@@ -29,14 +29,6 @@ use Joomla\Event\SubscriberInterface;
 final class Jadp extends CMSPlugin implements SubscriberInterface
 {
     /**
-     * The application object.
-     *
-     * @var    \Joomla\CMS\Application\CMSApplicationInterface
-     * @since  __DEPLOY_VERSION__
-     */
-    protected $app;
-
-    /**
      * Returns the events this plugin subscribes to.
      *
      * @return array<string, string>
@@ -66,7 +58,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             return;
         }
 
-        $document = $this->app->getDocument();
+        $document = $this->getApplication()->getDocument();
 
         if (!$document instanceof HtmlDocument) {
             return;
@@ -116,7 +108,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             return;
         }
 
-        $body = $this->app->getBody();
+        $body = $this->getApplication()->getBody();
 
         if (stripos($body, '</body>') === false) {
             return;
@@ -145,7 +137,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
 
         $host .= '></div>';
 
-        $this->app->setBody(str_ireplace('</body>', $host . '</body>', $body));
+        $this->getApplication()->setBody(str_ireplace('</body>', $host . '</body>', $body));
     }
 
     /**
@@ -158,7 +150,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     private function isEnabledForSite(): bool
     {
         return $this->params->get('enabled', 1)
-            && $this->app->isClient('site')
-            && $this->app->getDocument() instanceof HtmlDocument;
+            && $this->getApplication()->isClient('site')
+            && $this->getApplication()->getDocument() instanceof HtmlDocument;
     }
 }
