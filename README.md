@@ -265,7 +265,6 @@ plugins/system/jadp/
 │   │   ├── jadp-init.js
 │   │   ├── jadp.js
 │   │   └── jadp-ui.js
-│   └── joomla.asset.json
 ├── jadp.xml
 └── README.md
 ```
