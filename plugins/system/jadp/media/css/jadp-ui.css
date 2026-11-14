@@ -58,6 +58,7 @@
     right: max(1rem, env(safe-area-inset-right));
     bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
     width: min(22rem, calc(100vw - 2rem));
+    container-type: inline-size;
     max-height: min(75vh, 42rem);
     max-height: min(75dvh, 42rem);
     overflow: auto;
@@ -123,8 +124,8 @@
 }
 
 .jadp-size-group {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.35rem;
     min-width: 0;
@@ -134,8 +135,7 @@
 }
 
 .jadp-group-label {
-    flex: 0 1 auto;
-    min-width: max-content;
+    min-width: 0;
     margin: 0;
     padding: 0;
     font-weight: 700;
@@ -203,6 +203,12 @@
 .jadp-panel button:focus-visible {
     outline: 3px solid #f0b429;
     outline-offset: 4px;
+}
+
+@container (max-width: 17rem) {
+    .jadp-size-group {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
