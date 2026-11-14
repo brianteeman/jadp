@@ -20,3 +20,12 @@ html[data-jadp-line-spacing="increased"] body :is(p, li, dd, dt, blockquote, fig
 html[data-jadp-line-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td) {
     line-height: 2 !important;
 }
+
+/* Letter spacing preferences apply to text content and headings. */
+html[data-jadp-letter-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
+    letter-spacing: 0.05em !important;
+}
+
+html[data-jadp-letter-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
+    letter-spacing: 0.1em !important;
+}

@@ -26,6 +26,7 @@
         title: host.dataset.title,
         textSize: host.dataset.textSize,
         lineSpacing: host.dataset.lineSpacing,
+        letterSpacing: host.dataset.letterSpacing,
         normal: host.dataset.normal,
         increased: host.dataset.increased,
         maximum: host.dataset.maximum,
@@ -133,6 +134,33 @@
 
     content.appendChild(lineSpacingGroup);
 
+    const letterSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
+    const letterSpacingLegend = create('legend', {}, labels.letterSpacing);
+    const letterSpacingOptions = [
+        ['normal', labels.normal],
+        ['increased', labels.increased],
+        ['maximum', labels.maximum],
+    ];
+
+    letterSpacingGroup.appendChild(letterSpacingLegend);
+
+    const letterSpacingButtons = new Map();
+
+    letterSpacingOptions.forEach(([value, label]) => {
+        const button = create('button', {
+            type: 'button',
+            className: 'jadp-option',
+            'data-letter-spacing': value,
+            'aria-pressed': 'false',
+        }, label);
+
+        button.addEventListener('click', () => window.JADP.set('letterSpacing', value));
+        letterSpacingButtons.set(value, button);
+        letterSpacingGroup.appendChild(button);
+    });
+
+    content.appendChild(letterSpacingGroup);
+
     const disclaimer = create('p', { className: 'jadp-disclaimer' }, labels.disclaimer);
     const footer = create('footer', { className: 'jadp-footer' });
     const reset = create('button', {
@@ -178,6 +206,10 @@
 
         lineSpacingButtons.forEach((button, value) => {
             button.setAttribute('aria-pressed', String(preferences.lineSpacing === value));
+        });
+
+        letterSpacingButtons.forEach((button, value) => {
+            button.setAttribute('aria-pressed', String(preferences.letterSpacing === value));
         });
     });
 }());
