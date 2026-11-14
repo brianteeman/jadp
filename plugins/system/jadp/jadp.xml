@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_JADP</name>
+    <author>Brian Teeman</author>
+    <creationDate>November 2026</creationDate>
+    <copyright>(C) 2026 Brian Teeman</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <version>0.1.0</version>
+    <description>PLG_SYSTEM_JADP_XML_DESCRIPTION</description>
+    <namespace path="src">Joomla\Plugin\System\Jadp</namespace>
+    <files>
+        <folder plugin="jadp">services</folder>
+        <folder>src</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_system_jadp.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_jadp.sys.ini</language>
+    </languages>
+    <media destination="plg_system_jadp" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="enabled"
+                    type="radio"
+                    label="JENABLED"
+                    layout="joomla.form.field.radio.switcher"
+                    default="1"
+                    filter="integer"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
