@@ -24,6 +24,13 @@
         <fields name="params">
             <fieldset name="basic">
                 <field
+                    name="accessibility_notice"
+                    type="note"
+                    label="PLG_SYSTEM_JADP_ACCESSIBILITY_NOTICE_LABEL"
+                    description="PLG_SYSTEM_JADP_ACCESSIBILITY_NOTICE_DESC"
+                    class="alert alert-info"
+                />
+                <field
                     name="enabled"
                     type="radio"
                     label="JENABLED"
