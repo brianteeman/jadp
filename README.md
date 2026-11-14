@@ -278,7 +278,7 @@ The exact event and asset-loading implementation must be checked against the tar
 - jadp.js: maintain preference state, apply changes, persist values and handle reset.
 - jadp-ui.js: create and manage the toolbar UI and its interactions, preferably within a Shadow DOM.
 
-No jQuery, Bootstrap JavaScript or third-party JavaScript framework is required.
+All JavaScript must be written in **vanilla ES6**, using native browser APIs and language features. Do not use jQuery, Bootstrap JavaScript, third-party libraries or JavaScript frameworks. The code must remain compatible with the browsers supported by the target Joomla release.
 
 ### 5.2 Preference Storage
 
