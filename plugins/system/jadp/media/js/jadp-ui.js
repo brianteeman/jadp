@@ -67,6 +67,43 @@
         return element;
     };
 
+    const iconPaths = {
+        textSmall: ['M96 96h320v48H96z M208 144h96v272h-96z'],
+        textMedium: ['M48 48h416v48H48z M184 96h144v320H184z'],
+        textLarge: ['M16 16h480v48H16z M160 64h192v352H160z'],
+        lineNormal: ['M64 96h384v40H64z M64 224h384v40H64z M64 352h384v40H64z'],
+        lineIncreased: ['M64 48h384v40H64z M64 224h384v40H64z M64 400h384v40H64z'],
+        lineMaximum: ['M64 16h384v40H64z M64 224h384v40H64z M64 432h384v40H64z'],
+        letterNormal: ['M96 64h48v384H96z M232 64h48v384h-48z M368 64h48v384h-48z'],
+        letterIncreased: ['M48 64h48v384H48z M232 64h48v384h-48z M416 64h48v384h-48z'],
+        letterMaximum: ['M16 64h48v384H16z M232 64h48v384h-48z M448 64h48v384h-48z'],
+        wordNormal: ['M48 112h144v80H48z M240 112h224v80H240z M48 320h144v80H48z M240 320h224v80H240z'],
+        wordIncreased: ['M32 112h128v80H32z M288 112h192v80H288z M32 320h128v80H32z M288 320h192v80H288z'],
+        wordMaximum: ['M16 112h112v80H16z M336 112h160v80H336z M16 320h112v80H16z M336 320h160v80H336z'],
+        contrastNormal: ['M256 32a224 224 0 1 0 0 448a224 224 0 1 0 0-448z M256 96a160 160 0 1 1 0 320a160 160 0 1 1 0-320z'],
+        contrastHigh: ['M256 32a224 224 0 1 0 0 448a224 224 0 1 0 0-448z'],
+        colour: ['M256 32a224 224 0 1 0 0 448a224 224 0 1 0 0-448z M256 112a144 144 0 1 1 0 288a144 144 0 1 1 0-288z'],
+        grayscale: ['M256 32a224 224 0 1 0 0 448a224 224 0 1 0 0-448z M256 112a144 144 0 1 0 0 288a144 144 0 1 0 0-288z'],
+        link: ['M196 160h-52a112 112 0 0 0 0 224h80v-48h-80a64 64 0 0 1 0-128h52z M368 128h-80v48h80a64 64 0 0 1 0 128h-52v48h52a112 112 0 0 0 0-224z M160 232h192v48H160z'],
+        underline: ['M96 48h48v176a112 112 0 0 0 224 0V48h48v176a160 160 0 0 1-320 0z M64 416h384v48H64z'],
+    };
+
+    const createIcon = (name) => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 512 512');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+        svg.classList.add('jadp-icon');
+
+        iconPaths[name].forEach((pathData) => {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', pathData);
+            svg.appendChild(path);
+        });
+
+        return svg;
+    };
+
     const trigger = create('button', {
         type: 'button',
         className: 'jadp-trigger',
@@ -96,22 +133,25 @@
     const sizeGroup = create('fieldset', { className: 'jadp-size-group' });
     const legend = create('legend', {}, labels.textSize);
     const sizeOptions = [
-        ['normal', labels.normal],
-        ['large', labels.large],
-        ['extra-large', labels.extraLarge],
+        ['normal', labels.normal, 'textSmall'],
+        ['large', labels.large, 'textMedium'],
+        ['extra-large', labels.extraLarge, 'textLarge'],
     ];
 
     sizeGroup.appendChild(legend);
 
     const sizeButtons = new Map();
 
-    sizeOptions.forEach(([value, label]) => {
+    sizeOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'data-text-size': value,
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('textSize', value));
         sizeButtons.set(value, button);
@@ -123,22 +163,25 @@
     const lineSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
     const lineSpacingLegend = create('legend', {}, labels.lineSpacing);
     const lineSpacingOptions = [
-        ['normal', labels.normal],
-        ['increased', labels.increased],
-        ['maximum', labels.maximum],
+        ['normal', labels.normal, 'lineNormal'],
+        ['increased', labels.increased, 'lineIncreased'],
+        ['maximum', labels.maximum, 'lineMaximum'],
     ];
 
     lineSpacingGroup.appendChild(lineSpacingLegend);
 
     const lineSpacingButtons = new Map();
 
-    lineSpacingOptions.forEach(([value, label]) => {
+    lineSpacingOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'data-line-spacing': value,
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('lineSpacing', value));
         lineSpacingButtons.set(value, button);
@@ -150,22 +193,25 @@
     const letterSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
     const letterSpacingLegend = create('legend', {}, labels.letterSpacing);
     const letterSpacingOptions = [
-        ['normal', labels.normal],
-        ['increased', labels.increased],
-        ['maximum', labels.maximum],
+        ['normal', labels.normal, 'letterNormal'],
+        ['increased', labels.increased, 'letterIncreased'],
+        ['maximum', labels.maximum, 'letterMaximum'],
     ];
 
     letterSpacingGroup.appendChild(letterSpacingLegend);
 
     const letterSpacingButtons = new Map();
 
-    letterSpacingOptions.forEach(([value, label]) => {
+    letterSpacingOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'data-letter-spacing': value,
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('letterSpacing', value));
         letterSpacingButtons.set(value, button);
@@ -177,22 +223,25 @@
     const wordSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
     const wordSpacingLegend = create('legend', {}, labels.wordSpacing);
     const wordSpacingOptions = [
-        ['normal', labels.normal],
-        ['increased', labels.increased],
-        ['maximum', labels.maximum],
+        ['normal', labels.normal, 'wordNormal'],
+        ['increased', labels.increased, 'wordIncreased'],
+        ['maximum', labels.maximum, 'wordMaximum'],
     ];
 
     wordSpacingGroup.appendChild(wordSpacingLegend);
 
     const wordSpacingButtons = new Map();
 
-    wordSpacingOptions.forEach(([value, label]) => {
+    wordSpacingOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'data-word-spacing': value,
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('wordSpacing', value));
         wordSpacingButtons.set(value, button);
@@ -204,19 +253,22 @@
     const contrastGroup = create('fieldset', { className: 'jadp-size-group' });
     const contrastLegend = create('legend', {}, labels.contrast);
     const contrastOptions = [
-        [false, labels.normalContrast],
-        [true, labels.highContrast],
+        [false, labels.normalContrast, 'contrastNormal'],
+        [true, labels.highContrast, 'contrastHigh'],
     ];
     const contrastButtons = new Map();
 
     contrastGroup.appendChild(contrastLegend);
 
-    contrastOptions.forEach(([value, label]) => {
+    contrastOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('highContrast', value));
         contrastButtons.set(value, button);
@@ -228,19 +280,22 @@
     const grayscaleGroup = create('fieldset', { className: 'jadp-size-group' });
     const grayscaleLegend = create('legend', {}, labels.grayscale);
     const grayscaleOptions = [
-        [false, labels.normalGrayscale],
-        [true, labels.grayscaleOn],
+        [false, labels.normalGrayscale, 'colour'],
+        [true, labels.grayscaleOn, 'grayscale'],
     ];
     const grayscaleButtons = new Map();
 
     grayscaleGroup.appendChild(grayscaleLegend);
 
-    grayscaleOptions.forEach(([value, label]) => {
+    grayscaleOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('grayscale', value));
         grayscaleButtons.set(value, button);
@@ -252,19 +307,22 @@
     const underlineLinksGroup = create('fieldset', { className: 'jadp-size-group' });
     const underlineLinksLegend = create('legend', {}, labels.underlineLinks);
     const underlineLinksOptions = [
-        [false, labels.normalLinkStyle],
-        [true, labels.underline],
+        [false, labels.normalLinkStyle, 'link'],
+        [true, labels.underline, 'underline'],
     ];
     const underlineLinksButtons = new Map();
 
     underlineLinksGroup.appendChild(underlineLinksLegend);
 
-    underlineLinksOptions.forEach(([value, label]) => {
+    underlineLinksOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
             'aria-pressed': 'false',
-        }, label);
+            'aria-label': label,
+            title: label,
+        });
+        button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('underlineLinks', value));
         underlineLinksButtons.set(value, button);
