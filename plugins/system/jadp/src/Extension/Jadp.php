@@ -140,7 +140,6 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             'data-large' => Text::_('PLG_SYSTEM_JADP_LARGE'),
             'data-extra-large' => Text::_('PLG_SYSTEM_JADP_EXTRA_LARGE'),
             'data-reset' => Text::_('PLG_SYSTEM_JADP_RESET'),
-            'data-disclaimer' => Text::_('PLG_SYSTEM_JADP_DISCLAIMER'),
         ];
 
         $host = '<div id="jadp-root"';
