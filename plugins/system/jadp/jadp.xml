@@ -17,6 +17,7 @@
         <language tag="en-GB">language/en-GB/plg_system_jadp.sys.ini</language>
     </languages>
     <media destination="plg_system_jadp" folder="media">
+        <filename>joomla.asset.json</filename>
         <folder>css</folder>
         <folder>js</folder>
     </media>
