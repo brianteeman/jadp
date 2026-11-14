@@ -141,13 +141,13 @@ Resetting should restore the original presentation of the website and clear the 
 
 ### 3.5 Accessibility Information
 
-The toolbar must include an easily discoverable explanation of its purpose.
+The plugin configuration in the Joomla administrator should display an explanation of the toolbar's purpose.
 
-The following statement should be displayed:
+The following statement should be displayed to the site administrator:
 
 "This toolbar provides user preference controls only. It does not make this website accessible or guarantee compliance with accessibility standards."
 
-This statement should remain available regardless of which display preferences are enabled.
+This makes clear that enabling the plugin does not make a website accessible or guarantee compliance with accessibility standards.
 
 ### 3.6 Preference Persistence
 
@@ -333,7 +333,7 @@ Build a working Joomla system plugin in increments. The first milestone should i
 - Versioned localStorage persistence, including graceful storage failure handling.
 - Dedicated footer reset button with the reset behaviour specified above.
 - Close behaviour that preserves preferences.
-- The required purpose and disclaimer text in the toolbar.
+- An administrator-facing note explaining the purpose and limitations of the toolbar.
 - Joomla language strings rather than hard-coded user-facing text.
 
 Add the remaining spacing, contrast, grayscale and link underline preferences in subsequent increments.
@@ -364,6 +364,30 @@ The first implementation increment is present under `plugins/system/jadp/`.
 
 It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the fixed bottom-right activation control, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
 
-The remaining spacing, contrast, grayscale and link underline controls are not yet implemented. The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
+The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar.
+
+The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
 
 The plugin has not yet been installed and tested in a live Joomla site. Joomla installation, runtime behaviour, CSP, template compatibility and accessibility testing remain outstanding.
+
+## 9. To Investigate
+
+The following implementation details need further review and testing before the plugin is considered ready for release.
+
+### 9.1 High Contrast
+
+The current high-contrast rules apply a black background, white text and yellow links, while making the backgrounds of almost all page elements transparent and changing their borders to white.
+
+This broad approach may remove meaningful visual distinctions or make some interface components harder to use. Test navigation menus, alerts, cards, tables, form controls and components that rely on background colours to communicate meaning. Consider whether a more selective palette and set of rules would be more appropriate.
+
+### 9.2 Text Size Coverage
+
+The current implementation increases the font size on the body element. This avoids changing the root font size and unintentionally resizing rem-based layout dimensions.
+
+However, elements with explicitly defined font sizes, particularly those using rem units, may not scale. Test representative templates to establish which text is affected and whether the result is sufficiently consistent.
+
+### 9.3 Spacing Coverage
+
+The line, letter and word spacing rules currently target a defined list of elements, such as paragraphs, list items, table cells, labels and headings.
+
+Text in other elements, including spans and generic containers, may not be affected. Investigate whether the selectors should cover more text without unintentionally changing icons, controls or other non-text elements.
