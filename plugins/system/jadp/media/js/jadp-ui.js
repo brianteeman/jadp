@@ -115,13 +115,31 @@
         return svg;
     };
 
+    const createTriggerIcon = (open = false) => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 512 512');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+        svg.classList.add('jadp-trigger-icon');
+
+        const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        shape.setAttribute('d', open
+            ? 'M160 160L352 352M352 160L160 352'
+            : 'M256 32A224 224 0 1 0 256 480A224 224 0 1 0 256 32ZM256 112A48 48 0 1 0 256 208A48 48 0 1 0 256 112ZM112 240H400M256 208V320M256 320L176 416M256 320L336 416');
+        svg.appendChild(shape);
+
+        return svg;
+    };
+
     const trigger = create('button', {
         type: 'button',
         className: 'jadp-trigger',
         'aria-expanded': 'false',
         'aria-controls': 'jadp-panel',
         'aria-label': labels.open,
-    }, labels.open);
+        title: labels.open,
+    });
+    trigger.appendChild(createTriggerIcon());
 
     const panel = create('section', {
         id: 'jadp-panel',
@@ -359,7 +377,8 @@
         panel.hidden = !open;
         trigger.setAttribute('aria-expanded', String(open));
         trigger.setAttribute('aria-label', open ? labels.close : labels.open);
-        trigger.textContent = open ? labels.close : labels.open;
+        trigger.setAttribute('title', open ? labels.close : labels.open);
+        trigger.replaceChildren(createTriggerIcon(open));
 
         if (open) {
             close.focus();
