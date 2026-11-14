@@ -350,3 +350,14 @@ At minimum, test:
 - Content Security Policy compatibility and the chosen Shadow DOM styling approach.
 
 The initial release must not claim that enabling JADP makes a website accessible or guarantees conformance with any accessibility standard.
+
+
+## 8. Implementation Progress
+
+The first implementation increment is present under `plugins/system/jadp/`.
+
+It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the fixed bottom-right activation control, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
+
+The remaining spacing, contrast, grayscale and link underline controls are not yet implemented. The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
+
+The plugin has not yet been installed and tested in a live Joomla site. Joomla installation, runtime behaviour, CSP, template compatibility and accessibility testing remain outstanding.
