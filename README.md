@@ -240,7 +240,7 @@ The plugin should:
 - Run on the frontend only.
 - Support an administrator enable/disable option.
 - Register assets using Joomla WebAssetManager.
-- Inject the toolbar host markup.
+- Supply the toolbar configuration to JavaScript using Joomla's script-options API. JavaScript creates the toolbar host element and appends it to the document.
 - Avoid loading JADP assets when disabled.
 - Keep visitor preference state entirely in the browser.
 
@@ -264,6 +264,7 @@ plugins/system/jadp/
 │   ├── js/
 │   │   ├── jadp-init.js
 │   │   ├── jadp.js
+│   │   ├── jadp-host.js
 │   │   └── jadp-ui.js
 ├── jadp.xml
 └── README.md
@@ -275,7 +276,8 @@ The exact event and asset-loading implementation must be checked against the tar
 
 - jadp-init.js: read, validate and apply saved preferences as early as practical to reduce visual flicker.
 - jadp.js: maintain preference state, apply changes, persist values and handle reset.
-- jadp-ui.js: create and manage the toolbar UI and its interactions, preferably within a Shadow DOM.
+- jadp-host.js: read the configuration supplied through Joomla's script options, create the toolbar host element and append it to the document root.
+- jadp-ui.js: find the host created by jadp-host.js and create and manage the toolbar UI and its interactions, preferably within a Shadow DOM.
 
 All JavaScript must be written in **vanilla ES6**, using native browser APIs and language features. Do not use jQuery, Bootstrap JavaScript, third-party libraries or JavaScript frameworks. The code must remain compatible with the browsers supported by the target Joomla release.
 
@@ -307,6 +309,10 @@ Values must be validated before use. Corrupt, unsupported or inaccessible storag
 ### 5.3 Document State and CSS
 
 The preference engine should express active preferences through a consistent set of data attributes on the document root. CSS should provide the visual changes.
+
+The toolbar host is created by `jadp-host.js`, rather than being inserted into the rendered HTML response by PHP. The plugin passes the required stylesheet URL and translated labels to JavaScript using Joomla's `Document::addScriptOptions()` API. The script reads these values through `Joomla.getOptions()`, creates the host element and appends it to `document.documentElement`, outside the page's `body` element.
+
+Appending the host outside `body` is important because the grayscale preference applies a CSS `filter` to the body. A filtered element becomes a containing block for fixed-position descendants. If the toolbar host were inside the body, its fixed-position activation button and panel could consequently be positioned relative to the body rather than the viewport, causing the toolbar to move or appear in the wrong place. Keeping the host as a child of the document root, outside the filtered body, avoids that problem and also keeps the toolbar itself in normal colour.
 
 The implementation must avoid indiscriminate rules that unintentionally resize layout dimensions, icons, controls or other non-text UI. In particular, changing the root font size must not be assumed to be a safe way to scale website text because it also changes dimensions expressed in rem.
 
@@ -367,6 +373,8 @@ It currently provides the Joomla system plugin manifest and service provider, fr
 The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar.
 
 The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
+
+The toolbar host is created in JavaScript from Joomla script options and appended to `document.documentElement`, outside `body`. This is intentional: the grayscale preference filters the body, and a CSS filter creates a containing block for fixed-position descendants. Keeping the toolbar outside that filtered element prevents its fixed-position controls from being repositioned relative to the body or being affected by the grayscale filter.
 
 The plugin has not yet been installed and tested in a live Joomla site. Joomla installation, runtime behaviour, CSP, template compatibility and accessibility testing remain outstanding.
 
