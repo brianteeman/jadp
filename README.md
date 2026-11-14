@@ -414,36 +414,17 @@ Replace `YOUR_TEMPLATE` with the directory name of the active site template. Kee
 
 ### 10.2 Changing the Universal Access Icon
 
-The universal access icon displayed on the floating activation button is created as inline SVG by `jadp-ui.js`. It is not loaded from an image file or an icon font, so it cannot be changed simply by replacing an image or adding a rule to the template's CSS.
+The universal access icon can be changed in the plugin configuration without overriding JADP's JavaScript. Select the desired option under **Universal Access Icon**.
 
-A site owner can replace it by overriding the JADP UI JavaScript asset in the active template. The asset name is `plg.system.jadp.ui`. Add an entry with that same name to the template's `joomla.asset.json`, retaining its dependencies and attributes:
+- **Default JADP Icon** uses the built-in inline SVG.
+- **CSS Font Icon** accepts one or more CSS classes, for example `fa-solid fa-universal-access`. Supply the URL of the stylesheet that defines those classes and loads the required font. The stylesheet is loaded inside the toolbar's Shadow DOM, so the site's ordinary template stylesheets are not automatically available there. Font files referenced by the stylesheet should use URLs that resolve correctly from that stylesheet.
+- **PNG Image** lets you select a PNG from the site's `images` folder. The image is displayed within the floating button and scaled to fit.
 
-```json
-{
-    "name": "plg.system.jadp.ui",
-    "type": "script",
-    "uri": "plg_system_jadp/jadp-ui.js",
-    "dependencies": [
-        "plg.system.jadp.engine",
-        "plg.system.jadp.host"
-    ],
-    "attributes": {
-        "defer": true
-    }
-}
-```
+The custom icon is decorative; the activation button continues to provide its accessible name and changes that name when the toolbar opens or closes. The same custom icon is used in both states.
 
-Place a customised copy of `jadp-ui.js` in:
+For a CSS font icon, ensure that the stylesheet is publicly accessible and that its font files can be loaded by the browser. This can be a stylesheet from the site's own template or a locally hosted icon library. No external icon library is bundled with JADP.
 
-```text
-media/templates/site/YOUR_TEMPLATE/js/plg_system_jadp/jadp-ui.js
-```
-
-In that copy, change the SVG path in the `createTriggerIcon()` function. The function has separate path data for the closed and open states; retain both states and ensure the replacement SVG remains decorative (with `aria-hidden="true"`) because the button's accessible name is provided separately.
-
-This approach replaces the UI JavaScript asset, not just the icon. Keep the customised file aligned with future JADP releases and reapply the icon change when updating the plugin. The toolbar's preference controls and their behaviour should otherwise be left unchanged.
-
-For both overrides, clear Joomla's cache and any browser or proxy caches after making changes. Check the rendered page to confirm that Joomla is loading the template's replacement assets rather than the copies supplied by JADP.
+For the PNG option, use a small square image with a transparent background where possible. JADP only accepts a PNG file for this setting.
 
 ## 9. To Investigate
 
