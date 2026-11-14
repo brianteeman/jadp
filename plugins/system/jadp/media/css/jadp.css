@@ -74,3 +74,8 @@ html[data-jadp-word-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figca
 html[data-jadp-grayscale="true"] body {
     filter: grayscale(1);
 }
+
+/* Underline links preference makes links easier to distinguish from surrounding text. */
+html[data-jadp-underline-links="true"] body a {
+    text-decoration: underline !important;
+}

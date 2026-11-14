@@ -38,6 +38,9 @@
         grayscale: host.dataset.grayscale,
         normalGrayscale: host.dataset.normalGrayscale,
         grayscaleOn: host.dataset.grayscaleOn,
+        underlineLinks: host.dataset.underlineLinks,
+        normalLinkStyle: host.dataset.normalLinkStyle,
+        underline: host.dataset.underline,
         normal: host.dataset.normal,
         increased: host.dataset.increased,
         maximum: host.dataset.maximum,
@@ -247,6 +250,30 @@
 
     content.appendChild(grayscaleGroup);
 
+    const underlineLinksGroup = create('fieldset', { className: 'jadp-size-group' });
+    const underlineLinksLegend = create('legend', {}, labels.underlineLinks);
+    const underlineLinksOptions = [
+        [false, labels.normalLinkStyle],
+        [true, labels.underline],
+    ];
+    const underlineLinksButtons = new Map();
+
+    underlineLinksGroup.appendChild(underlineLinksLegend);
+
+    underlineLinksOptions.forEach(([value, label]) => {
+        const button = create('button', {
+            type: 'button',
+            className: 'jadp-option',
+            'aria-pressed': 'false',
+        }, label);
+
+        button.addEventListener('click', () => window.JADP.set('underlineLinks', value));
+        underlineLinksButtons.set(value, button);
+        underlineLinksGroup.appendChild(button);
+    });
+
+    content.appendChild(underlineLinksGroup);
+
     const disclaimer = create('p', { className: 'jadp-disclaimer' }, labels.disclaimer);
     const footer = create('footer', { className: 'jadp-footer' });
     const reset = create('button', {
@@ -308,6 +335,10 @@
 
         grayscaleButtons.forEach((button, value) => {
             button.setAttribute('aria-pressed', String(preferences.grayscale === value));
+        });
+
+        underlineLinksButtons.forEach((button, value) => {
+            button.setAttribute('aria-pressed', String(preferences.underlineLinks === value));
         });
     });
 }());
