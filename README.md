@@ -378,6 +378,73 @@ The toolbar host is created in JavaScript from Joomla script options and appende
 
 The plugin has not yet been installed and tested in a live Joomla site. Joomla installation, runtime behaviour, CSP, template compatibility and accessibility testing remain outstanding.
 
+## 10. Customisation
+
+JADP separates the styles for the toolbar itself from the styles that apply visitor preferences to the website.
+
+### 10.1 Toolbar Appearance
+
+All CSS relating to the toolbar interface is contained in:
+
+`media/css/jadp-ui.css`
+
+This stylesheet controls the activation button, toolbar panel, headings, controls, icons and responsive layout. Site owners who want to change the appearance of the JADP toolbar should customise this stylesheet.
+
+**Do not edit `jadp.css`.** That file contains the CSS used to apply the visitor's display preferences to the website, including text size, spacing, contrast, grayscale and link underlining. Changing it can alter the behaviour of the preferences rather than simply changing the appearance of the toolbar.
+
+The toolbar is created inside a Shadow DOM. Consequently, CSS rules in the site template's normal stylesheet or `user.css` cannot directly style the toolbar contents. The JADP toolbar stylesheet itself must be replaced or customised.
+
+The recommended approach is to override the JADP stylesheet through the Joomla Web Asset Manager. Add an asset with the same name, `plg.system.jadp`, to the active template's `joomla.asset.json`. Joomla loads the template registry after the extension registry, and an asset with the same name replaces the earlier definition. For example:
+
+```json
+{
+    "name": "plg.system.jadp",
+    "type": "style",
+    "uri": "plg_system_jadp/jadp-ui.css"
+}
+```
+
+Place your customised file in the corresponding template media location:
+
+```text
+media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
+```
+
+Replace `YOUR_TEMPLATE` with the directory name of the active site template. Keep the original JADP stylesheet as a reference when creating your customised version. Review your changes when updating JADP, as future releases may add or change toolbar styles.
+
+### 10.2 Changing the Universal Access Icon
+
+The universal access icon displayed on the floating activation button is created as inline SVG by `jadp-ui.js`. It is not loaded from an image file or an icon font, so it cannot be changed simply by replacing an image or adding a rule to the template's CSS.
+
+A site owner can replace it by overriding the JADP UI JavaScript asset in the active template. The asset name is `plg.system.jadp.ui`. Add an entry with that same name to the template's `joomla.asset.json`, retaining its dependencies and attributes:
+
+```json
+{
+    "name": "plg.system.jadp.ui",
+    "type": "script",
+    "uri": "plg_system_jadp/jadp-ui.js",
+    "dependencies": [
+        "plg.system.jadp.engine",
+        "plg.system.jadp.host"
+    ],
+    "attributes": {
+        "defer": true
+    }
+}
+```
+
+Place a customised copy of `jadp-ui.js` in:
+
+```text
+media/templates/site/YOUR_TEMPLATE/js/plg_system_jadp/jadp-ui.js
+```
+
+In that copy, change the SVG path in the `createTriggerIcon()` function. The function has separate path data for the closed and open states; retain both states and ensure the replacement SVG remains decorative (with `aria-hidden="true"`) because the button's accessible name is provided separately.
+
+This approach replaces the UI JavaScript asset, not just the icon. Keep the customised file aligned with future JADP releases and reapply the icon change when updating the plugin. The toolbar's preference controls and their behaviour should otherwise be left unchanged.
+
+For both overrides, clear Joomla's cache and any browser or proxy caches after making changes. Check the rendered page to confirm that Joomla is loading the template's replacement assets rather than the copies supplied by JADP.
+
 ## 9. To Investigate
 
 The following implementation details need further review and testing before the plugin is considered ready for release.
