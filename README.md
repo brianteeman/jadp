@@ -314,6 +314,13 @@ High contrast must use a considered palette rather than simply inverting the ent
 
 The precise selectors and effects must be tested against Cassiopeia and representative third-party templates.
 
+
+### 5.4 Toolbar Icons
+
+Icons may be used within the toolbar, including on the activation, close and preference controls, but all icons must be implemented as inline SVG markup.
+
+Do not use icon fonts, external SVG files, image-based icons, icon libraries or third-party icon packages. Icons must not be the sole means of identifying a control; provide an accessible name and retain clear text labels where appropriate. Inline SVGs used decoratively should be hidden from assistive technology, while any meaningful SVG must have an accessible text alternative.
+
 ## 6. Initial Implementation Milestone
 
 Build a working Joomla system plugin in increments. The first milestone should include:
