@@ -159,8 +159,8 @@
     header.append(heading, close);
 
     const content = create('div', { className: 'jadp-content' });
-    const sizeGroup = create('fieldset', { className: 'jadp-size-group' });
-    const legend = create('legend', {}, labels.textSize);
+    const sizeGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-text-size-label' });
+    const legend = create('span', { id: 'jadp-text-size-label', className: 'jadp-group-label' }, labels.textSize);
     const sizeOptions = [
         ['normal', labels.normal, 'textSmall'],
         ['large', labels.large, 'textMedium'],
@@ -168,6 +168,7 @@
     ];
 
     sizeGroup.appendChild(legend);
+    const sizeOptionsContainer = create('div', { className: 'jadp-options' });
 
     const sizeButtons = new Map();
 
@@ -184,13 +185,15 @@
 
         button.addEventListener('click', () => window.JADP.set('textSize', value));
         sizeButtons.set(value, button);
-        sizeGroup.appendChild(button);
+        sizeOptionsContainer.appendChild(button);
     });
+
+    sizeGroup.appendChild(sizeOptionsContainer);
 
     content.appendChild(sizeGroup);
 
-    const lineSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
-    const lineSpacingLegend = create('legend', {}, labels.lineSpacing);
+    const lineSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-line-spacing-label' });
+    const lineSpacingLegend = create('span', { id: 'jadp-line-spacing-label', className: 'jadp-group-label' }, labels.lineSpacing);
     const lineSpacingOptions = [
         ['normal', labels.normal, 'lineNormal'],
         ['increased', labels.increased, 'lineIncreased'],
@@ -198,6 +201,7 @@
     ];
 
     lineSpacingGroup.appendChild(lineSpacingLegend);
+    const lineSpacingOptionsContainer = create('div', { className: 'jadp-options' });
 
     const lineSpacingButtons = new Map();
 
@@ -214,13 +218,15 @@
 
         button.addEventListener('click', () => window.JADP.set('lineSpacing', value));
         lineSpacingButtons.set(value, button);
-        lineSpacingGroup.appendChild(button);
+        lineSpacingOptionsContainer.appendChild(button);
     });
+
+    lineSpacingGroup.appendChild(lineSpacingOptionsContainer);
 
     content.appendChild(lineSpacingGroup);
 
-    const letterSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
-    const letterSpacingLegend = create('legend', {}, labels.letterSpacing);
+    const letterSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-letter-spacing-label' });
+    const letterSpacingLegend = create('span', { id: 'jadp-letter-spacing-label', className: 'jadp-group-label' }, labels.letterSpacing);
     const letterSpacingOptions = [
         ['normal', labels.normal, 'letterNormal'],
         ['increased', labels.increased, 'letterIncreased'],
@@ -228,6 +234,7 @@
     ];
 
     letterSpacingGroup.appendChild(letterSpacingLegend);
+    const letterSpacingOptionsContainer = create('div', { className: 'jadp-options' });
 
     const letterSpacingButtons = new Map();
 
@@ -244,13 +251,15 @@
 
         button.addEventListener('click', () => window.JADP.set('letterSpacing', value));
         letterSpacingButtons.set(value, button);
-        letterSpacingGroup.appendChild(button);
+        letterSpacingOptionsContainer.appendChild(button);
     });
+
+    letterSpacingGroup.appendChild(letterSpacingOptionsContainer);
 
     content.appendChild(letterSpacingGroup);
 
-    const wordSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
-    const wordSpacingLegend = create('legend', {}, labels.wordSpacing);
+    const wordSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-word-spacing-label' });
+    const wordSpacingLegend = create('span', { id: 'jadp-word-spacing-label', className: 'jadp-group-label' }, labels.wordSpacing);
     const wordSpacingOptions = [
         ['normal', labels.normal, 'wordNormal'],
         ['increased', labels.increased, 'wordIncreased'],
@@ -258,6 +267,7 @@
     ];
 
     wordSpacingGroup.appendChild(wordSpacingLegend);
+    const wordSpacingOptionsContainer = create('div', { className: 'jadp-options' });
 
     const wordSpacingButtons = new Map();
 
@@ -274,13 +284,15 @@
 
         button.addEventListener('click', () => window.JADP.set('wordSpacing', value));
         wordSpacingButtons.set(value, button);
-        wordSpacingGroup.appendChild(button);
+        wordSpacingOptionsContainer.appendChild(button);
     });
+
+    wordSpacingGroup.appendChild(wordSpacingOptionsContainer);
 
     content.appendChild(wordSpacingGroup);
 
-    const contrastGroup = create('fieldset', { className: 'jadp-size-group' });
-    const contrastLegend = create('legend', {}, labels.contrast);
+    const contrastGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-contrast-label' });
+    const contrastLegend = create('span', { id: 'jadp-contrast-label', className: 'jadp-group-label' }, labels.contrast);
     const contrastOptions = [
         [false, labels.normalContrast, 'contrastNormal'],
         [true, labels.highContrast, 'contrastHigh'],
@@ -288,6 +300,7 @@
     const contrastButtons = new Map();
 
     contrastGroup.appendChild(contrastLegend);
+    const contrastOptionsContainer = create('div', { className: 'jadp-options' });
 
     contrastOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
@@ -301,13 +314,15 @@
 
         button.addEventListener('click', () => window.JADP.set('highContrast', value));
         contrastButtons.set(value, button);
-        contrastGroup.appendChild(button);
+        contrastOptionsContainer.appendChild(button);
     });
+
+    contrastGroup.appendChild(contrastOptionsContainer);
 
     content.appendChild(contrastGroup);
 
-    const grayscaleGroup = create('fieldset', { className: 'jadp-size-group' });
-    const grayscaleLegend = create('legend', {}, labels.grayscale);
+    const grayscaleGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-grayscale-label' });
+    const grayscaleLegend = create('span', { id: 'jadp-grayscale-label', className: 'jadp-group-label' }, labels.grayscale);
     const grayscaleOptions = [
         [false, labels.normalGrayscale, 'colour'],
         [true, labels.grayscaleOn, 'grayscale'],
@@ -315,6 +330,7 @@
     const grayscaleButtons = new Map();
 
     grayscaleGroup.appendChild(grayscaleLegend);
+    const grayscaleOptionsContainer = create('div', { className: 'jadp-options' });
 
     grayscaleOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
@@ -328,13 +344,15 @@
 
         button.addEventListener('click', () => window.JADP.set('grayscale', value));
         grayscaleButtons.set(value, button);
-        grayscaleGroup.appendChild(button);
+        grayscaleOptionsContainer.appendChild(button);
     });
+
+    grayscaleGroup.appendChild(grayscaleOptionsContainer);
 
     content.appendChild(grayscaleGroup);
 
-    const underlineLinksGroup = create('fieldset', { className: 'jadp-size-group' });
-    const underlineLinksLegend = create('legend', {}, labels.underlineLinks);
+    const underlineLinksGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-underline-links-label' });
+    const underlineLinksLegend = create('span', { id: 'jadp-underline-links-label', className: 'jadp-group-label' }, labels.underlineLinks);
     const underlineLinksOptions = [
         [false, labels.normalLinkStyle, 'link'],
         [true, labels.underline, 'underline'],
@@ -342,6 +360,7 @@
     const underlineLinksButtons = new Map();
 
     underlineLinksGroup.appendChild(underlineLinksLegend);
+    const underlineLinksOptionsContainer = create('div', { className: 'jadp-options' });
 
     underlineLinksOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
@@ -355,8 +374,10 @@
 
         button.addEventListener('click', () => window.JADP.set('underlineLinks', value));
         underlineLinksButtons.set(value, button);
-        underlineLinksGroup.appendChild(button);
+        underlineLinksOptionsContainer.appendChild(button);
     });
+
+    underlineLinksGroup.appendChild(underlineLinksOptionsContainer);
 
     content.appendChild(underlineLinksGroup);
 
