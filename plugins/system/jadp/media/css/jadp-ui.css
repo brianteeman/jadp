@@ -114,10 +114,9 @@
 }
 
 .jadp-size-group {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) repeat(3, 2.75rem);
+    display: flex;
     align-items: center;
-    column-gap: 0.35rem;
+    gap: 0.35rem;
     min-width: 0;
     margin: 0;
     padding: 0;
@@ -144,8 +143,13 @@
     cursor: pointer;
 }
 
+.jadp-options {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 0.35rem;
+}
+
 .jadp-option {
-    grid-row: 1;
     display: grid;
     place-items: center;
     width: 2.75rem;
