@@ -138,7 +138,7 @@
         if (iconType === 'class' && host.dataset.triggerIconClass) {
             const icon = document.createElement('span');
             icon.classList.add('jadp-trigger-font-icon');
-            host.dataset.triggerIconClass.split(/\\s+/).filter(Boolean).forEach((className) => {
+            host.dataset.triggerIconClass.split(/\s+/).filter(Boolean).forEach((className) => {
                 if (/^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(className)) {
                     icon.classList.add(className);
                 }
