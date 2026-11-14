@@ -11,3 +11,12 @@ html[data-jadp-text-size="large"] body {
 html[data-jadp-text-size="extra-large"] body {
     font-size: 1.25em;
 }
+
+/* Line spacing preferences apply to text blocks, not every page element. */
+html[data-jadp-line-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td) {
+    line-height: 1.8 !important;
+}
+
+html[data-jadp-line-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td) {
+    line-height: 2 !important;
+}
