@@ -29,3 +29,34 @@ html[data-jadp-letter-spacing="increased"] body :is(p, li, dd, dt, blockquote, f
 html[data-jadp-letter-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
     letter-spacing: 0.1em !important;
 }
+
+/* High contrast mode uses a black background, white text and yellow links. */
+html[data-jadp-high-contrast="true"] body {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+html[data-jadp-high-contrast="true"] body * {
+    background-color: transparent !important;
+    border-color: #fff !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    text-shadow: none !important;
+}
+
+html[data-jadp-high-contrast="true"] body a,
+html[data-jadp-high-contrast="true"] body a:visited {
+    color: #ff0 !important;
+    text-decoration: underline !important;
+}
+
+html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button) {
+    background-color: #000 !important;
+    border: 1px solid #fff !important;
+    color: #fff !important;
+}
+
+html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button):focus-visible {
+    outline: 3px solid #ff0 !important;
+    outline-offset: 2px;
+}
