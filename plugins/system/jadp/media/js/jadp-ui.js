@@ -13,6 +13,10 @@
         return;
     }
 
+    // Keep the toolbar outside the filtered body so its fixed positioning
+    // remains relative to the viewport when grayscale is enabled.
+    document.documentElement.appendChild(host);
+
     const shadow = host.attachShadow({ mode: 'open' });
     const stylesheet = document.createElement('link');
 
