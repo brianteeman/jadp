@@ -60,3 +60,12 @@ html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button):f
     outline: 3px solid #ff0 !important;
     outline-offset: 2px;
 }
+
+/* Word spacing preferences apply to text blocks and headings. */
+html[data-jadp-word-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
+    word-spacing: 0.1em !important;
+}
+
+html[data-jadp-word-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
+    word-spacing: 0.2em !important;
+}
