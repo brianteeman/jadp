@@ -134,7 +134,7 @@
     close.addEventListener('click', () => setOpen(false));
     reset.addEventListener('click', () => window.JADP.reset());
 
-    shadow.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && isOpen) {
             event.preventDefault();
             setOpen(false);
