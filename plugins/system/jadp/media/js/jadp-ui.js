@@ -168,6 +168,7 @@
     ];
 
     sizeGroup.appendChild(legend);
+    const sizeOptionsContainer = create('div', { className: 'jadp-options' });
 
     const sizeButtons = new Map();
 
@@ -184,8 +185,10 @@
 
         button.addEventListener('click', () => window.JADP.set('textSize', value));
         sizeButtons.set(value, button);
-        sizeGroup.appendChild(button);
+        sizeOptionsContainer.appendChild(button);
     });
+
+    sizeGroup.appendChild(sizeOptionsContainer);
 
     content.appendChild(sizeGroup);
 
@@ -198,6 +201,7 @@
     ];
 
     lineSpacingGroup.appendChild(lineSpacingLegend);
+    const lineSpacingOptionsContainer = create('div', { className: 'jadp-options' });
 
     const lineSpacingButtons = new Map();
 
@@ -214,8 +218,10 @@
 
         button.addEventListener('click', () => window.JADP.set('lineSpacing', value));
         lineSpacingButtons.set(value, button);
-        lineSpacingGroup.appendChild(button);
+        lineSpacingOptionsContainer.appendChild(button);
     });
+
+    lineSpacingGroup.appendChild(lineSpacingOptionsContainer);
 
     content.appendChild(lineSpacingGroup);
 
@@ -228,6 +234,7 @@
     ];
 
     letterSpacingGroup.appendChild(letterSpacingLegend);
+    const letterSpacingOptionsContainer = create('div', { className: 'jadp-options' });
 
     const letterSpacingButtons = new Map();
 
@@ -244,8 +251,10 @@
 
         button.addEventListener('click', () => window.JADP.set('letterSpacing', value));
         letterSpacingButtons.set(value, button);
-        letterSpacingGroup.appendChild(button);
+        letterSpacingOptionsContainer.appendChild(button);
     });
+
+    letterSpacingGroup.appendChild(letterSpacingOptionsContainer);
 
     content.appendChild(letterSpacingGroup);
 
@@ -258,6 +267,7 @@
     ];
 
     wordSpacingGroup.appendChild(wordSpacingLegend);
+    const wordSpacingOptionsContainer = create('div', { className: 'jadp-options' });
 
     const wordSpacingButtons = new Map();
 
@@ -274,8 +284,10 @@
 
         button.addEventListener('click', () => window.JADP.set('wordSpacing', value));
         wordSpacingButtons.set(value, button);
-        wordSpacingGroup.appendChild(button);
+        wordSpacingOptionsContainer.appendChild(button);
     });
+
+    wordSpacingGroup.appendChild(wordSpacingOptionsContainer);
 
     content.appendChild(wordSpacingGroup);
 
@@ -288,6 +300,7 @@
     const contrastButtons = new Map();
 
     contrastGroup.appendChild(contrastLegend);
+    const contrastOptionsContainer = create('div', { className: 'jadp-options' });
 
     contrastOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
@@ -301,8 +314,10 @@
 
         button.addEventListener('click', () => window.JADP.set('highContrast', value));
         contrastButtons.set(value, button);
-        contrastGroup.appendChild(button);
+        contrastOptionsContainer.appendChild(button);
     });
+
+    contrastGroup.appendChild(contrastOptionsContainer);
 
     content.appendChild(contrastGroup);
 
@@ -315,6 +330,7 @@
     const grayscaleButtons = new Map();
 
     grayscaleGroup.appendChild(grayscaleLegend);
+    const grayscaleOptionsContainer = create('div', { className: 'jadp-options' });
 
     grayscaleOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
@@ -328,8 +344,10 @@
 
         button.addEventListener('click', () => window.JADP.set('grayscale', value));
         grayscaleButtons.set(value, button);
-        grayscaleGroup.appendChild(button);
+        grayscaleOptionsContainer.appendChild(button);
     });
+
+    grayscaleGroup.appendChild(grayscaleOptionsContainer);
 
     content.appendChild(grayscaleGroup);
 
@@ -342,6 +360,7 @@
     const underlineLinksButtons = new Map();
 
     underlineLinksGroup.appendChild(underlineLinksLegend);
+    const underlineLinksOptionsContainer = create('div', { className: 'jadp-options' });
 
     underlineLinksOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
@@ -355,8 +374,10 @@
 
         button.addEventListener('click', () => window.JADP.set('underlineLinks', value));
         underlineLinksButtons.set(value, button);
-        underlineLinksGroup.appendChild(button);
+        underlineLinksOptionsContainer.appendChild(button);
     });
+
+    underlineLinksGroup.appendChild(underlineLinksOptionsContainer);
 
     content.appendChild(underlineLinksGroup);
 
