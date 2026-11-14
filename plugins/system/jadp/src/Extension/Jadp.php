@@ -11,7 +11,7 @@
 namespace Joomla\Plugin\System\Jadp\Extension;
 
 use Joomla\CMS\Document\HtmlDocument;
-use Joomla\CMS\Event\Application\BeforeRenderEvent;
+use Joomla\CMS\Event\Application\BeforeCompileHeadEvent;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
@@ -38,21 +38,21 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'onBeforeRender'      => 'onBeforeRender',
+            'onBeforeCompileHead' => 'onBeforeCompileHead',
             'onAfterRender'       => 'onAfterRender',
         ];
     }
 
     /**
-     * Register frontend assets before Joomla renders the template.
+     * Register frontend assets when Joomla compiles the document head.
      *
-     * @param   BeforeRenderEvent  $event  The event.
+     * @param   BeforeCompileHeadEvent  $event  The event.
      *
      * @return  void
      *
      * @since __DEPLOY_VERSION__
      */
-    public function onBeforeRender(BeforeRenderEvent $event): void
+    public function onBeforeCompileHead(BeforeCompileHeadEvent $event): void
     {
         if (!$this->isEnabledForSite()) {
             return;
