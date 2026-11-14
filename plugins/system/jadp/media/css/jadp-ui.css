@@ -113,6 +113,12 @@
     cursor: pointer;
 }
 
+.jadp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
 .jadp-size-group {
     display: flex;
     align-items: center;
