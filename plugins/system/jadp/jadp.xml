@@ -34,6 +34,13 @@
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
+                <field
+                    name="accessibility_notice"
+                    type="note"
+                    label="PLG_SYSTEM_JADP_ACCESSIBILITY_NOTICE_LABEL"
+                    description="PLG_SYSTEM_JADP_ACCESSIBILITY_NOTICE_DESC"
+                    class="alert alert-info"
+                />
             </fieldset>
         </fields>
     </config>
