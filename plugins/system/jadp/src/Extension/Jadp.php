@@ -121,14 +121,16 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             'plg.system.jadp.host',
             'plg_system_jadp/jadp-host.js',
             [],
-            ['defer' => true]
+            ['defer' => true],
+            ['core']
         );
 
         $assets->registerAndUseScript(
             'plg.system.jadp.ui',
             'plg_system_jadp/jadp-ui.js',
             [],
-            ['defer' => true]
+            ['defer' => true],
+            ['plg.system.jadp.host']
         );
     }
 
