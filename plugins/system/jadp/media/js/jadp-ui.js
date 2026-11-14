@@ -25,8 +25,8 @@
     shadow.appendChild(stylesheet);
 
     const labels = {
-        open: host.dataset.openLabel,
-        close: host.dataset.closeLabel,
+        open: host.dataset.open,
+        close: host.dataset.close,
         title: host.dataset.title,
         textSize: host.dataset.textSize,
         lineSpacing: host.dataset.lineSpacing,
