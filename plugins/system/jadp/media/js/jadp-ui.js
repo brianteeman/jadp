@@ -27,6 +27,9 @@
         textSize: host.dataset.textSize,
         lineSpacing: host.dataset.lineSpacing,
         letterSpacing: host.dataset.letterSpacing,
+        contrast: host.dataset.contrast,
+        normalContrast: host.dataset.normalContrast,
+        highContrast: host.dataset.highContrast,
         normal: host.dataset.normal,
         increased: host.dataset.increased,
         maximum: host.dataset.maximum,
@@ -161,6 +164,30 @@
 
     content.appendChild(letterSpacingGroup);
 
+    const contrastGroup = create('fieldset', { className: 'jadp-size-group' });
+    const contrastLegend = create('legend', {}, labels.contrast);
+    const contrastOptions = [
+        [false, labels.normalContrast],
+        [true, labels.highContrast],
+    ];
+    const contrastButtons = new Map();
+
+    contrastGroup.appendChild(contrastLegend);
+
+    contrastOptions.forEach(([value, label]) => {
+        const button = create('button', {
+            type: 'button',
+            className: 'jadp-option',
+            'aria-pressed': 'false',
+        }, label);
+
+        button.addEventListener('click', () => window.JADP.set('highContrast', value));
+        contrastButtons.set(value, button);
+        contrastGroup.appendChild(button);
+    });
+
+    content.appendChild(contrastGroup);
+
     const disclaimer = create('p', { className: 'jadp-disclaimer' }, labels.disclaimer);
     const footer = create('footer', { className: 'jadp-footer' });
     const reset = create('button', {
@@ -210,6 +237,10 @@
 
         letterSpacingButtons.forEach((button, value) => {
             button.setAttribute('aria-pressed', String(preferences.letterSpacing === value));
+        });
+
+        contrastButtons.forEach((button, value) => {
+            button.setAttribute('aria-pressed', String(preferences.highContrast === value));
         });
     });
 }());
