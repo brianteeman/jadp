@@ -1,0 +1,13 @@
+/**
+ * JADP website display preferences.
+ *
+ * Keep the initial text-size adjustment limited to the body base size.
+ * Do not change the root font size: that would also resize rem-based layout.
+ */
+html[data-jadp-text-size="large"] body {
+    font-size: 1.125em;
+}
+
+html[data-jadp-text-size="extra-large"] body {
+    font-size: 1.25em;
+}
