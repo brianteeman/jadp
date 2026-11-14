@@ -18,6 +18,14 @@
     document.documentElement.appendChild(host);
 
     const shadow = host.attachShadow({ mode: 'open' });
+
+    if (host.dataset.triggerIconType === 'class' && host.dataset.triggerIconCss) {
+        const iconStylesheet = document.createElement('link');
+        iconStylesheet.rel = 'stylesheet';
+        iconStylesheet.href = host.dataset.triggerIconCss;
+        shadow.appendChild(iconStylesheet);
+    }
+
     const stylesheet = document.createElement('link');
 
     stylesheet.rel = 'stylesheet';
@@ -116,6 +124,29 @@
     };
 
     const createTriggerIcon = (open = false) => {
+        const iconType = host.dataset.triggerIconType;
+
+        if (iconType === 'image' && host.dataset.triggerIconImage) {
+            const image = document.createElement('img');
+            image.src = host.dataset.triggerIconImage;
+            image.alt = '';
+            image.setAttribute('aria-hidden', 'true');
+            image.className = 'jadp-trigger-image';
+            return image;
+        }
+
+        if (iconType === 'class' && host.dataset.triggerIconClass) {
+            const icon = document.createElement('span');
+            icon.classList.add('jadp-trigger-font-icon');
+            host.dataset.triggerIconClass.split(/\\s+/).filter(Boolean).forEach((className) => {
+                if (/^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(className)) {
+                    icon.classList.add(className);
+                }
+            });
+            icon.setAttribute('aria-hidden', 'true');
+            return icon;
+        }
+
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', '0 0 512 512');
         svg.setAttribute('aria-hidden', 'true');
