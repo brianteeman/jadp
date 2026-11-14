@@ -17,16 +17,39 @@
     z-index: 2147483000;
     right: max(1rem, env(safe-area-inset-right));
     bottom: max(1rem, env(safe-area-inset-bottom));
-    min-height: 2.75rem;
-    max-width: calc(100vw - 2rem);
-    padding: 0.65rem 1rem;
-    border: 2px solid #202124;
-    border-radius: 0.35rem;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    padding: 0;
+    border: 2px solid #fff;
+    border-radius: 50%;
     background: #202124;
     color: #fff;
-    font: inherit;
-    font-weight: 600;
+    box-shadow: 0 0.2rem 0.75rem rgb(0 0 0 / 30%);
     cursor: pointer;
+    transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.jadp-trigger:hover {
+    background: #174ea6;
+    box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 35%);
+    transform: translateY(-2px);
+}
+
+.jadp-trigger:active {
+    transform: scale(0.96);
+}
+
+.jadp-trigger-icon {
+    display: block;
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 24;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .jadp-panel {
@@ -160,7 +183,13 @@
 .jadp-trigger:focus-visible,
 .jadp-panel button:focus-visible {
     outline: 3px solid #f0b429;
-    outline-offset: 3px;
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jadp-trigger {
+        transition: none;
+    }
 }
 
 @media (max-width: 24rem) {
