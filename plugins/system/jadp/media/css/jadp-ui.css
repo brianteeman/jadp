@@ -126,6 +126,7 @@
 
 .jadp-size-group legend {
     grid-column: 1;
+    grid-row: 1;
     margin: 0;
     padding: 0;
     font-weight: 700;
@@ -144,6 +145,7 @@
 }
 
 .jadp-option {
+    grid-row: 1;
     display: grid;
     place-items: center;
     width: 2.75rem;
