@@ -413,9 +413,39 @@
     reset.addEventListener('click', () => window.JADP.reset());
 
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && isOpen) {
+        if (!isOpen) {
+            return;
+        }
+
+        if (event.key === 'Escape') {
             event.preventDefault();
             setOpen(false);
+
+            return;
+        }
+
+        if (event.key !== 'Tab') {
+            return;
+        }
+
+        const focusable = Array.from(panel.querySelectorAll(
+            'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )).filter((element) => !element.hidden && element.getAttribute('aria-hidden') !== 'true');
+
+        if (!focusable.length) {
+            event.preventDefault();
+            return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && (shadow.activeElement === first || !panel.contains(shadow.activeElement))) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && (shadow.activeElement === last || !panel.contains(shadow.activeElement))) {
+            event.preventDefault();
+            first.focus();
         }
     });
 
