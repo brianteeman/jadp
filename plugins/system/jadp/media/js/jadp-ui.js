@@ -13,6 +13,10 @@
         return;
     }
 
+    // Keep the toolbar outside the filtered body so its fixed positioning
+    // remains relative to the viewport when grayscale is enabled.
+    document.documentElement.appendChild(host);
+
     const shadow = host.attachShadow({ mode: 'open' });
     const stylesheet = document.createElement('link');
 
@@ -31,6 +35,9 @@
         contrast: host.dataset.contrast,
         normalContrast: host.dataset.normalContrast,
         highContrast: host.dataset.highContrast,
+        grayscale: host.dataset.grayscale,
+        normalGrayscale: host.dataset.normalGrayscale,
+        grayscaleOn: host.dataset.grayscaleOn,
         normal: host.dataset.normal,
         increased: host.dataset.increased,
         maximum: host.dataset.maximum,
@@ -216,6 +223,30 @@
 
     content.appendChild(contrastGroup);
 
+    const grayscaleGroup = create('fieldset', { className: 'jadp-size-group' });
+    const grayscaleLegend = create('legend', {}, labels.grayscale);
+    const grayscaleOptions = [
+        [false, labels.normalGrayscale],
+        [true, labels.grayscaleOn],
+    ];
+    const grayscaleButtons = new Map();
+
+    grayscaleGroup.appendChild(grayscaleLegend);
+
+    grayscaleOptions.forEach(([value, label]) => {
+        const button = create('button', {
+            type: 'button',
+            className: 'jadp-option',
+            'aria-pressed': 'false',
+        }, label);
+
+        button.addEventListener('click', () => window.JADP.set('grayscale', value));
+        grayscaleButtons.set(value, button);
+        grayscaleGroup.appendChild(button);
+    });
+
+    content.appendChild(grayscaleGroup);
+
     const disclaimer = create('p', { className: 'jadp-disclaimer' }, labels.disclaimer);
     const footer = create('footer', { className: 'jadp-footer' });
     const reset = create('button', {
@@ -273,6 +304,10 @@
 
         contrastButtons.forEach((button, value) => {
             button.setAttribute('aria-pressed', String(preferences.highContrast === value));
+        });
+
+        grayscaleButtons.forEach((button, value) => {
+            button.setAttribute('aria-pressed', String(preferences.grayscale === value));
         });
     });
 }());

@@ -69,3 +69,8 @@ html[data-jadp-word-spacing="increased"] body :is(p, li, dd, dt, blockquote, fig
 html[data-jadp-word-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
     word-spacing: 0.2em !important;
 }
+
+/* Grayscale mode removes colour from the rendered page. */
+html[data-jadp-grayscale="true"] body {
+    filter: grayscale(1);
+}
