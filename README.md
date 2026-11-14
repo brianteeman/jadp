@@ -176,3 +176,177 @@ The storage implementation should:
 Browser storage is scoped to an origin. Preferences will therefore not automatically transfer between different protocols, hostnames or ports.
 
 The implementation should not depend on cookies, server-side user accounts or external storage services.
+
+
+## 4. Agreed Implementation Decisions
+
+These decisions supplement the original feature specification and take precedence where the earlier wording is less specific.
+
+### 4.1 Toolbar Position and Behaviour
+
+- The activation button is fixed to the bottom-right of the viewport.
+- The initial implementation uses this physical position regardless of text direction.
+- The toolbar is opened and closed by the activation button.
+- Closing the toolbar does not reset visitor preferences.
+- The toolbar must remain usable on narrow viewports and on devices with display cut-outs or safe areas.
+
+### 4.2 Text Size Presets
+
+Text size is presented as three mutually exclusive presets:
+
+- Normal (default).
+- Large.
+- Extra large.
+
+The selected preset must be apparent and exposed accessibly, for example by using native buttons with aria-pressed.
+
+### 4.3 Reset Control
+
+The toolbar must include a dedicated, visible Reset preferences button in its footer. It must be visually and functionally distinct from the close button.
+
+Activating reset must:
+
+1. Restore every preference to its default.
+2. Remove or update all preference attributes on the document root.
+3. Update the selected and enabled state of every toolbar control.
+4. Remove the JADP entry from localStorage.
+5. Restore the default presentation without reloading the page.
+6. Leave the toolbar open.
+
+### 4.4 Toolbar Isolation
+
+The toolbar interface should be isolated from template CSS. The preferred approach is a Shadow DOM host for the toolbar UI, with its own styles. Website display preferences must still be applied to the website document, outside the shadow root.
+
+This is an implementation direction to validate with Joomla, browser support and Content Security Policy testing, not a reason to introduce unnecessary dependencies.
+
+### 4.5 Reference Implementation
+
+The following project is a design and implementation reference only:
+
+https://github.com/ifrederico/accessible-web-widget
+
+Useful ideas to evaluate include its floating activation button, isolated toolbar UI, preference state management, responsive panel and dedicated footer reset control.
+
+JADP must remain much smaller and adhere to its own scope and explicit exclusions. Do not import features such as profiles, text-to-speech, dyslexia-specific fonts, auditing, automated remediation, cookie fallbacks or remote font services.
+
+The reference repository is MIT licensed. Any direct reuse of code must retain appropriate licence and attribution notices. Prefer an independent implementation based on JADP requirements.
+
+## 5. Proposed Joomla Extension Architecture
+
+The initial implementation is expected to be a Joomla system plugin, provisionally named plg_system_jadp.
+
+The plugin should:
+
+- Run on the frontend only.
+- Support an administrator enable/disable option.
+- Register assets using Joomla WebAssetManager.
+- Inject the toolbar host markup.
+- Avoid loading JADP assets when disabled.
+- Keep visitor preference state entirely in the browser.
+
+A provisional file structure is:
+
+```text
+plugins/system/jadp/
+├── services/
+│   └── provider.php
+├── src/
+│   └── Extension/
+│       └── Jadp.php
+├── language/
+│   └── en-GB/
+│       ├── plg_system_jadp.ini
+│       └── plg_system_jadp.sys.ini
+├── media/
+│   ├── css/
+│   │   ├── jadp.css
+│   │   └── jadp-ui.css
+│   ├── js/
+│   │   ├── jadp-init.js
+│   │   ├── jadp.js
+│   │   └── jadp-ui.js
+│   └── joomla.asset.json
+├── jadp.xml
+└── README.md
+```
+
+The exact event and asset-loading implementation must be checked against the target Joomla version before coding.
+
+### 5.1 JavaScript Responsibilities
+
+- jadp-init.js: read, validate and apply saved preferences as early as practical to reduce visual flicker.
+- jadp.js: maintain preference state, apply changes, persist values and handle reset.
+- jadp-ui.js: create and manage the toolbar UI and its interactions, preferably within a Shadow DOM.
+
+No jQuery, Bootstrap JavaScript or third-party JavaScript framework is required.
+
+### 5.2 Preference Storage
+
+Use one Joomla-specific, versioned localStorage entry. The provisional key is:
+
+joomla.jadp.preferences
+
+The initial version 1 data shape is:
+
+```json
+{
+  "version": 1,
+  "preferences": {
+    "textSize": "normal",
+    "lineSpacing": "normal",
+    "letterSpacing": "normal",
+    "wordSpacing": "normal",
+    "highContrast": false,
+    "grayscale": false,
+    "underlineLinks": false
+  }
+}
+```
+
+Values must be validated before use. Corrupt, unsupported or inaccessible storage must not break the page. In-memory changes must continue to work when persistence is unavailable. Do not fall back to cookies.
+
+### 5.3 Document State and CSS
+
+The preference engine should express active preferences through a consistent set of data attributes on the document root. CSS should provide the visual changes.
+
+The implementation must avoid indiscriminate rules that unintentionally resize layout dimensions, icons, controls or other non-text UI. In particular, changing the root font size must not be assumed to be a safe way to scale website text because it also changes dimensions expressed in rem.
+
+High contrast must use a considered palette rather than simply inverting the entire page. The toolbar itself must remain legible and usable when page preferences are active. Grayscale must not make the toolbar grayscale.
+
+The precise selectors and effects must be tested against Cassiopeia and representative third-party templates.
+
+## 6. Initial Implementation Milestone
+
+Build a working Joomla system plugin in increments. The first milestone should include:
+
+- A valid Joomla plugin skeleton and manifest.
+- Frontend-only activation and asset registration.
+- Fixed bottom-right activation button.
+- Isolated, responsive toolbar UI.
+- Three text-size presets.
+- Versioned localStorage persistence, including graceful storage failure handling.
+- Dedicated footer reset button with the reset behaviour specified above.
+- Close behaviour that preserves preferences.
+- The required purpose and disclaimer text in the toolbar.
+- Joomla language strings rather than hard-coded user-facing text.
+
+Add the remaining spacing, contrast, grayscale and link underline preferences in subsequent increments.
+
+## 7. Quality and Compatibility Checks
+
+At minimum, test:
+
+- Keyboard operation, visible focus, accessible names and state announcements.
+- Opening, closing and focus restoration.
+- Resetting all preferences without reloading.
+- Multiple preferences active at the same time.
+- Persistence across navigation and reloads.
+- Corrupt, unsupported and unavailable localStorage.
+- Two open tabs receiving storage updates.
+- Responsive and touch layouts.
+- RTL pages, including Arabic and Hebrew.
+- Cassiopeia and representative third-party templates.
+- High contrast and grayscale interactions with fixed elements, dialogs, dropdowns and forms.
+- Content Security Policy compatibility and the chosen Shadow DOM styling approach.
+
+The initial release must not claim that enabling JADP makes a website accessible or guarantees conformance with any accessibility standard.
