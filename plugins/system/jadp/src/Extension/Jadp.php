@@ -8,17 +8,17 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\\Plugin\\System\\Jadp\\Extension;
+namespace Joomla\Plugin\System\Jadp\Extension;
 
-use Joomla\\CMS\\Document\\HtmlDocument;
-use Joomla\\CMS\\Event\\Application\\BeforeCompileHeadEvent;
-use Joomla\\CMS\\Language\\Text;
-use Joomla\\CMS\\Plugin\\CMSPlugin;
-use Joomla\\CMS\\Uri\\Uri;
-use Joomla\\Event\\SubscriberInterface;
+use Joomla\CMS\Document\HtmlDocument;
+use Joomla\CMS\Event\Application\BeforeCompileHeadEvent;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Uri\Uri;
+use Joomla\Event\SubscriberInterface;
 
 // phpcs:disable PSR1.Files.SideEffects
-\\defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 // phpcs:enable PSR1.Files.SideEffects
 
 /**
