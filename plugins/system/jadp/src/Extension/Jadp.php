@@ -93,45 +93,12 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             ],
         ]);
 
-        $assets = $document->getWebAssetManager();
+        $wa = $document->getWebAssetManager();
+        $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp');
 
-        // Joomla.getOptions() is provided by the core script.
-        $assets->useScript('core');
-
-        $assets->registerAndUseStyle(
-            'plg.system.jadp',
-            'plg_system_jadp/jadp.css'
-        );
-
-        $assets->registerAndUseScript(
-            'plg.system.jadp.init',
-            'plg_system_jadp/jadp-init.js',
-            [],
-            ['defer' => false]
-        );
-
-        $assets->registerAndUseScript(
-            'plg.system.jadp',
-            'plg_system_jadp/jadp.js',
-            [],
-            ['defer' => true]
-        );
-
-        $assets->registerAndUseScript(
-            'plg.system.jadp.host',
-            'plg_system_jadp/jadp-host.js',
-            [],
-            ['defer' => true],
-            ['core']
-        );
-
-        $assets->registerAndUseScript(
-            'plg.system.jadp.ui',
-            'plg_system_jadp/jadp-ui.js',
-            [],
-            ['defer' => true],
-            ['plg.system.jadp.host']
-        );
+        $wa->useStyle('plg.system.jadp')
+            ->useScript('plg.system.jadp.init')
+            ->useScript('plg.system.jadp.ui');
     }
 
     /**
