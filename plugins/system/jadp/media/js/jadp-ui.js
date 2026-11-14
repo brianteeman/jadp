@@ -27,6 +27,8 @@
         textSize: host.dataset.textSize,
         lineSpacing: host.dataset.lineSpacing,
         letterSpacing: host.dataset.letterSpacing,
+        contrast: host.dataset.contrast,
+        normalContrast: host.dataset.normalContrast,
         highContrast: host.dataset.highContrast,
         normal: host.dataset.normal,
         increased: host.dataset.increased,
@@ -163,18 +165,27 @@
     content.appendChild(letterSpacingGroup);
 
     const contrastGroup = create('fieldset', { className: 'jadp-size-group' });
-    const contrastLegend = create('legend', {}, labels.highContrast);
-    const contrastButton = create('button', {
-        type: 'button',
-        className: 'jadp-option jadp-toggle',
-        'aria-pressed': 'false',
-    }, labels.highContrast);
+    const contrastLegend = create('legend', {}, labels.contrast);
+    const contrastOptions = [
+        [false, labels.normalContrast],
+        [true, labels.highContrast],
+    ];
+    const contrastButtons = new Map();
 
-    contrastButton.addEventListener('click', () => {
-        window.JADP.set('highContrast', !window.JADP.getPreferences().highContrast);
+    contrastGroup.appendChild(contrastLegend);
+
+    contrastOptions.forEach(([value, label]) => {
+        const button = create('button', {
+            type: 'button',
+            className: 'jadp-option',
+            'aria-pressed': 'false',
+        }, label);
+
+        button.addEventListener('click', () => window.JADP.set('highContrast', value));
+        contrastButtons.set(value, button);
+        contrastGroup.appendChild(button);
     });
 
-    contrastGroup.append(contrastLegend, contrastButton);
     content.appendChild(contrastGroup);
 
     const disclaimer = create('p', { className: 'jadp-disclaimer' }, labels.disclaimer);
@@ -228,6 +239,8 @@
             button.setAttribute('aria-pressed', String(preferences.letterSpacing === value));
         });
 
-        contrastButton.setAttribute('aria-pressed', String(preferences.highContrast));
+        contrastButtons.forEach((button, value) => {
+            button.setAttribute('aria-pressed', String(preferences.highContrast === value));
+        });
     });
 }());
