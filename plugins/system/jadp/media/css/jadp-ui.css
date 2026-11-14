@@ -41,6 +41,19 @@
     transform: scale(0.96);
 }
 
+.jadp-trigger-image,
+.jadp-trigger-font-icon {
+    display: block;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.jadp-trigger-image {
+    object-fit: contain;
+}
+
 .jadp-trigger-icon {
     display: block;
     width: 1.8rem;
