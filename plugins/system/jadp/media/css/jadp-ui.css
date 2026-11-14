@@ -1,0 +1,155 @@
+:host {
+    all: initial;
+    color: #202124;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.jadp-trigger {
+    position: fixed;
+    z-index: 2147483000;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    min-height: 2.75rem;
+    max-width: calc(100vw - 2rem);
+    padding: 0.65rem 1rem;
+    border: 2px solid #202124;
+    border-radius: 0.35rem;
+    background: #202124;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.jadp-panel {
+    position: fixed;
+    z-index: 2147483001;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
+    width: min(22rem, calc(100vw - 2rem));
+    max-height: min(75vh, 42rem);
+    overflow: auto;
+    padding: 1rem;
+    border: 1px solid #767676;
+    border-radius: 0.5rem;
+    background: #fff;
+    color: #202124;
+    box-shadow: 0 0.25rem 1.25rem rgb(0 0 0 / 25%);
+    font: inherit;
+}
+
+.jadp-panel[hidden] {
+    display: none;
+}
+
+.jadp-header,
+.jadp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.jadp-header {
+    margin-bottom: 1rem;
+}
+
+.jadp-header h2 {
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.jadp-close {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    border: 1px solid #767676;
+    border-radius: 0.25rem;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.jadp-size-group {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.jadp-size-group legend {
+    margin-bottom: 0.5rem;
+    padding: 0;
+    font-weight: 700;
+}
+
+.jadp-option,
+.jadp-reset {
+    min-height: 2.75rem;
+    padding: 0.5rem;
+    border: 1px solid #555;
+    border-radius: 0.25rem;
+    background: #fff;
+    color: #202124;
+    font: inherit;
+    cursor: pointer;
+}
+
+.jadp-option[aria-pressed="true"] {
+    border: 2px solid #174ea6;
+    background: #e8f0fe;
+    color: #174ea6;
+    font-weight: 700;
+}
+
+.jadp-disclaimer {
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.jadp-footer {
+    justify-content: flex-end;
+    padding-top: 0.75rem;
+    border-top: 1px solid #bbb;
+}
+
+.jadp-reset {
+    border-color: #8b1e1e;
+    background: #8b1e1e;
+    color: #fff;
+    font-weight: 600;
+}
+
+.jadp-trigger:focus-visible,
+.jadp-panel button:focus-visible {
+    outline: 3px solid #f0b429;
+    outline-offset: 3px;
+}
+
+@media (max-width: 24rem) {
+    .jadp-panel {
+        right: max(0.5rem, env(safe-area-inset-right));
+        bottom: calc(max(0.5rem, env(safe-area-inset-bottom)) + 3.5rem);
+        width: calc(100vw - 1rem);
+    }
+
+    .jadp-trigger {
+        right: max(0.5rem, env(safe-area-inset-right));
+        bottom: max(0.5rem, env(safe-area-inset-bottom));
+    }
+}
