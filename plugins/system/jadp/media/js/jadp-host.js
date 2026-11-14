@@ -23,9 +23,7 @@
     host.dataset.jadpCss = options.css;
 
     Object.entries(options.labels).forEach(([name, value]) => {
-        const attribute = name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
-
-        host.dataset[attribute] = value;
+        host.dataset[name] = value;
     });
 
     document.documentElement.appendChild(host);
