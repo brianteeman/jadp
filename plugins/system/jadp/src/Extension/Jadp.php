@@ -118,7 +118,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     {
         $image = trim((string) $this->params->get('trigger_icon_image', ''));
 
-        if ($image === '' || !preg_match('/\\.png$/i', parse_url($image, PHP_URL_PATH) ?: '')) {
+        if ($image === '' || !preg_match('/\.png$/i', parse_url($image, PHP_URL_PATH) ?: '')) {
             return '';
         }
 
