@@ -108,9 +108,9 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Check that the plugin is enabled for a frontend HTML request.
+     * Get the configured PNG icon URL.
      *
-     * @return bool
+     * @return string
      *
      * @since __DEPLOY_VERSION__
      */
