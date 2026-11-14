@@ -67,6 +67,12 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
 
         $document->addScriptOptions('plg_system_jadp', [
             'css' => Uri::root(true) . '/media/plg_system_jadp/css/jadp-ui.css',
+            'triggerIcon' => [
+                'type' => $this->params->get('trigger_icon_type', 'default'),
+                'class' => trim((string) $this->params->get('trigger_icon_class', '')),
+                'css' => trim((string) $this->params->get('trigger_icon_css', '')),
+                'image' => $this->getTriggerIconImage(),
+            ],
             'labels' => [
                 'open' => Text::_('PLG_SYSTEM_JADP_OPEN'),
                 'close' => Text::_('PLG_SYSTEM_JADP_CLOSE'),
@@ -99,6 +105,28 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
         $wa->useStyle('plg.system.jadp')
             ->useScript('plg.system.jadp.init')
             ->useScript('plg.system.jadp.ui');
+    }
+
+    /**
+     * Check that the plugin is enabled for a frontend HTML request.
+     *
+     * @return bool
+     *
+     * @since __DEPLOY_VERSION__
+     */
+    private function getTriggerIconImage(): string
+    {
+        $image = trim((string) $this->params->get('trigger_icon_image', ''));
+
+        if ($image === '' || !preg_match('/\\.png$/i', parse_url($image, PHP_URL_PATH) ?: '')) {
+            return '';
+        }
+
+        if (preg_match('#^https?://#i', $image)) {
+            return $image;
+        }
+
+        return Uri::root() . ltrim($image, '/');
     }
 
     /**
