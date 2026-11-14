@@ -27,6 +27,7 @@
         textSize: host.dataset.textSize,
         lineSpacing: host.dataset.lineSpacing,
         letterSpacing: host.dataset.letterSpacing,
+        wordSpacing: host.dataset.wordSpacing,
         contrast: host.dataset.contrast,
         normalContrast: host.dataset.normalContrast,
         highContrast: host.dataset.highContrast,
@@ -164,6 +165,33 @@
 
     content.appendChild(letterSpacingGroup);
 
+    const wordSpacingGroup = create('fieldset', { className: 'jadp-size-group' });
+    const wordSpacingLegend = create('legend', {}, labels.wordSpacing);
+    const wordSpacingOptions = [
+        ['normal', labels.normal],
+        ['increased', labels.increased],
+        ['maximum', labels.maximum],
+    ];
+
+    wordSpacingGroup.appendChild(wordSpacingLegend);
+
+    const wordSpacingButtons = new Map();
+
+    wordSpacingOptions.forEach(([value, label]) => {
+        const button = create('button', {
+            type: 'button',
+            className: 'jadp-option',
+            'data-word-spacing': value,
+            'aria-pressed': 'false',
+        }, label);
+
+        button.addEventListener('click', () => window.JADP.set('wordSpacing', value));
+        wordSpacingButtons.set(value, button);
+        wordSpacingGroup.appendChild(button);
+    });
+
+    content.appendChild(wordSpacingGroup);
+
     const contrastGroup = create('fieldset', { className: 'jadp-size-group' });
     const contrastLegend = create('legend', {}, labels.contrast);
     const contrastOptions = [
@@ -237,6 +265,10 @@
 
         letterSpacingButtons.forEach((button, value) => {
             button.setAttribute('aria-pressed', String(preferences.letterSpacing === value));
+        });
+
+        wordSpacingButtons.forEach((button, value) => {
+            button.setAttribute('aria-pressed', String(preferences.wordSpacing === value));
         });
 
         contrastButtons.forEach((button, value) => {
