@@ -54,6 +54,7 @@
                     type="url"
                     label="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_LABEL"
                     description="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_DESC"
+                    required="true"
                     showon="trigger_icon_type:class"
                 />
                 <field
