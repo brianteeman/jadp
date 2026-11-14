@@ -102,10 +102,11 @@
         path.setAttribute('d', definition.path);
 
         if (definition.scale || definition.transform) {
-            const scale = definition.scale || 1;
+            const scaleX = definition.scale?.scaleX || 1;
+            const scaleY = definition.scale?.scaleY || 1;
             const centreX = definition.width / 2;
             const centreY = definition.height / 2;
-            const scaleTransform = `translate(${centreX} ${centreY}) scale(${scale}) translate(${-centreX} ${-centreY})`;
+            const scaleTransform = `translate(${centreX} ${centreY}) scale(${scaleX} ${scaleY}) translate(${-centreX} ${-centreY})`;
             path.setAttribute('transform', definition.transform ? `${scaleTransform} ${definition.transform}` : scaleTransform);
         }
 
