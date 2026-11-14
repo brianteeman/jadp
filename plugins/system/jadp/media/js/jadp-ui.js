@@ -440,10 +440,10 @@
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
 
-        if (event.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) {
+        if (event.shiftKey && (shadow.activeElement === first || !panel.contains(shadow.activeElement))) {
             event.preventDefault();
             last.focus();
-        } else if (!event.shiftKey && (document.activeElement === last || !panel.contains(document.activeElement))) {
+        } else if (!event.shiftKey && (shadow.activeElement === last || !panel.contains(shadow.activeElement))) {
             event.preventDefault();
             first.focus();
         }
