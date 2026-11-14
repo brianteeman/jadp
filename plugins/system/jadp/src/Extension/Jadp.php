@@ -70,26 +70,26 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
 
         $assets->registerAndUseStyle(
             'plg.system.jadp',
-            'plg_system_jadp/css/jadp.css'
+            'plg_system_jadp/jadp.css'
         );
 
         $assets->registerAndUseScript(
             'plg.system.jadp.init',
-            'plg_system_jadp/js/jadp-init.js',
+            'plg_system_jadp/jadp-init.js',
             [],
             ['defer' => false]
         );
 
         $assets->registerAndUseScript(
             'plg.system.jadp',
-            'plg_system_jadp/js/jadp.js',
+            'plg_system_jadp/jadp.js',
             [],
             ['defer' => true]
         );
 
         $assets->registerAndUseScript(
             'plg.system.jadp.ui',
-            'plg_system_jadp/js/jadp-ui.js',
+            'plg_system_jadp/jadp-ui.js',
             [],
             ['defer' => true]
         );
