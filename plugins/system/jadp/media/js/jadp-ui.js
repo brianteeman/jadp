@@ -159,8 +159,8 @@
     header.append(heading, close);
 
     const content = create('div', { className: 'jadp-content' });
-    const sizeGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.textSize });
-    const legend = create('span', { className: 'jadp-group-label' }, labels.textSize);
+    const sizeGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-text-size-label' });
+    const legend = create('span', { id: 'jadp-text-size-label', className: 'jadp-group-label' }, labels.textSize);
     const sizeOptions = [
         ['normal', labels.normal, 'textSmall'],
         ['large', labels.large, 'textMedium'],
@@ -192,8 +192,8 @@
 
     content.appendChild(sizeGroup);
 
-    const lineSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.lineSpacing });
-    const lineSpacingLegend = create('span', { className: 'jadp-group-label' }, labels.lineSpacing);
+    const lineSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-line-spacing-label' });
+    const lineSpacingLegend = create('span', { id: 'jadp-line-spacing-label', className: 'jadp-group-label' }, labels.lineSpacing);
     const lineSpacingOptions = [
         ['normal', labels.normal, 'lineNormal'],
         ['increased', labels.increased, 'lineIncreased'],
@@ -225,8 +225,8 @@
 
     content.appendChild(lineSpacingGroup);
 
-    const letterSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.letterSpacing });
-    const letterSpacingLegend = create('span', { className: 'jadp-group-label' }, labels.letterSpacing);
+    const letterSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-letter-spacing-label' });
+    const letterSpacingLegend = create('span', { id: 'jadp-letter-spacing-label', className: 'jadp-group-label' }, labels.letterSpacing);
     const letterSpacingOptions = [
         ['normal', labels.normal, 'letterNormal'],
         ['increased', labels.increased, 'letterIncreased'],
@@ -258,8 +258,8 @@
 
     content.appendChild(letterSpacingGroup);
 
-    const wordSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.wordSpacing });
-    const wordSpacingLegend = create('span', { className: 'jadp-group-label' }, labels.wordSpacing);
+    const wordSpacingGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-word-spacing-label' });
+    const wordSpacingLegend = create('span', { id: 'jadp-word-spacing-label', className: 'jadp-group-label' }, labels.wordSpacing);
     const wordSpacingOptions = [
         ['normal', labels.normal, 'wordNormal'],
         ['increased', labels.increased, 'wordIncreased'],
@@ -291,8 +291,8 @@
 
     content.appendChild(wordSpacingGroup);
 
-    const contrastGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.contrast });
-    const contrastLegend = create('span', { className: 'jadp-group-label' }, labels.contrast);
+    const contrastGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-contrast-label' });
+    const contrastLegend = create('span', { id: 'jadp-contrast-label', className: 'jadp-group-label' }, labels.contrast);
     const contrastOptions = [
         [false, labels.normalContrast, 'contrastNormal'],
         [true, labels.highContrast, 'contrastHigh'],
@@ -321,8 +321,8 @@
 
     content.appendChild(contrastGroup);
 
-    const grayscaleGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.grayscale });
-    const grayscaleLegend = create('span', { className: 'jadp-group-label' }, labels.grayscale);
+    const grayscaleGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-grayscale-label' });
+    const grayscaleLegend = create('span', { id: 'jadp-grayscale-label', className: 'jadp-group-label' }, labels.grayscale);
     const grayscaleOptions = [
         [false, labels.normalGrayscale, 'colour'],
         [true, labels.grayscaleOn, 'grayscale'],
@@ -351,8 +351,8 @@
 
     content.appendChild(grayscaleGroup);
 
-    const underlineLinksGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-label': labels.underlineLinks });
-    const underlineLinksLegend = create('span', { className: 'jadp-group-label' }, labels.underlineLinks);
+    const underlineLinksGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-underline-links-label' });
+    const underlineLinksLegend = create('span', { id: 'jadp-underline-links-label', className: 'jadp-group-label' }, labels.underlineLinks);
     const underlineLinksOptions = [
         [false, labels.normalLinkStyle, 'link'],
         [true, labels.underline, 'underline'],
