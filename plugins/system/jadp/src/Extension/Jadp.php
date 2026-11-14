@@ -39,12 +39,11 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     {
         return [
             'onBeforeCompileHead' => 'onBeforeCompileHead',
-            'onAfterRender'       => 'onAfterRender',
         ];
     }
 
     /**
-     * Register frontend assets when Joomla compiles the document head.
+     * Register frontend assets and toolbar options when Joomla compiles the document head.
      *
      * @param   BeforeCompileHeadEvent  $event  The event.
      *
@@ -66,7 +65,38 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
 
         $this->loadLanguage();
 
+        $document->addScriptOptions('plg_system_jadp', [
+            'css' => Uri::root(true) . '/media/plg_system_jadp/css/jadp-ui.css',
+            'labels' => [
+                'open' => Text::_('PLG_SYSTEM_JADP_OPEN'),
+                'close' => Text::_('PLG_SYSTEM_JADP_CLOSE'),
+                'title' => Text::_('PLG_SYSTEM_JADP_TITLE'),
+                'textSize' => Text::_('PLG_SYSTEM_JADP_TEXT_SIZE'),
+                'lineSpacing' => Text::_('PLG_SYSTEM_JADP_LINE_SPACING'),
+                'letterSpacing' => Text::_('PLG_SYSTEM_JADP_LETTER_SPACING'),
+                'wordSpacing' => Text::_('PLG_SYSTEM_JADP_WORD_SPACING'),
+                'contrast' => Text::_('PLG_SYSTEM_JADP_CONTRAST'),
+                'normalContrast' => Text::_('PLG_SYSTEM_JADP_NORMAL_CONTRAST'),
+                'highContrast' => Text::_('PLG_SYSTEM_JADP_HIGH_CONTRAST'),
+                'grayscale' => Text::_('PLG_SYSTEM_JADP_GRAYSCALE'),
+                'normalGrayscale' => Text::_('PLG_SYSTEM_JADP_NORMAL_GRAYSCALE'),
+                'grayscaleOn' => Text::_('PLG_SYSTEM_JADP_GRAYSCALE_ON'),
+                'underlineLinks' => Text::_('PLG_SYSTEM_JADP_UNDERLINE_LINKS'),
+                'normalLinkStyle' => Text::_('PLG_SYSTEM_JADP_NORMAL_LINK_STYLE'),
+                'underline' => Text::_('PLG_SYSTEM_JADP_UNDERLINE'),
+                'normal' => Text::_('PLG_SYSTEM_JADP_NORMAL'),
+                'increased' => Text::_('PLG_SYSTEM_JADP_INCREASED'),
+                'maximum' => Text::_('PLG_SYSTEM_JADP_MAXIMUM'),
+                'large' => Text::_('PLG_SYSTEM_JADP_LARGE'),
+                'extraLarge' => Text::_('PLG_SYSTEM_JADP_EXTRA_LARGE'),
+                'reset' => Text::_('PLG_SYSTEM_JADP_RESET'),
+            ],
+        ]);
+
         $assets = $document->getWebAssetManager();
+
+        // Joomla.getOptions() is provided by the core script.
+        $assets->useScript('core');
 
         $assets->registerAndUseStyle(
             'plg.system.jadp',
@@ -88,69 +118,20 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
         );
 
         $assets->registerAndUseScript(
+            'plg.system.jadp.host',
+            'plg_system_jadp/jadp-host.js',
+            [],
+            ['defer' => true],
+            ['core']
+        );
+
+        $assets->registerAndUseScript(
             'plg.system.jadp.ui',
             'plg_system_jadp/jadp-ui.js',
             [],
-            ['defer' => true]
+            ['defer' => true],
+            ['plg.system.jadp.host']
         );
-    }
-
-    /**
-     * Add the toolbar host to the rendered frontend document.
-     *
-     * @return  void
-     *
-     * @since __DEPLOY_VERSION__
-     */
-    public function onAfterRender(): void
-    {
-        if (!$this->isEnabledForSite()) {
-            return;
-        }
-
-        $body = $this->getApplication()->getBody();
-
-        if (stripos($body, '</body>') === false) {
-            return;
-        }
-
-        $this->loadLanguage();
-
-        $attributes = [
-            'data-jadp-css' => Uri::root(true) . '/media/plg_system_jadp/css/jadp-ui.css',
-            'data-open-label' => Text::_('PLG_SYSTEM_JADP_OPEN'),
-            'data-close-label' => Text::_('PLG_SYSTEM_JADP_CLOSE'),
-            'data-title' => Text::_('PLG_SYSTEM_JADP_TITLE'),
-            'data-text-size' => Text::_('PLG_SYSTEM_JADP_TEXT_SIZE'),
-            'data-line-spacing' => Text::_('PLG_SYSTEM_JADP_LINE_SPACING'),
-            'data-letter-spacing' => Text::_('PLG_SYSTEM_JADP_LETTER_SPACING'),
-            'data-word-spacing' => Text::_('PLG_SYSTEM_JADP_WORD_SPACING'),
-            'data-contrast' => Text::_('PLG_SYSTEM_JADP_CONTRAST'),
-            'data-normal-contrast' => Text::_('PLG_SYSTEM_JADP_NORMAL_CONTRAST'),
-            'data-high-contrast' => Text::_('PLG_SYSTEM_JADP_HIGH_CONTRAST'),
-            'data-grayscale' => Text::_('PLG_SYSTEM_JADP_GRAYSCALE'),
-            'data-normal-grayscale' => Text::_('PLG_SYSTEM_JADP_NORMAL_GRAYSCALE'),
-            'data-grayscale-on' => Text::_('PLG_SYSTEM_JADP_GRAYSCALE_ON'),
-            'data-underline-links' => Text::_('PLG_SYSTEM_JADP_UNDERLINE_LINKS'),
-            'data-normal-link-style' => Text::_('PLG_SYSTEM_JADP_NORMAL_LINK_STYLE'),
-            'data-underline' => Text::_('PLG_SYSTEM_JADP_UNDERLINE'),
-            'data-normal' => Text::_('PLG_SYSTEM_JADP_NORMAL'),
-            'data-increased' => Text::_('PLG_SYSTEM_JADP_INCREASED'),
-            'data-maximum' => Text::_('PLG_SYSTEM_JADP_MAXIMUM'),
-            'data-large' => Text::_('PLG_SYSTEM_JADP_LARGE'),
-            'data-extra-large' => Text::_('PLG_SYSTEM_JADP_EXTRA_LARGE'),
-            'data-reset' => Text::_('PLG_SYSTEM_JADP_RESET'),
-        ];
-
-        $host = '<div id="jadp-root"';
-
-        foreach ($attributes as $name => $value) {
-            $host .= ' ' . $name . '="' . htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '"';
-        }
-
-        $host .= '></div>';
-
-        $this->getApplication()->setBody(str_ireplace('</body>', $host . '</body>', $body));
     }
 
     /**
