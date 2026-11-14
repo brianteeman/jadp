@@ -47,7 +47,6 @@
         large: host.dataset.large,
         extraLarge: host.dataset.extraLarge,
         reset: host.dataset.reset,
-        disclaimer: host.dataset.disclaimer,
     };
 
     const create = (tag, attributes = {}, text = '') => {
@@ -274,7 +273,6 @@
 
     content.appendChild(underlineLinksGroup);
 
-    const disclaimer = create('p', { className: 'jadp-disclaimer' }, labels.disclaimer);
     const footer = create('footer', { className: 'jadp-footer' });
     const reset = create('button', {
         type: 'button',
@@ -282,7 +280,7 @@
     }, labels.reset);
 
     footer.appendChild(reset);
-    panel.append(header, content, disclaimer, footer);
+    panel.append(header, content, footer);
     shadow.append(trigger, panel);
 
     let isOpen = false;
