@@ -124,6 +124,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             'data-text-size' => Text::_('PLG_SYSTEM_JADP_TEXT_SIZE'),
             'data-line-spacing' => Text::_('PLG_SYSTEM_JADP_LINE_SPACING'),
             'data-letter-spacing' => Text::_('PLG_SYSTEM_JADP_LETTER_SPACING'),
+            'data-high-contrast' => Text::_('PLG_SYSTEM_JADP_HIGH_CONTRAST'),
             'data-normal' => Text::_('PLG_SYSTEM_JADP_NORMAL'),
             'data-increased' => Text::_('PLG_SYSTEM_JADP_INCREASED'),
             'data-maximum' => Text::_('PLG_SYSTEM_JADP_MAXIMUM'),
