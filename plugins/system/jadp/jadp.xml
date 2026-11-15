@@ -32,6 +32,20 @@
                     class="alert alert-info"
                 />
                 <field
+                    name="trigger_position"
+                    type="list"
+                    label="PLG_SYSTEM_JADP_TRIGGER_POSITION_LABEL"
+                    description="PLG_SYSTEM_JADP_TRIGGER_POSITION_DESC"
+                    default="bottom-left"
+                >
+                    <option value="top-left">PLG_SYSTEM_JADP_POSITION_TOP_LEFT</option>
+                    <option value="top-right">PLG_SYSTEM_JADP_POSITION_TOP_RIGHT</option>
+                    <option value="middle-left">PLG_SYSTEM_JADP_POSITION_MIDDLE_LEFT</option>
+                    <option value="middle-right">PLG_SYSTEM_JADP_POSITION_MIDDLE_RIGHT</option>
+                    <option value="bottom-left">PLG_SYSTEM_JADP_POSITION_BOTTOM_LEFT</option>
+                    <option value="bottom-right">PLG_SYSTEM_JADP_POSITION_BOTTOM_RIGHT</option>
+                </field>
+                <field
                     name="trigger_icon_type"
                     type="list"
                     label="PLG_SYSTEM_JADP_TRIGGER_ICON_TYPE_LABEL"
