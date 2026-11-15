@@ -210,7 +210,20 @@
         type: 'button',
         className: 'jadp-close',
         'aria-label': labels.close,
-    }, '×');
+    });
+    const closeIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    closeIcon.setAttribute('viewBox', '0 0 16 16');
+    closeIcon.setAttribute('aria-hidden', 'true');
+    closeIcon.setAttribute('focusable', 'false');
+
+    const closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    closePath.setAttribute('d', 'M4 4L12 12M12 4L4 12');
+    closePath.setAttribute('fill', 'none');
+    closePath.setAttribute('stroke', 'currentColor');
+    closePath.setAttribute('stroke-width', '1.8');
+    closePath.setAttribute('stroke-linecap', 'round');
+    closeIcon.appendChild(closePath);
+    close.appendChild(closeIcon);
 
     header.append(heading, close);
 
