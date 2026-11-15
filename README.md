@@ -242,7 +242,7 @@ The initial implementation is expected to be a Joomla system plugin, provisional
 The plugin should:
 
 - Run on the site, administrator, or both clients, as selected in the plugin configuration. The default is Site (Frontend).
-- Support an administrator enable/disable option.
+- Provide an **Enabled** selector with Site (Frontend), Administrator (Backend) and Both options; Site is the default.
 - Register assets using Joomla WebAssetManager.
 - Supply the toolbar configuration to JavaScript using Joomla's script-options API. JavaScript creates the toolbar host element and appends it to the document.
 - Avoid loading JADP assets when disabled.
