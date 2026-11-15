@@ -3,7 +3,7 @@
     color: #202124;
     font-family: system-ui, sans-serif;
     font-size: 16px;
-    line-block-size: 1.5;
+    line-height: 1.5;
 }
 
 *,
@@ -47,7 +47,7 @@
     inline-size: 1.8rem;
     block-size: 1.8rem;
     font-size: 1.8rem;
-    line-block-size: 1;
+    line-height: 1;
 }
 
 .jadp-trigger-image {
@@ -60,7 +60,7 @@
     block-size: 1.8rem;
     fill: none;
     stroke: currentColor;
-    stroke-inline-size: 24;
+    stroke-width: 24;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
@@ -181,7 +181,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-inset-block-end: 1rem;
+    margin-block-end: 1rem;
 }
 
 .jadp-header h2 {
@@ -275,8 +275,8 @@
 
 .jadp-footer {
     justify-content: flex-end;
-    padding-inset-block-start: 0.75rem;
-    border-inset-block-start: 1px solid #bbb;
+    padding-block-start: 0.75rem;
+    border-block-start: 1px solid #bbb;
 }
 
 .jadp-reset {
@@ -304,7 +304,7 @@
     }
 }
 
-@media (max-inline-size: 24rem) {
+@media (max-width: 24rem) {
     .jadp-panel {
         inset-inline-start: max(0.5rem, env(safe-area-inset-left));
         inset-block-end: calc(max(0.5rem, env(safe-area-inset-bottom)) + 3.5rem);
