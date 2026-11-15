@@ -63,6 +63,17 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             return;
         }
 
+        $wa = $document->getWebAssetManager();
+        $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp');
+
+        // Component-template pages need the saved page preferences, but not another toolbar.
+        $wa->useStyle('plg.system.jadp')
+            ->useScript('plg.system.jadp.init');
+
+        if ($this->getApplication()->input->getCmd('tmpl') === 'component') {
+            return;
+        }
+
         $this->loadLanguage();
 
         $document->addScriptOptions('plg_system_jadp', [
@@ -101,12 +112,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             ],
         ]);
 
-        $wa = $document->getWebAssetManager();
-        $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp');
-
-        $wa->useStyle('plg.system.jadp')
-            ->useStyle('plg.system.jadp.skip')
-            ->useScript('plg.system.jadp.init')
+        $wa->useStyle('plg.system.jadp.skip')
             ->useScript('plg.system.jadp.ui');
     }
 
@@ -141,13 +147,8 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
      */
     private function isEnabledForClient(): bool
     {
-        $application = $this->getApplication();
-
-        if ($application->input->getCmd('tmpl') === 'component') {
-            return false;
-        }
-
         $enabledFor = $this->params->get('enabled_clients', 'site');
+        $application = $this->getApplication();
 
         return $application->getDocument() instanceof HtmlDocument
             && (
