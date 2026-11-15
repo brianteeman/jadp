@@ -56,14 +56,18 @@
 }
 
 .jadp-trigger-icon {
-  display: block;
-  inline-size: 1.8rem;
-  block-size: 1.8rem;
-  fill: currentColor;
-  stroke: currentColor;
-  stroke-width: 24;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+    display: block;
+    inline-size: 1.8rem;
+    block-size: 1.8rem;
+    fill: currentColor;
+}
+
+.jadp-trigger-icon.is-open {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 24;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .jadp-panel {
