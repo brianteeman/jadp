@@ -417,14 +417,14 @@ Replace `YOUR_TEMPLATE` with the directory name of the active site template. Kee
 The universal access icon can be changed in the plugin configuration without overriding JADP's JavaScript. Select the desired option under **Universal Access Icon**.
 
 - **Default JADP Icon** uses the built-in inline SVG.
-- **CSS Font Icon** accepts one or more CSS classes, for example `fa-solid fa-universal-access`. Supply the URL of the stylesheet that defines those classes and loads the required font. The stylesheet is loaded inside the toolbar's Shadow DOM, so the site's ordinary template stylesheets are not automatically available there. Font files referenced by the stylesheet should use URLs that resolve correctly from that stylesheet.
+- **CSS Font Icon** accepts one or more CSS classes, for example `fa-solid fa-universal-access`. The Icon Stylesheet URL is required and must point to the stylesheet that defines those classes and loads the required font. The stylesheet is loaded inside the toolbar's Shadow DOM, so the site's ordinary template stylesheets are not automatically available there. Font files referenced by the stylesheet should use URLs that resolve correctly from that stylesheet.
 - **PNG Image** lets you select a PNG from the site's `images` folder. The image is displayed within the floating button and scaled to fit.
 
 The custom icon is decorative; the activation button continues to provide its accessible name and changes that name when the toolbar opens or closes. The same custom icon is used in both states.
 
 For a CSS font icon, ensure that the stylesheet is publicly accessible and that its font files can be loaded by the browser. This can be a stylesheet from the site's own template or a locally hosted icon library. No external icon library is bundled with JADP.
 
-For the PNG option, use a small square image with a transparent background where possible. JADP only accepts a PNG file for this setting.
+For the PNG option, use a square image around 64 × 64 pixels, preferably with a transparent background. The image is scaled to fit the toolbar button. JADP only accepts a PNG file for this setting.
 
 ## 9. To Investigate
 
