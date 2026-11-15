@@ -34,6 +34,7 @@
 
     const labels = {
         open: host.dataset.open,
+        skipOpen: host.dataset.skipOpen,
         close: host.dataset.close,
         title: host.dataset.title,
         textSize: host.dataset.textSize,
@@ -171,6 +172,18 @@
         title: labels.open,
     });
     trigger.appendChild(createTriggerIcon());
+
+    const skipLink = create('a', {
+        href: '#jadp-root',
+        className: 'jadp-skip-link',
+    }, labels.skipOpen);
+
+    skipLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        setOpen(true, skipLink);
+    });
+
+    document.body.prepend(skipLink);
 
     const panel = create('section', {
         id: 'jadp-panel',
@@ -424,8 +437,14 @@
 
     let isOpen = false;
 
-    const setOpen = (open) => {
+    let opener = trigger;
+
+    const setOpen = (open, source = trigger) => {
         isOpen = open;
+
+        if (open) {
+            opener = source;
+        }
         panel.hidden = !open;
         trigger.setAttribute('aria-expanded', String(open));
         trigger.setAttribute('aria-label', open ? labels.close : labels.open);
@@ -435,11 +454,11 @@
         if (open) {
             close.focus();
         } else {
-            trigger.focus();
+            opener.focus();
         }
     };
 
-    trigger.addEventListener('click', () => setOpen(!isOpen));
+    trigger.addEventListener('click', () => setOpen(!isOpen, trigger));
     close.addEventListener('click', () => setOpen(false));
     reset.addEventListener('click', () => window.JADP.reset());
 

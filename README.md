@@ -110,6 +110,10 @@ The activation button must have an accessible name and be operable using a keybo
 
 Its expanded or collapsed state should be communicated to assistive technologies.
 
+A skip-link-style **Open display preferences** link is also provided at the beginning of the page. It is visually hidden until it receives keyboard focus, making JADP discoverable to keyboard users without requiring them to locate the floating button. The link is part of the page's normal document content, so screen reader users can encounter it when navigating from the start of the page.
+
+Activating the link opens the existing toolbar and moves focus into it. Closing the toolbar returns focus to the control that opened it, whether that was the skip link or the floating button. The floating button remains available for mouse and touch users.
+
 ### 3.2 Toolbar Layout
 
 The toolbar should present the available controls in a clear and understandable layout.
@@ -349,7 +353,8 @@ Add the remaining spacing, contrast, grayscale and link underline preferences in
 At minimum, test:
 
 - Keyboard operation, visible focus, accessible names and state announcements.
-- Opening, closing and focus restoration.
+- Discovery and activation of the JADP skip link using keyboard and screen reader navigation.
+- Opening, closing and focus restoration, including returning focus to the original opener.
 - Resetting all preferences without reloading.
 - Multiple preferences active at the same time.
 - Persistence across navigation and reloads.
@@ -375,6 +380,8 @@ The toolbar currently provides text size, line spacing, letter spacing, word spa
 The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
 
 The toolbar host is created in JavaScript from Joomla script options and appended to `document.documentElement`, outside `body`. This is intentional: the grayscale preference filters the body, and a CSS filter creates a containing block for fixed-position descendants. Keeping the toolbar outside that filtered element prevents its fixed-position controls from being repositioned relative to the body or being affected by the grayscale filter.
+
+A separate, translated skip-link-style entry point is inserted as the first element in the page body. Its styling is registered as a normal Joomla Web Asset so it can be visible on keyboard focus without being affected by the toolbar's Shadow DOM. The link opens the toolbar and focus is restored to the original opener when the toolbar closes.
 
 The plugin has not yet been installed and tested in a live Joomla site. Joomla installation, runtime behaviour, CSP, template compatibility and accessibility testing remain outstanding.
 
@@ -412,7 +419,17 @@ media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
 
 Replace `YOUR_TEMPLATE` with the directory name of the active site template. Keep the original JADP stylesheet as a reference when creating your customised version. Review your changes when updating JADP, as future releases may add or change toolbar styles.
 
-### 10.2 Changing the Universal Access Icon
+### 10.2 Keyboard and Screen Reader Discovery
+
+JADP adds an **Open display preferences** link at the beginning of the page body. It is visually moved off-screen until it receives keyboard focus, at which point it becomes visible at the top of the viewport, in the same way as a conventional skip link.
+
+The link is included in the normal document flow and is not hidden with `display: none` or `visibility: hidden`. This allows assistive technologies to encounter it when reading or navigating from the start of the page. It has its own translated language string.
+
+Activating the link opens the JADP panel and moves focus into the panel. When the panel is closed, focus returns to the element that opened it. This works for both the skip link and the floating activation button.
+
+The skip link is styled separately in `media/css/jadp-skip.css` and registered through Joomla Web Asset Manager. It is deliberately outside the toolbar's Shadow DOM because it is a page-level entry point rather than part of the toolbar interface.
+
+### 10.3 Changing the Universal Access Icon
 
 The universal access icon can be changed in the plugin configuration without overriding JADP's JavaScript. Select the desired option under **Universal Access Icon**.
 
