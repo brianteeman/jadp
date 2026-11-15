@@ -27,6 +27,10 @@ Changes take effect immediately. Visitors can combine preferences, close the too
 
 Preferences are saved in the visitor's browser and are reapplied on later pages and visits to the same website. They are stored locally, not in a Joomla user account, and are not transferred between different website origins (for example, between HTTP and HTTPS or between different hostnames). If browser storage is unavailable, preferences can still be changed for the current page, but may not persist.
 
+## Requirements
+
+Joomla 5.4 or later (including Joomla 6). The plugin uses Joomla APIs introduced in Joomla 5.4.
+
 ## Installing and enabling JADP
 
 Install the JADP package using Joomla's normal extension installer. Then open **System → Manage → Plugins**, find **System - JADP**, and enable it.
