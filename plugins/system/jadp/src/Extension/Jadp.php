@@ -53,7 +53,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
      */
     public function onBeforeCompileHead(BeforeCompileHeadEvent $event): void
     {
-        if (!$this->isEnabledForSite()) {
+        if (!$this->isEnabledForClient()) {
             return;
         }
 
@@ -133,16 +133,22 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Check that the plugin is enabled for a frontend HTML request.
+     * Check that the plugin is enabled for the current HTML client.
      *
      * @return bool
      *
      * @since __DEPLOY_VERSION__
      */
-    private function isEnabledForSite(): bool
+    private function isEnabledForClient(): bool
     {
-        return $this->params->get('enabled', 1)
-            && $this->getApplication()->isClient('site')
-            && $this->getApplication()->getDocument() instanceof HtmlDocument;
+        $enabledFor = $this->params->get('enabled_clients', 'site');
+        $application = $this->getApplication();
+
+        return $application->getDocument() instanceof HtmlDocument
+            && (
+                $enabledFor === 'both'
+                || ($enabledFor === 'site' && $application->isClient('site'))
+                || ($enabledFor === 'administrator' && $application->isClient('administrator'))
+            );
     }
 }
