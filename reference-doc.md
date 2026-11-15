@@ -2,7 +2,7 @@
 
 ## 1. Purpose and Philosophy
 
-Joomla Accessibility Display Preferences (JADP) is a Joomla core feature that provides **visitors** with a collection of optional controls to customise the visual presentation of a website.
+Joomla Accessibility Display Preferences (JADP) is a Joomla system plugin that provides **visitors** with a collection of optional controls to customise the visual presentation of a website.
 
 The objective is to give visitors greater control over how they view and interact with website content, offering simple adjustments to display characteristics such as text size, spacing and contrast.
 
@@ -31,9 +31,7 @@ The initial implementation will provide the following controls.
 
 ### 2.1 Text Size
 
-Allow visitors to increase or decrease the size of website text.
-
-The implementation should provide a sensible range of adjustments and prevent excessively large or small values.
+Allow visitors to choose between three text-size presets: Normal, Large and Extra large. Normal is the default; there is no smaller-than-normal setting.
 
 ### 2.2 Line Spacing
 
@@ -113,6 +111,8 @@ Its expanded or collapsed state should be communicated to assistive technologies
 A skip-link-style **Open display preferences** link is also provided at the beginning of the page. It is visually hidden until it receives keyboard focus, making JADP discoverable to keyboard users without requiring them to locate the floating button. The link is part of the page's normal document content, so screen reader users can encounter it when navigating from the start of the page.
 
 Activating the link opens the existing toolbar and moves focus into it. Closing the toolbar returns focus to the control that opened it, whether that was the skip link or the floating button. The floating button remains available for mouse and touch users.
+
+While the toolbar is open, the current implementation keeps keyboard focus within the panel: Tab from the last focusable control moves to the first, and Shift+Tab from the first moves to the last. Pressing Escape closes the toolbar and returns focus to the original opener. This is the current implementation behaviour; it should be reviewed alongside the intended non-modal interaction model.
 
 ### 3.2 Toolbar Layout
 
@@ -201,6 +201,14 @@ Text size is presented as three mutually exclusive presets:
 - Large.
 - Extra large.
 
+The current CSS values for the spacing presets are:
+
+| Preference | Increased | Maximum |
+| --- | ---: | ---: |
+| Line spacing (`line-height`) | `1.8` | `2` |
+| Letter spacing | `.12em` | `.2em` |
+| Word spacing | `.16em` | `.24em` |
+
 The selected preset must be apparent and exposed accessibly, for example by using native buttons with aria-pressed.
 
 ### 4.3 Reset Control
@@ -244,6 +252,7 @@ The plugin should:
 - Register assets using Joomla WebAssetManager.
 - Supply the toolbar configuration to JavaScript using Joomla's script-options API. JavaScript creates the toolbar host element and appends it to the document.
 - Avoid loading JADP assets when disabled.
+- On pages using Joomla's `tmpl=component` layout, load the preference CSS and early initialisation script but omit the toolbar UI. This allows saved preferences to apply to component content, including modal content that uses this layout, without rendering a duplicate toolbar.
 - Keep visitor preference state entirely in the browser.
 
 A provisional file structure is:
@@ -272,7 +281,7 @@ plugins/system/jadp/
 └── README.md
 ```
 
-The exact event and asset-loading implementation must be checked against the target Joomla version before coding.
+The plugin currently subscribes to Joomla's `onBeforeCompileHead` event and registers its assets through the Web Asset Manager. The implementation should continue to be checked against the minimum supported Joomla version when core APIs change.
 
 ### 5.1 JavaScript Responsibilities
 
@@ -281,7 +290,7 @@ The exact event and asset-loading implementation must be checked against the tar
 - jadp-host.js: read the configuration supplied through Joomla's script options, create the toolbar host element and append it to the document root.
 - jadp-ui.js: find the host created by jadp-host.js and create and manage the toolbar UI and its interactions, preferably within a Shadow DOM.
 
-All JavaScript must be written in **vanilla ES6**, using native browser APIs and language features. Do not use jQuery, Bootstrap JavaScript, third-party libraries or JavaScript frameworks. The code must remain compatible with the browsers supported by the target Joomla release.
+All JavaScript must be written in **vanilla JavaScript**, using modern ECMAScript features and native browser APIs. Do not use jQuery, Bootstrap JavaScript, third-party libraries or JavaScript frameworks. The code uses features newer than ES2015 (including `Object.entries()`, object spread and optional chaining), so it should not be described as strictly ES6. Compatibility must be assessed against the browsers supported by the target Joomla release.
 
 ### 5.2 Preference Storage
 
@@ -314,20 +323,20 @@ The preference engine should express active preferences through a consistent set
 
 The toolbar host is created by `jadp-host.js`, rather than being inserted into the rendered HTML response by PHP. The plugin passes the required stylesheet URL and translated labels to JavaScript using Joomla's `Document::addScriptOptions()` API. The script reads these values through `Joomla.getOptions()`, creates the host element and appends it to `document.documentElement`, outside the page's `body` element.
 
-Appending the host outside `body` is important because the grayscale preference applies a CSS `filter` to the body. A filtered element becomes a containing block for fixed-position descendants. If the toolbar host were inside the body, its fixed-position activation button and panel could consequently be positioned relative to the body rather than the viewport, causing the toolbar to move or appear in the wrong place. Keeping the host as a child of the document root, outside the filtered body, avoids that problem and also keeps the toolbar itself in normal colour.
+The toolbar host is appended outside `body`, as a child of `document.documentElement`. This is important to the positioning behaviour of fixed-position controls when CSS filters are applied. The current grayscale rule applies `filter: grayscale(1)` to the `html` element rather than to `body`. This avoids the fixed-position containing-block problem observed when the filter was applied to `body`, and also converts the page background to grayscale in cases where the body background is painted on the document canvas. Because the filter is applied to the root element, the toolbar is also displayed in grayscale; it is not kept in normal colour.
 
 The implementation must avoid indiscriminate rules that unintentionally resize layout dimensions, icons, controls or other non-text UI. In particular, changing the root font size must not be assumed to be a safe way to scale website text because it also changes dimensions expressed in rem.
 
-High contrast must use a considered palette rather than simply inverting the entire page. The toolbar itself must remain legible and usable when page preferences are active. Grayscale must not make the toolbar grayscale.
+High contrast currently uses a black body background, white text, yellow links and focus indicators, and broad rules that make most page-element backgrounds transparent and borders white. This approach remains under review because it can remove meaningful visual distinctions. The toolbar is isolated in a Shadow DOM and is not directly restyled by the page's high-contrast selectors. Grayscale is applied to the document root, so the toolbar is also shown in grayscale.
 
 The precise selectors and effects must be tested against Cassiopeia and representative third-party templates.
 
 
 ### 5.4 Toolbar Icons
 
-Icons may be used within the toolbar, including on the activation, close and preference controls, but all icons must be implemented as inline SVG markup.
+The icons used by the controls inside the toolbar panel are implemented as inline SVG. These are decorative and hidden from assistive technology; each control has its own accessible name and title.
 
-Do not use icon fonts, external SVG files, image-based icons, icon libraries or third-party icon packages. Icons must not be the sole means of identifying a control; provide an accessible name and retain clear text labels where appropriate. Inline SVGs used decoratively should be hidden from assistive technology, while any meaningful SVG must have an accessible text alternative.
+The floating trigger button is separately configurable in the plugin settings. It can use the built-in inline SVG, a CSS font icon supplied by the site, or a PNG image selected from the site's `images` folder. The trigger icon is decorative; the button itself retains its accessible name and keyboard operation regardless of the selected icon.
 
 ## 6. Initial Implementation Milestone
 
@@ -353,14 +362,18 @@ At minimum, test:
 - Keyboard operation, visible focus, accessible names and state announcements.
 - Discovery and activation of the JADP skip link using keyboard and screen reader navigation.
 - Opening, closing and focus restoration, including returning focus to the original opener.
+- Tab and Shift+Tab behaviour while the toolbar is open, including the current focus-trapping behaviour.
+- Escape handling while the toolbar is open.
 - Resetting all preferences without reloading.
 - Multiple preferences active at the same time.
-- Persistence across navigation and reloads.- Corrupt, unsupported and unavailable localStorage.
+- Persistence across navigation and reloads.
+- Corrupt, unsupported and unavailable localStorage.
 - Two open tabs receiving storage updates.
 - Responsive and touch layouts.
 - RTL pages, including Arabic and Hebrew.
 - Cassiopeia and representative third-party templates.
-- High contrast and grayscale interactions with fixed elements, dialogs, dropdowns and forms.
+- High contrast and grayscale interactions with fixed elements, modal dialogs, dropdowns and forms.
+- Component-template pages, including modal content loaded using Joomla's `tmpl=component` layout.
 - Content Security Policy compatibility and the chosen Shadow DOM styling approach.
 
 The initial release must not claim that enabling JADP makes a website accessible or guarantees conformance with any accessibility standard.
@@ -368,19 +381,21 @@ The initial release must not claim that enabling JADP makes a website accessible
 
 ## 8. Implementation Progress
 
-The first implementation increment is present under `plugins/system/jadp/`.
+The implementation is present under `plugins/system/jadp/`.
 
-It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the configurable activation control, with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
+It provides the Joomla system plugin manifest and service provider, asset registration through Joomla's Web Asset Manager, a configurable activation control with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer. The plugin can be enabled for the Site, Administrator or Both clients; Site is the default.
 
 The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, the clients where it is enabled, configurable trigger icon options and the trigger button position.
 
 The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
 
-The toolbar host is created in JavaScript from Joomla script options and appended to `document.documentElement`, outside `body`. This is intentional: the grayscale preference filters the body, and a CSS filter creates a containing block for fixed-position descendants. Keeping the toolbar outside that filtered element prevents its fixed-position controls from being repositioned relative to the body or being affected by the grayscale filter.
+The toolbar host is created in JavaScript from Joomla script options and appended to `document.documentElement`, outside `body`. The grayscale preference applies `filter: grayscale(1)` to `html`, rather than `body`. This resolves the fixed-position behaviour associated with filtering the body and also applies grayscale to the document canvas and page background. The toolbar is affected by this root-level filter and therefore appears in grayscale when that preference is enabled.
+
+On requests using Joomla's `tmpl=component` layout, the plugin still loads the page-preference stylesheet and early initialisation script so saved preferences continue to affect the component content. It does not create a second JADP toolbar on those pages. This also covers modal content when the Joomla modal loads that content using `tmpl=component`; it should not be read as a blanket rule for every possible modal implementation.
 
 A separate, translated skip-link-style entry point is inserted as the first element in the page body. Its styling is registered as a normal Joomla Web Asset so it can be visible on keyboard focus without being affected by the toolbar's Shadow DOM. The link opens the toolbar and focus is restored to the original opener when the toolbar closes.
 
-The plugin has not yet been installed and tested in a live Joomla site. Joomla installation, runtime behaviour, CSP, template compatibility and accessibility testing remain outstanding.
+The plugin has been installed and basic runtime behaviour has been tested on Joomla 6.2 with the Cassiopeia template. The asset-loading implementation has also been corrected to use Joomla's `onBeforeCompileHead` event. Broader testing remains outstanding, including other Joomla versions, administrator use, third-party templates, Content Security Policy configurations, browser compatibility and assistive-technology behaviour.
 
 ## 10. Customisation
 
@@ -396,7 +411,7 @@ This stylesheet controls the activation button, toolbar panel, headings, control
 
 **Do not edit `jadp.css`.** That file contains the CSS used to apply the visitor's display preferences to the website, including text size, spacing, contrast, grayscale and link underlining. Changing it can alter the behaviour of the preferences rather than simply changing the appearance of the toolbar.
 
-The toolbar is created inside a Shadow DOM. Consequently, CSS rules in the site template's normal stylesheet or `user.css` cannot directly style the toolbar contents. The JADP toolbar stylesheet itself must be replaced or customised.
+The toolbar is created inside a Shadow DOM. Consequently, CSS rules in the site template's normal stylesheet or `user.css` cannot directly style the toolbar contents. The JADP toolbar stylesheet itself must be replaced or customised. The trigger button's optional CSS icon stylesheet is also loaded inside the Shadow DOM when that trigger-icon option is selected.
 
 The toolbar stylesheet is registered as the Web Asset `plg.system.jadp.ui`. JADP obtains its resolved URI from the Web Asset Manager and passes that URI to the toolbar, which links the stylesheet from inside its Shadow DOM. This allows Joomla's normal media-path resolution to locate a template override while keeping the stylesheet isolated from the page's ordinary CSS.
 
