@@ -154,6 +154,10 @@
         svg.setAttribute('focusable', 'false');
         svg.classList.add('jadp-trigger-icon');
 
+        if (open) {
+            svg.classList.add('is-open');
+        }
+
         const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
         if (open) {
