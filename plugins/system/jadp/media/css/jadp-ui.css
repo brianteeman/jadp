@@ -219,6 +219,12 @@
   border-radius: .25rem;
 }
 
+.jadp-close svg {
+  display: block;
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
 .jadp-content {
   display: flex;
   flex-direction: column;
