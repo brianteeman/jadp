@@ -2,7 +2,7 @@
 
 Joomla Accessibility Display Preferences (JADP) adds a small display-preferences toolbar to a Joomla website. It lets visitors adjust how page content is presented to suit their reading preferences.
 
-JADP provides optional display adjustments. It is not an accessibility overlay, does not repair accessibility problems and does not make a website accessible or guarantee compliance with WCAG or any other accessibility standard. A well-built, accessible website is still essential.
+**JADP provides optional display adjustments. It is not an accessibility overlay, does not repair accessibility problems and does not make a website accessible or guarantee compliance with WCAG or any other accessibility standard. A well-built, accessible website is still essential.**
 
 ## What visitors can change
 
