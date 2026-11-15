@@ -46,6 +46,10 @@
     box-shadow: none !important;
   }
   
+  html[data-jadp-high-contrast="true"] body a:not(.jadp-skip-link) * {
+    color: inherit !important;
+  }
+
   html[data-jadp-high-contrast="true"] body a:not(.jadp-skip-link),
   html[data-jadp-high-contrast="true"] body a:not(.jadp-skip-link):visited {
     color: #ff0 !important;
@@ -61,6 +65,11 @@
   html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button):focus-visible {
     outline: 3px solid #ff0 !important;
     outline-offset: 2px;
+  }
+
+  html[data-jadp-high-contrast="true"] body :focus-visible {
+    outline: 3px solid #ff0 !important;
+    outline-offset: 2px !important;
   }
   
   /* Word spacing preferences apply to text blocks and headings. */
