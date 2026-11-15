@@ -141,8 +141,13 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
      */
     private function isEnabledForClient(): bool
     {
-        $enabledFor = $this->params->get('enabled_clients', 'site');
         $application = $this->getApplication();
+
+        if ($application->input->getCmd('tmpl') === 'component') {
+            return false;
+        }
+
+        $enabledFor = $this->params->get('enabled_clients', 'site');
 
         return $application->getDocument() instanceof HtmlDocument
             && (
