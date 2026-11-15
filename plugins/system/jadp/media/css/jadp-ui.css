@@ -181,6 +181,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
+  margin-block-start: .75rem;
   padding-block-start: .75rem;
   border-block-start: 1px solid #bbb;
 }
