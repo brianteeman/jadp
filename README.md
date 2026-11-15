@@ -4,6 +4,9 @@ Joomla Accessibility Display Preferences (JADP) adds a small display-preferences
 
 **JADP provides optional display adjustments. It is not an accessibility overlay, does not repair accessibility problems and does not make a website accessible or guarantee compliance with WCAG or any other accessibility standard. A well-built, accessible website is still essential.**
 
+<img width="601" height="637" alt="JADP panel" src="https://github.com/user-attachments/assets/98007c20-540c-42a2-b2ba-b0fd85c1d527" />
+
+
 ## What visitors can change
 
 Visitors open the toolbar using the floating display-preferences button. Keyboard users can also reach it using the **Open display preferences** link at the beginning of the page; the link becomes visible when it receives keyboard focus.
