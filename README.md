@@ -79,6 +79,10 @@ media/plg_system_jadp/css/
 ├── jadp.css
 └── jadp-skip.css
 ```
+### A note about CSS customisation
+
+The toolbar stylesheet and the visitor-preference stylesheet serve different purposes. How you customise them depends on what you want to change - ** this section is not complete yet **.
+
 
 ### Toolbar appearance — `jadp-ui.css`
 
@@ -109,12 +113,6 @@ Be careful when changing selectors. Broad rules can affect icons, buttons, form 
 ### Keyboard entry link — `jadp-skip.css`
 
 This stylesheet controls the **Open display preferences** link at the beginning of the page. The link is positioned off-screen until it receives keyboard focus, when it becomes visible. Keep it discoverable to keyboard and screen reader users; do not hide it using `display: none` or `visibility: hidden`.
-
-### A note about CSS customisation
-
-The toolbar stylesheet and the visitor-preference stylesheet serve different purposes. Use `jadp-ui.css` to change the toolbar's appearance, and `jadp.css` to change the effects applied to the website. Changing one does not replace the role of the other.
-
-After making CSS changes, check the site with keyboard navigation, narrow viewports, right-to-left content, high contrast and grayscale enabled. Also check that the toolbar remains legible and usable while page preferences are active.
 
 ## Accessibility and responsibility
 
