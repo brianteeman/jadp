@@ -79,3 +79,18 @@ html[data-jadp-grayscale="true"] body {
 html[data-jadp-underline-links="true"] body a {
   text-decoration: underline !important;
 }
+
+
+/* Display preferences affect the screen, not printed documents. */
+@media print {
+  html[data-jadp-high-contrast="true"] body,
+  html[data-jadp-high-contrast="true"] body *,
+  html[data-jadp-grayscale="true"] body {
+    color: initial !important;
+    background: initial !important;
+    border-color: initial !important;
+    box-shadow: initial !important;
+    filter: none !important;
+    text-shadow: initial !important;
+  }
+}
