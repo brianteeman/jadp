@@ -350,7 +350,7 @@ The original implementation milestone has been delivered. The current plugin inc
 - An administrator-facing note explaining the purpose and limitations of the toolbar.
 - Joomla language strings for user-facing text.
 
-The remaining work is validation, compatibility testing and resolution of the items listed in Section 9, rather than implementation of the original preference controls.
+The remaining work is validation, compatibility testing and resolution of the items listed in Section 10, rather than implementation of the original preference controls.
 
 ## 7. Quality and Compatibility Checks
 
@@ -394,11 +394,11 @@ A separate, translated skip-link-style entry point is inserted as the first elem
 
 The plugin has been installed and basic runtime behaviour has been tested on Joomla 6.2 with the Cassiopeia template. The asset-loading implementation has also been corrected to use Joomla's `onBeforeCompileHead` event. Broader testing remains outstanding, including other Joomla versions, administrator use, third-party templates, Content Security Policy configurations, browser compatibility and assistive-technology behaviour.
 
-## 10. Customisation
+## 9. Customisation
 
 JADP separates the styles for the toolbar itself from the styles that apply visitor preferences to the website.
 
-### 10.1 Toolbar Appearance
+### 9.1 Toolbar Appearance
 
 All CSS relating to the toolbar interface is contained in:
 
@@ -430,7 +430,7 @@ media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
 
 Replace `YOUR_TEMPLATE` with the active site template directory. The replacement stylesheet is loaded inside the toolbar's Shadow DOM rather than in the page's light DOM. Keep it in sync with changes to the JADP toolbar styles when updating the plugin.
 
-### 10.2 Website Preference Effects
+### 9.2 Website Preference Effects
 
 The website preference rules are contained in `media/css/jadp.css`. They apply to screen presentation; the stylesheet's print rules restore the affected page styles for printing.
 
@@ -451,7 +451,7 @@ The spacing rules apply to selected text elements rather than every element on t
 
 High contrast currently applies white text, a black body background, yellow links and focus indicators, and broad background and border overrides. This remains an area for further review. Grayscale applies a filter to the document root, which also affects the toolbar. Underline links applies underlining to links in the page body.
 
-### 10.3 Keyboard and Screen Reader Discovery
+### 9.3 Keyboard and Screen Reader Discovery
 
 JADP adds an **Open display preferences** link at the beginning of the page body. It is visually moved off-screen until it receives keyboard focus, at which point it becomes visible at the top of the viewport, in the same way as a conventional skip link.
 
@@ -461,11 +461,11 @@ Activating the link opens the JADP panel and moves focus into the panel. When th
 
 The skip link is styled separately in `media/css/jadp-skip.css` and registered through Joomla Web Asset Manager. It is deliberately outside the toolbar's Shadow DOM because it is a page-level entry point rather than part of the toolbar interface.
 
-### 10.4 Trigger Button Position
+### 9.4 Trigger Button Position
 
 The trigger button position can be selected in the plugin configuration. The available positions are Top Left, Top Right, Middle Left, Middle Right, Bottom Left and Bottom Right. Bottom Left is the default. The toolbar panel is positioned alongside the trigger button.
 
-### 10.5 Changing the Universal Access Icon
+### 9.5 Changing the Universal Access Icon
 
 The universal access icon can be changed in the plugin configuration without overriding JADP's JavaScript. Select the desired option under **Universal Access Icon**.
 
@@ -479,24 +479,15 @@ For a CSS font icon, ensure that the stylesheet is publicly accessible and that 
 
 For the PNG option, use a square image around 64 × 64 pixels, preferably with a transparent background. The image is scaled to fit the toolbar button. JADP only accepts a PNG file for this setting.
 
-## 9. To Investigate
+## 10. To Investigate
 
-The following implementation details need further review and testing before the plugin is considered ready for release.
+The following items remain under investigation. See the linked GitHub issues for the details and acceptance checks.
 
-### 9.1 High Contrast
+- [Review and refine high-contrast background handling (#23)](https://github.com/brianteeman/jadp/issues/23)
+- [Consider visible text labels for toolbar controls (#24)](https://github.com/brianteeman/jadp/issues/24)
+- [Review semantics of mutually exclusive preference controls (#25)](https://github.com/brianteeman/jadp/issues/25)
+- [Review text-size preference coverage (#26)](https://github.com/brianteeman/jadp/issues/26)
 
-The current high-contrast rules apply a black background, white text and yellow links, while making the backgrounds of almost all page elements transparent and changing their borders to white.
+### 10.5 Spacing Coverage
 
-This broad approach may remove meaningful visual distinctions or make some interface components harder to use. Test navigation menus, alerts, cards, tables, form controls and components that rely on background colours to communicate meaning. Consider whether a more selective palette and set of rules would be more appropriate.
-
-### 9.2 Text Size Coverage
-
-The current implementation increases the font size on the body element. This avoids changing the root font size and unintentionally resizing rem-based layout dimensions.
-
-However, elements with explicitly defined font sizes, particularly those using rem units, may not scale. Test representative templates to establish which text is affected and whether the result is sufficiently consistent.
-
-### 9.3 Spacing Coverage
-
-The line, letter and word spacing rules currently target a defined list of elements, such as paragraphs, list items, table cells, labels and headings.
-
-Text in other elements, including spans and generic containers, may not be affected. Investigate whether the selectors should cover more text without unintentionally changing icons, controls or other non-text elements.
+The line, letter and word spacing rules currently target a defined list of elements. Text in other elements, including spans and generic containers, may not be affected. Investigate whether the selectors should cover more text without unintentionally changing icons, controls or other non-text elements.
