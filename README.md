@@ -241,8 +241,8 @@ The initial implementation is expected to be a Joomla system plugin, provisional
 
 The plugin should:
 
-- Run on the frontend only.
-- Support an administrator enable/disable option.
+- Run on the site, administrator, or both clients, as selected in the plugin configuration. The default is Site (Frontend).
+- Provide an **Enabled** selector with Site (Frontend), Administrator (Backend) and Both options; Site is the default.
 - Register assets using Joomla WebAssetManager.
 - Supply the toolbar configuration to JavaScript using Joomla's script-options API. JavaScript creates the toolbar host element and appends it to the document.
 - Avoid loading JADP assets when disabled.
@@ -336,7 +336,7 @@ Do not use icon fonts, external SVG files, image-based icons, icon libraries or 
 Build a working Joomla system plugin in increments. The first milestone should include:
 
 - A valid Joomla plugin skeleton and manifest.
-- Frontend-only activation and asset registration.
+- Client-specific activation and asset registration, controlled by the Enabled setting (Site, Administrator or Both; default Site).
 - Configurable activation button position, defaulting to bottom-left.
 - Isolated, responsive toolbar UI.
 - Three text-size presets.
@@ -375,7 +375,7 @@ The first implementation increment is present under `plugins/system/jadp/`.
 
 It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the configurable activation control, with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
 
-The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, configurable trigger icon options and the trigger button position.
+The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, the clients where it is enabled, configurable trigger icon options and the trigger button position.
 
 The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
 
