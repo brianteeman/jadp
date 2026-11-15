@@ -192,6 +192,7 @@
   justify-content: space-between;
   gap: 1rem;
   margin-block-end: 1rem;
+  padding: .5rem;
 }
 
 .jadp-header h2 {
@@ -203,10 +204,14 @@
 }
 
 .jadp-close {
+  display: grid;
+  place-items: center;
   min-inline-size: 2.5rem;
   min-block-size: 2.5rem;
+  padding: 0;
   font: inherit;
   font-size: 1.5rem;
+  line-height: 1;
   color: inherit;
   cursor: pointer;
   background: #fff;
