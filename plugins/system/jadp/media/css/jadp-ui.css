@@ -301,8 +301,8 @@
   border-color: #8b1e1e;
 }
 
-.jadp-trigger:focus-vwsible,
-.jadp-panel button:focus-vwsible {
+.jadp-trigger:focus-visible,
+.jadp-panel button:focus-visible {
   outline: 3px solid #f0b429;
   outline-offset: 4px;
 }
