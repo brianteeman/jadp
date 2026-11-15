@@ -373,7 +373,7 @@ The initial release must not claim that enabling JADP makes a website accessible
 
 The first implementation increment is present under `plugins/system/jadp/`.
 
-It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the fixed bottom-right activation control, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
+It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the configurable activation control, with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
 
 The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, configurable trigger icon options and the trigger button position.
 
