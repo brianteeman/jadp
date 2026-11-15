@@ -66,6 +66,10 @@
                 <field
                     name="trigger_icon_css"
                     type="url"
+                    filter="url"
+                    validate="url"
+                    schemes="https"
+                    relative="true"
                     label="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_LABEL"
                     description="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_DESC"
                     showon="trigger_icon_type:class"
