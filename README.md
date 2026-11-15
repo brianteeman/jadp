@@ -188,7 +188,7 @@ These decisions supplement the original feature specification and take precedenc
 
 ### 4.1 Toolbar Position and Behaviour
 
-- The activation button is fixed to the bottom-right of the viewport.
+- The activation button position is configurable in the plugin settings: top-left, top-right, middle-left, middle-right, bottom-left or bottom-right. The default is bottom-left.
 - The initial implementation uses this physical position regardless of text direction.
 - The toolbar is opened and closed by the activation button.
 - Closing the toolbar does not reset visitor preferences.
@@ -337,7 +337,7 @@ Build a working Joomla system plugin in increments. The first milestone should i
 
 - A valid Joomla plugin skeleton and manifest.
 - Frontend-only activation and asset registration.
-- Fixed bottom-right activation button.
+- Configurable activation button position, defaulting to bottom-left.
 - Isolated, responsive toolbar UI.
 - Three text-size presets.
 - Versioned localStorage persistence, including graceful storage failure handling.
@@ -373,9 +373,9 @@ The initial release must not claim that enabling JADP makes a website accessible
 
 The first implementation increment is present under `plugins/system/jadp/`.
 
-It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the fixed bottom-right activation control, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
+It currently provides the Joomla system plugin manifest and service provider, frontend-only asset registration, the configurable activation control, with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, the three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer.
 
-The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar.
+The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, configurable trigger icon options and the trigger button position.
 
 The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
 
@@ -429,7 +429,11 @@ Activating the link opens the JADP panel and moves focus into the panel. When th
 
 The skip link is styled separately in `media/css/jadp-skip.css` and registered through Joomla Web Asset Manager. It is deliberately outside the toolbar's Shadow DOM because it is a page-level entry point rather than part of the toolbar interface.
 
-### 10.3 Changing the Universal Access Icon
+### 10.3 Trigger Button Position
+
+The trigger button position can be selected in the plugin configuration. The available positions are Top Left, Top Right, Middle Left, Middle Right, Bottom Left and Bottom Right. Bottom Left is the default. The toolbar panel is positioned alongside the trigger button.
+
+### 10.4 Changing the Universal Access Icon
 
 The universal access icon can be changed in the plugin configuration without overriding JADP's JavaScript. Select the desired option under **Universal Access Icon**.
 

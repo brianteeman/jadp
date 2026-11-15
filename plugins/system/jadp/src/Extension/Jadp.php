@@ -67,6 +67,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
 
         $document->addScriptOptions('plg_system_jadp', [
             'css' => Uri::root(true) . '/media/plg_system_jadp/css/jadp-ui.css',
+            'triggerPosition' => $this->params->get('trigger_position', 'bottom-left'),
             'triggerIcon' => [
                 'type' => $this->params->get('trigger_icon_type', 'default'),
                 'class' => trim((string) $this->params->get('trigger_icon_class', '')),

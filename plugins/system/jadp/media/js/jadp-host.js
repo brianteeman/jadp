@@ -21,6 +21,7 @@
 
     host.id = 'jadp-root';
     host.dataset.jadpCss = options.css;
+    host.dataset.triggerPosition = options.triggerPosition || 'bottom-left';
 
     const triggerIcon = options.triggerIcon || {};
     host.dataset.triggerIconType = triggerIcon.type || 'default';
