@@ -97,9 +97,25 @@ This stylesheet controls the floating button and the toolbar panel, including it
 
 The toolbar is rendered inside a Shadow DOM. This isolates it from the site's template CSS, so adding rules to the template's `user.css` or other ordinary stylesheets will not directly change the toolbar's contents.
 
-To customise the toolbar, make your changes to `media/plg_system_jadp/css/jadp-ui.css`. This is the stylesheet loaded inside the Shadow DOM. You can change its colours, typography, dimensions, spacing, borders and other presentation details. Take care to retain visible keyboard focus, readable contrast, usable control sizes and the responsive rules.
+The toolbar stylesheet is registered with Joomla's Web Asset Manager as `plg.system.jadp.ui`. The URL passed to the toolbar is resolved through the Web Asset Manager, so a site template can provide an override without modifying the installed plugin files.
 
-Changes made to the installed plugin media file may be overwritten when JADP is updated. Keep a copy of your customisations and reapply or review them after updating the plugin.
+To customise the toolbar, add the following asset to the active site template's `joomla.asset.json`:
+
+```json
+{
+    "name": "plg.system.jadp.ui",
+    "type": "style",
+    "uri": "plg_system_jadp/jadp-ui.css"
+}
+```
+
+Place your replacement stylesheet at:
+
+```text
+media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
+```
+
+Replace `YOUR_TEMPLATE` with the active template directory. The replacement is loaded inside the toolbar's Shadow DOM, so its rules remain isolated from the rest of the page. Keep the replacement in step with changes to JADP's toolbar stylesheet when updating the plugin, and retain visible focus, readable contrast, usable control sizes and responsive behaviour.
 
 ### Visitor preference effects — `jadp.css`
 
