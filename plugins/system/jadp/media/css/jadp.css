@@ -38,7 +38,7 @@
     background-color: #000 !important;
   }
   
-  html[data-jadp-high-contrast="true"] body * {
+  html[data-jadp-high-contrast="true"] body *:not(.jadp-skip-link) {
     color: #fff !important;
     text-shadow: none !important;
     background-color: transparent !important;
@@ -46,8 +46,8 @@
     box-shadow: none !important;
   }
   
-  html[data-jadp-high-contrast="true"] body a,
-  html[data-jadp-high-contrast="true"] body a:visited {
+  html[data-jadp-high-contrast="true"] body a:not(.jadp-skip-link),
+  html[data-jadp-high-contrast="true"] body a:not(.jadp-skip-link):visited {
     color: #ff0 !important;
     text-decoration: underline !important;
   }
