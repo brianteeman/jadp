@@ -172,8 +172,10 @@
 .jadp-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 1rem;
+    padding-block-start: 0.75rem;
+    border-block-start: 1px solid #bbb;
 }
 
 .jadp-header {
@@ -271,12 +273,6 @@
     background: #e8f0fe;
     color: #174ea6;
     font-weight: 700;
-}
-
-.jadp-footer {
-    justify-content: flex-end;
-    padding-block-start: 0.75rem;
-    border-block-start: 1px solid #bbb;
 }
 
 .jadp-reset {
