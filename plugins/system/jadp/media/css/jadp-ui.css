@@ -313,6 +313,13 @@
   }
 }
 
+@media print {
+  .jadp-trigger,
+  .jadp-panel {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .jadp-trigger {
     transition: none;
