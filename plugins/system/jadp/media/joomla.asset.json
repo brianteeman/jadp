@@ -53,6 +53,11 @@
             "attributes": {
                 "defer": true
             }
+        },
+        {
+            "name": "plg.system.jadp.ui",
+            "type": "style",
+            "uri": "plg_system_jadp/jadp-ui.css"
         }
     ]
 }

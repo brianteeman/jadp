@@ -398,23 +398,25 @@ This stylesheet controls the activation button, toolbar panel, headings, control
 
 The toolbar is created inside a Shadow DOM. Consequently, CSS rules in the site template's normal stylesheet or `user.css` cannot directly style the toolbar contents. The JADP toolbar stylesheet itself must be replaced or customised.
 
-The recommended approach is to override the JADP stylesheet through the Joomla Web Asset Manager. Add an asset with the same name, `plg.system.jadp`, to the active template's `joomla.asset.json`. Joomla loads the template registry after the extension registry, and an asset with the same name replaces the earlier definition. For example:
+The toolbar stylesheet is registered as the Web Asset `plg.system.jadp.ui`. JADP obtains its resolved URI from the Web Asset Manager and passes that URI to the toolbar, which links the stylesheet from inside its Shadow DOM. This allows Joomla's normal media-path resolution to locate a template override while keeping the stylesheet isolated from the page's ordinary CSS.
+
+Add an asset with the same name and type to the active site template's `joomla.asset.json`:
 
 ```json
 {
-    "name": "plg.system.jadp",
+    "name": "plg.system.jadp.ui",
     "type": "style",
     "uri": "plg_system_jadp/jadp-ui.css"
 }
 ```
 
-Place your customised file in the corresponding template media location:
+Place the replacement file at:
 
 ```text
 media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
 ```
 
-Replace `YOUR_TEMPLATE` with the directory name of the active site template. Keep the original JADP stylesheet as a reference when creating your customised version. Review your changes when updating JADP, as future releases may add or change toolbar styles.
+Replace `YOUR_TEMPLATE` with the active site template directory. The replacement stylesheet is loaded inside the toolbar's Shadow DOM rather than in the page's light DOM. Keep it in sync with changes to the JADP toolbar styles when updating the plugin.
 
 ### 10.2 Keyboard and Screen Reader Discovery
 
