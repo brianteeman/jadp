@@ -82,7 +82,7 @@
   }
   
   /* Grayscale mode removes colour from the rendered page. */
-  html[data-jadp-grayscale="true"] body {
+  html[data-jadp-grayscale="true"] {
     filter: grayscale(1);
   }
   
