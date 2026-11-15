@@ -75,7 +75,7 @@
   left: max(1rem, env(safe-area-inset-left));
   bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
   z-index: 2147483001;
-  inline-size: min(22rem, calc(100vw - 2rem));
+  inline-size: min(22rem, calc(100% - 2rem));
   container-type: inline-size;
   /* stylelint-disable */
   max-block-size: min(75vh, 42rem);
@@ -136,7 +136,7 @@
   top: 50%;
   bottom: auto;
   left: calc(max(1rem, env(safe-area-inset-left)) + 3.75rem);
-  width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-left)) - 5.75rem));
+  width: min(22rem, calc(100% - max(1rem, env(safe-area-inset-left)) - 5.75rem));
   transform: translateY(-50%);
 }
 
@@ -153,7 +153,7 @@
   right: calc(max(1rem, env(safe-area-inset-right)) + 3.75rem);
   bottom: auto;
   left: auto;
-  width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-right)) - 5.75rem));
+  width: min(22rem, calc(100% - max(1rem, env(safe-area-inset-right)) - 5.75rem));
   transform: translateY(-50%);
 }
 
@@ -330,18 +330,18 @@
   .jadp-panel {
     left: max(.5rem, env(safe-area-inset-left));
     bottom: calc(max(.5rem, env(safe-area-inset-bottom)) + 3.5rem);
-    inline-size: calc(100vw - 1rem);
+    inline-size: calc(100% - 1rem);
   }
 
   :host([data-trigger-position="middle-left"]) .jadp-panel {
     left: calc(max(.5rem, env(safe-area-inset-left)) + 3.75rem);
-    inline-size: calc(100vw - max(.5rem, env(safe-area-inset-left)) - 4.75rem);
+    inline-size: calc(100% - max(.5rem, env(safe-area-inset-left)) - 4.75rem);
   }
 
   :host([data-trigger-position="middle-right"]) .jadp-panel {
     right: calc(max(.5rem, env(safe-area-inset-right)) + 3.75rem);
     left: auto;
-    inline-size: calc(100vw - max(.5rem, env(safe-area-inset-right)) - 4.75rem);
+    inline-size: calc(100% - max(.5rem, env(safe-area-inset-right)) - 4.75rem);
   }
 
   .jadp-trigger {
