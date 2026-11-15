@@ -25,11 +25,11 @@
   
   /* Letter spacing preferences apply to text content and headings. */
   html[data-jadp-letter-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    letter-spacing: .05em !important;
+    letter-spacing: .12em !important;
   }
   
   html[data-jadp-letter-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    letter-spacing: .1em !important;
+    letter-spacing: .2em !important;
   }
   
   /* High contrast mode uses a black background, white text and yellow links. */
@@ -65,11 +65,11 @@
   
   /* Word spacing preferences apply to text blocks and headings. */
   html[data-jadp-word-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    word-spacing: .1em !important;
+    word-spacing: .16em !important;
   }
   
   html[data-jadp-word-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    word-spacing: .2em !important;
+    word-spacing: .24em !important;
   }
   
   /* Grayscale mode removes colour from the rendered page. */
