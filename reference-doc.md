@@ -226,9 +226,7 @@ Activating reset must:
 
 ### 4.4 Toolbar Isolation
 
-The toolbar interface should be isolated from template CSS. The preferred approach is a Shadow DOM host for the toolbar UI, with its own styles. Website display preferences must still be applied to the website document, outside the shadow root.
-
-This is an implementation direction to validate with Joomla, browser support and Content Security Policy testing, not a reason to introduce unnecessary dependencies.
+The toolbar interface is isolated from template CSS using an open Shadow DOM attached to the `jadp-root` host. Its interface stylesheet is loaded inside the shadow root. Website display preferences are applied to the document outside the shadow root. This isolation should continue to be tested with the supported browsers and Content Security Policy configurations.
 
 ### 4.5 Reference Implementation
 
@@ -244,7 +242,7 @@ The reference repository is MIT licensed. Any direct reuse of code must retain a
 
 ## 5. Proposed Joomla Extension Architecture
 
-The initial implementation is expected to be a Joomla system plugin, provisionally named plg_system_jadp.
+JADP is implemented as the Joomla system plugin `plg_system_jadp`.
 The plugin should:
 
 - Run on the site, administrator, or both clients, as selected in the plugin configuration. The default is Site (Frontend).
@@ -288,7 +286,7 @@ The plugin currently subscribes to Joomla's `onBeforeCompileHead` event and regi
 - jadp-init.js: read, validate and apply saved preferences as early as practical to reduce visual flicker.
 - jadp.js: maintain preference state, apply changes, persist values and handle reset.
 - jadp-host.js: read the configuration supplied through Joomla's script options, create the toolbar host element and append it to the document root.
-- jadp-ui.js: find the host created by jadp-host.js and create and manage the toolbar UI and its interactions, preferably within a Shadow DOM.
+- jadp-ui.js: find the host created by jadp-host.js and create and manage the toolbar UI and its interactions inside an open Shadow DOM.
 
 All JavaScript must be written in **vanilla JavaScript**, using modern ECMAScript features and native browser APIs. Do not use jQuery, Bootstrap JavaScript, third-party libraries or JavaScript frameworks. The code uses features newer than ES2015 (including `Object.entries()`, object spread and optional chaining), so it should not be described as strictly ES6. Compatibility must be assessed against the browsers supported by the target Joomla release.
 
@@ -340,20 +338,19 @@ The floating trigger button is separately configurable in the plugin settings. I
 
 ## 6. Initial Implementation Milestone
 
-Build a working Joomla system plugin in increments. The first milestone should include:
+The original implementation milestone has been delivered. The current plugin includes:
 
-- A valid Joomla plugin skeleton and manifest.
-- Client-specific activation and asset registration, controlled by the Enabled setting (Site, Administrator or Both; default Site).
-- Configurable activation button position, defaulting to bottom-left.
-- Isolated, responsive toolbar UI.
-- Three text-size presets.
-- Versioned localStorage persistence, including graceful storage failure handling.
-- Dedicated footer reset button with the reset behaviour specified above.
-- Close behaviour that preserves preferences.
+- A Joomla system plugin manifest and service provider.
+- Client-specific activation for Site, Administrator or Both, with Site as the default.
+- Six configurable trigger-button positions, with Bottom Left as the default.
+- An isolated, responsive Shadow DOM toolbar.
+- Three text-size presets and the line-spacing, letter-spacing, word-spacing, high-contrast, grayscale and link-underlining preferences.
+- Versioned localStorage persistence, graceful storage-failure handling and cross-tab updates.
+- A dedicated footer reset button and close behaviour that preserves preferences.
 - An administrator-facing note explaining the purpose and limitations of the toolbar.
-- Joomla language strings rather than hard-coded user-facing text.
+- Joomla language strings for user-facing text.
 
-Add the remaining spacing, contrast, grayscale and link underline preferences in subsequent increments.
+The remaining work is validation, compatibility testing and resolution of the items listed in Section 9, rather than implementation of the original preference controls.
 
 ## 7. Quality and Compatibility Checks
 
@@ -433,7 +430,28 @@ media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
 
 Replace `YOUR_TEMPLATE` with the active site template directory. The replacement stylesheet is loaded inside the toolbar's Shadow DOM rather than in the page's light DOM. Keep it in sync with changes to the JADP toolbar styles when updating the plugin.
 
-### 10.2 Keyboard and Screen Reader Discovery
+### 10.2 Website Preference Effects
+
+The website preference rules are contained in `media/css/jadp.css`. They apply to screen presentation; the stylesheet's print rules restore the affected page styles for printing.
+
+The current values are:
+
+| Preference | Setting | CSS value |
+| --- | --- | --- |
+| Text size | Large | `1.125em` on `body` |
+| Text size | Extra large | `1.25em` on `body` |
+| Line spacing | Increased | `1.8` |
+| Line spacing | Maximum | `2` |
+| Letter spacing | Increased | `.12em` |
+| Letter spacing | Maximum | `.2em` |
+| Word spacing | Increased | `.16em` |
+| Word spacing | Maximum | `.24em` |
+
+The spacing rules apply to selected text elements rather than every element on the page. Text in other elements may not be affected. The text-size preference changes the body's base font size and does not change the root font size, so content with explicitly assigned font sizes may not scale in the same way.
+
+High contrast currently applies white text, a black body background, yellow links and focus indicators, and broad background and border overrides. This remains an area for further review. Grayscale applies a filter to the document root, which also affects the toolbar. Underline links applies underlining to links in the page body.
+
+### 10.3 Keyboard and Screen Reader Discovery
 
 JADP adds an **Open display preferences** link at the beginning of the page body. It is visually moved off-screen until it receives keyboard focus, at which point it becomes visible at the top of the viewport, in the same way as a conventional skip link.
 
@@ -443,11 +461,11 @@ Activating the link opens the JADP panel and moves focus into the panel. When th
 
 The skip link is styled separately in `media/css/jadp-skip.css` and registered through Joomla Web Asset Manager. It is deliberately outside the toolbar's Shadow DOM because it is a page-level entry point rather than part of the toolbar interface.
 
-### 10.3 Trigger Button Position
+### 10.4 Trigger Button Position
 
 The trigger button position can be selected in the plugin configuration. The available positions are Top Left, Top Right, Middle Left, Middle Right, Bottom Left and Bottom Right. Bottom Left is the default. The toolbar panel is positioned alongside the trigger button.
 
-### 10.4 Changing the Universal Access Icon
+### 10.5 Changing the Universal Access Icon
 
 The universal access icon can be changed in the plugin configuration without overriding JADP's JavaScript. Select the desired option under **Universal Access Icon**.
 
