@@ -3,7 +3,7 @@
     color: #202124;
     font-family: system-ui, sans-serif;
     font-size: 16px;
-    line-height: 1.5;
+    line-block-size: 1.5;
 }
 
 *,
@@ -15,12 +15,12 @@
 .jadp-trigger {
     position: fixed;
     z-index: 2147483000;
-    left: max(1rem, env(safe-area-inset-left));
-    bottom: max(1rem, env(safe-area-inset-bottom));
+    inset-inline-start: max(1rem, env(safe-area-inset-left));
+    inset-block-end: max(1rem, env(safe-area-inset-bottom));
     display: grid;
     place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
+    inline-size: 3.25rem;
+    block-size: 3.25rem;
     padding: 0;
     border: 2px solid #fff;
     border-radius: 50%;
@@ -44,10 +44,10 @@
 .jadp-trigger-image,
 .jadp-trigger-font-icon {
     display: block;
-    width: 1.8rem;
-    height: 1.8rem;
+    inline-size: 1.8rem;
+    block-size: 1.8rem;
     font-size: 1.8rem;
-    line-height: 1;
+    line-block-size: 1;
 }
 
 .jadp-trigger-image {
@@ -56,11 +56,11 @@
 
 .jadp-trigger-icon {
     display: block;
-    width: 1.8rem;
-    height: 1.8rem;
+    inline-size: 1.8rem;
+    block-size: 1.8rem;
     fill: none;
     stroke: currentColor;
-    stroke-width: 24;
+    stroke-inline-size: 24;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
@@ -68,12 +68,12 @@
 .jadp-panel {
     position: fixed;
     z-index: 2147483001;
-    left: max(1rem, env(safe-area-inset-left));
-    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
-    width: min(22rem, calc(100vw - 2rem));
+    inset-inline-start: max(1rem, env(safe-area-inset-left));
+    inset-block-end: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
+    inline-size: min(22rem, calc(100vi - 2rem));
     container-type: inline-size;
-    max-height: min(75vh, 42rem);
-    max-height: min(75dvh, 42rem);
+    max-block-size: min(75vh, 42rem);
+    max-block-size: min(75dvh, 42rem);
     overflow: auto;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
@@ -181,7 +181,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-inset-block-end: 1rem;
 }
 
 .jadp-header h2 {
@@ -193,8 +193,8 @@
 }
 
 .jadp-close {
-    min-width: 2.5rem;
-    min-height: 2.5rem;
+    min-inline-size: 2.5rem;
+    min-block-size: 2.5rem;
     border: 1px solid #767676;
     border-radius: 0.25rem;
     background: #fff;
@@ -215,14 +215,14 @@
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.35rem;
-    min-width: 0;
+    min-inline-size: 0;
     margin: 0;
     padding: 0;
     border: 0;
 }
 
 .jadp-group-label {
-    min-width: 0;
+    min-inline-size: 0;
     margin: 0;
     padding: 0;
     font-weight: 700;
@@ -230,7 +230,7 @@
 
 .jadp-option,
 .jadp-reset {
-    min-height: 2.75rem;
+    min-block-size: 2.75rem;
     padding: 0.5rem;
     border: 1px solid #555;
     border-radius: 0.25rem;
@@ -249,16 +249,16 @@
 .jadp-option {
     display: grid;
     place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    min-width: 2.75rem;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    min-inline-size: 2.75rem;
     padding: 0.5rem;
 }
 
 .jadp-icon {
     display: block;
-    width: 1.5rem;
-    height: 1.5rem;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
     fill: currentColor;
 }
 
@@ -275,8 +275,8 @@
 
 .jadp-footer {
     justify-content: flex-end;
-    padding-top: 0.75rem;
-    border-top: 1px solid #bbb;
+    padding-inset-block-start: 0.75rem;
+    border-inset-block-start: 1px solid #bbb;
 }
 
 .jadp-reset {
@@ -292,7 +292,7 @@
     outline-offset: 4px;
 }
 
-@container (max-width: 17rem) {
+@container (max-inline-size: 17rem) {
     .jadp-size-group {
         grid-template-columns: 1fr;
     }
@@ -304,27 +304,27 @@
     }
 }
 
-@media (max-width: 24rem) {
+@media (max-inline-size: 24rem) {
     .jadp-panel {
-        left: max(0.5rem, env(safe-area-inset-left));
-        bottom: calc(max(0.5rem, env(safe-area-inset-bottom)) + 3.5rem);
-        width: calc(100vw - 1rem);
+        inset-inline-start: max(0.5rem, env(safe-area-inset-left));
+        inset-block-end: calc(max(0.5rem, env(safe-area-inset-bottom)) + 3.5rem);
+        inline-size: calc(100vi - 1rem);
     }
 
     :host([data-trigger-position="middle-left"]) .jadp-panel {
-        left: calc(max(0.5rem, env(safe-area-inset-left)) + 3.75rem);
-        width: calc(100vw - max(0.5rem, env(safe-area-inset-left)) - 4.75rem);
+        inset-inline-start: calc(max(0.5rem, env(safe-area-inset-left)) + 3.75rem);
+        inline-size: calc(100vi - max(0.5rem, env(safe-area-inset-left)) - 4.75rem);
     }
 
     :host([data-trigger-position="middle-right"]) .jadp-panel {
-        right: calc(max(0.5rem, env(safe-area-inset-right)) + 3.75rem);
-        left: auto;
-        width: calc(100vw - max(0.5rem, env(safe-area-inset-right)) - 4.75rem);
+        inset-inline-end: calc(max(0.5rem, env(safe-area-inset-right)) + 3.75rem);
+        inset-inline-start: auto;
+        inline-size: calc(100vi - max(0.5rem, env(safe-area-inset-right)) - 4.75rem);
     }
 
     .jadp-trigger {
-        left: max(0.5rem, env(safe-area-inset-left));
-        bottom: max(0.5rem, env(safe-area-inset-bottom));
+        inset-inline-start: max(0.5rem, env(safe-area-inset-left));
+        inset-block-end: max(0.5rem, env(safe-area-inset-bottom));
     }
 }
 
