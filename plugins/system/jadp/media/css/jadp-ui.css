@@ -128,7 +128,8 @@
 :host([data-trigger-position="middle-left"]) .jadp-panel {
     top: 50%;
     bottom: auto;
-    left: max(1rem, env(safe-area-inset-left));
+    left: calc(max(1rem, env(safe-area-inset-left)) + 3.75rem);
+    width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-left)) - 5.75rem));
     transform: translateY(-50%);
 }
 
@@ -142,9 +143,10 @@
 
 :host([data-trigger-position="middle-right"]) .jadp-panel {
     top: 50%;
-    right: max(1rem, env(safe-area-inset-right));
+    right: calc(max(1rem, env(safe-area-inset-right)) + 3.75rem);
     bottom: auto;
     left: auto;
+    width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-right)) - 5.75rem));
     transform: translateY(-50%);
 }
 
@@ -307,6 +309,17 @@
         left: max(0.5rem, env(safe-area-inset-left));
         bottom: calc(max(0.5rem, env(safe-area-inset-bottom)) + 3.5rem);
         width: calc(100vw - 1rem);
+    }
+
+    :host([data-trigger-position="middle-left"]) .jadp-panel {
+        left: calc(max(0.5rem, env(safe-area-inset-left)) + 3.75rem);
+        width: calc(100vw - max(0.5rem, env(safe-area-inset-left)) - 4.75rem);
+    }
+
+    :host([data-trigger-position="middle-right"]) .jadp-panel {
+        right: calc(max(0.5rem, env(safe-area-inset-right)) + 3.75rem);
+        left: auto;
+        width: calc(100vw - max(0.5rem, env(safe-area-inset-right)) - 4.75rem);
     }
 
     .jadp-trigger {
