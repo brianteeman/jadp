@@ -10,8 +10,7 @@
     padding: 0.75rem 1rem;
     transform: translateY(-150%);
     border: 2px solid #fff;
-    border-end-start-radius: 0.25rem;
-    border-end-end-radius: 0;
+    border-end-end-radius: 0.25rem;
     background: #202124;
     color: #fff;
     font: 600 1rem/1.5 system-ui, sans-serif;
