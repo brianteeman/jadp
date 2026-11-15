@@ -75,6 +75,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
             ],
             'labels' => [
                 'open' => Text::_('PLG_SYSTEM_JADP_OPEN'),
+                'skipOpen' => Text::_('PLG_SYSTEM_JADP_SKIP_OPEN'),
                 'close' => Text::_('PLG_SYSTEM_JADP_CLOSE'),
                 'title' => Text::_('PLG_SYSTEM_JADP_TITLE'),
                 'textSize' => Text::_('PLG_SYSTEM_JADP_TEXT_SIZE'),
@@ -103,6 +104,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
         $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp');
 
         $wa->useStyle('plg.system.jadp')
+            ->useStyle('plg.system.jadp.skip')
             ->useScript('plg.system.jadp.init')
             ->useScript('plg.system.jadp.ui');
     }
