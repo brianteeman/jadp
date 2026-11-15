@@ -59,7 +59,7 @@
   display: block;
   inline-size: 1.8rem;
   block-size: 1.8rem;
-  fill: none;
+  fill: currentColor;
   stroke: currentColor;
   stroke-width: 24;
   stroke-linecap: round;
