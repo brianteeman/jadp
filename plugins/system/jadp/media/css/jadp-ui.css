@@ -14,8 +14,8 @@
 
 .jadp-trigger {
   position: fixed;
-  inset-inline-start: max(1rem, env(safe-area-inset-left));
-  inset-block-end: max(1rem, env(safe-area-inset-bottom));
+  left: max(1rem, env(safe-area-inset-left));
+  bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 2147483000;
   box-sizing: border-box;
   display: grid;
@@ -72,8 +72,8 @@
 
 .jadp-panel {
   position: fixed;
-  inset-inline-start: max(1rem, env(safe-area-inset-left));
-  inset-block-end: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
+  left: max(1rem, env(safe-area-inset-left));
+  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
   z-index: 2147483001;
   inline-size: min(22rem, calc(100vw - 2rem));
   container-type: inline-size;
@@ -321,24 +321,24 @@
 
 @media (max-width: 24rem) {
   .jadp-panel {
-    inset-inline-start: max(.5rem, env(safe-area-inset-left));
-    inset-block-end: calc(max(.5rem, env(safe-area-inset-bottom)) + 3.5rem);
+    left: max(.5rem, env(safe-area-inset-left));
+    bottom: calc(max(.5rem, env(safe-area-inset-bottom)) + 3.5rem);
     inline-size: calc(100vw - 1rem);
   }
 
   :host([data-trigger-position="middle-left"]) .jadp-panel {
-    inset-inline-start: calc(max(.5rem, env(safe-area-inset-left)) + 3.75rem);
+    left: calc(max(.5rem, env(safe-area-inset-left)) + 3.75rem);
     inline-size: calc(100vw - max(.5rem, env(safe-area-inset-left)) - 4.75rem);
   }
 
   :host([data-trigger-position="middle-right"]) .jadp-panel {
-    inset-inline-end: calc(max(.5rem, env(safe-area-inset-right)) + 3.75rem);
-    inset-inline-start: auto;
+    right: calc(max(.5rem, env(safe-area-inset-right)) + 3.75rem);
+    left: auto;
     inline-size: calc(100vw - max(.5rem, env(safe-area-inset-right)) - 4.75rem);
   }
 
   .jadp-trigger {
-    inset-inline-start: max(.5rem, env(safe-area-inset-left));
-    inset-block-end: max(.5rem, env(safe-area-inset-bottom));
+    left: max(.5rem, env(safe-area-inset-left));
+    bottom: max(.5rem, env(safe-area-inset-bottom));
   }
 }
