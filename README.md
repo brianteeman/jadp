@@ -81,7 +81,7 @@ media/plg_system_jadp/css/
 ```
 ### A note about CSS customisation
 
-The toolbar stylesheet and the visitor-preference stylesheet serve different purposes. How you customise them depends on what you want to change - ** this section is not complete yet **.
+The toolbar stylesheet and the visitor-preference stylesheet serve different purposes. How you customise them depends on what you want to change - **this section is not complete yet**.
 
 
 ### Toolbar appearance — `jadp-ui.css`
