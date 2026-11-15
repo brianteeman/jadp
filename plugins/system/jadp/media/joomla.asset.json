@@ -11,6 +11,11 @@
             "uri": "plg_system_jadp/jadp.css"
         },
         {
+            "name": "plg.system.jadp.skip",
+            "type": "style",
+            "uri": "plg_system_jadp/jadp-skip.css"
+        },
+        {
             "name": "plg.system.jadp.init",
             "type": "script",
             "uri": "plg_system_jadp/jadp-init.js",
