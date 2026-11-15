@@ -18,6 +18,12 @@
   transform: translateY(-150%);
 }
 
+@media print {
+  .jadp-skip-link {
+    display: none !important;
+  }
+}
+
 .jadp-skip-link:focus,
 .jadp-skip-link:focus-visible {
   outline: 3px solid #f0b429;
