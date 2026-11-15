@@ -32,6 +32,41 @@
                     class="alert alert-info"
                 />
                 <field
+                    name="trigger_icon_type"
+                    type="list"
+                    label="PLG_SYSTEM_JADP_TRIGGER_ICON_TYPE_LABEL"
+                    description="PLG_SYSTEM_JADP_TRIGGER_ICON_TYPE_DESC"
+                    default="default"
+                >
+                    <option value="default">PLG_SYSTEM_JADP_TRIGGER_ICON_DEFAULT</option>
+                    <option value="class">PLG_SYSTEM_JADP_TRIGGER_ICON_CLASS</option>
+                    <option value="image">PLG_SYSTEM_JADP_TRIGGER_ICON_IMAGE</option>
+                </field>
+                <field
+                    name="trigger_icon_class"
+                    type="text"
+                    label="PLG_SYSTEM_JADP_TRIGGER_ICON_CLASS_LABEL"
+                    description="PLG_SYSTEM_JADP_TRIGGER_ICON_CLASS_DESC"
+                    showon="trigger_icon_type:class"
+                />
+                <field
+                    name="trigger_icon_css"
+                    type="url"
+                    label="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_LABEL"
+                    description="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_DESC"
+                    required="true"
+                    showon="trigger_icon_type:class"
+                />
+                <field
+                    name="trigger_icon_image"
+                    type="media"
+                    label="PLG_SYSTEM_JADP_TRIGGER_ICON_IMAGE_LABEL"
+                    description="PLG_SYSTEM_JADP_TRIGGER_ICON_IMAGE_DESC"
+                    directory="images"
+                    preview="true"
+                    showon="trigger_icon_type:image"
+                />
+                <field
                     name="enabled"
                     type="radio"
                     label="JENABLED"

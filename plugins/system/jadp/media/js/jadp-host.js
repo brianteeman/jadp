@@ -22,6 +22,12 @@
     host.id = 'jadp-root';
     host.dataset.jadpCss = options.css;
 
+    const triggerIcon = options.triggerIcon || {};
+    host.dataset.triggerIconType = triggerIcon.type || 'default';
+    host.dataset.triggerIconClass = triggerIcon.class || '';
+    host.dataset.triggerIconCss = triggerIcon.css || '';
+    host.dataset.triggerIconImage = triggerIcon.image || '';
+
     Object.entries(options.labels).forEach(([name, value]) => {
         host.dataset[name] = value;
     });
