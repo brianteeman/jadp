@@ -5,77 +5,77 @@
  * Do not change the root font size: that would also resize rem-based layout.
  */
 html[data-jadp-text-size="large"] body {
-    font-size: 1.125em;
+  font-size: 1.125em;
 }
 
 html[data-jadp-text-size="extra-large"] body {
-    font-size: 1.25em;
+  font-size: 1.25em;
 }
 
 /* Line spacing preferences apply to text blocks, not every page element. */
 html[data-jadp-line-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td) {
-    line-height: 1.8 !important;
+  line-height: 1.8 !important;
 }
 
 html[data-jadp-line-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td) {
-    line-height: 2 !important;
+  line-height: 2 !important;
 }
 
 /* Letter spacing preferences apply to text content and headings. */
 html[data-jadp-letter-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    letter-spacing: 0.05em !important;
+  letter-spacing: .05em !important;
 }
 
 html[data-jadp-letter-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    letter-spacing: 0.1em !important;
+  letter-spacing: .1em !important;
 }
 
 /* High contrast mode uses a black background, white text and yellow links. */
 html[data-jadp-high-contrast="true"] body {
-    background-color: #000 !important;
-    color: #fff !important;
+  color: #fff !important;
+  background-color: #000 !important;
 }
 
 html[data-jadp-high-contrast="true"] body * {
-    background-color: transparent !important;
-    border-color: #fff !important;
-    box-shadow: none !important;
-    color: #fff !important;
-    text-shadow: none !important;
+  color: #fff !important;
+  text-shadow: none !important;
+  background-color: transparent !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
 }
 
 html[data-jadp-high-contrast="true"] body a,
 html[data-jadp-high-contrast="true"] body a:visited {
-    color: #ff0 !important;
-    text-decoration: underline !important;
+  color: #ff0 !important;
+  text-decoration: underline !important;
 }
 
 html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button) {
-    background-color: #000 !important;
-    border: 1px solid #fff !important;
-    color: #fff !important;
+  color: #fff !important;
+  background-color: #000 !important;
+  border: 1px solid #fff !important;
 }
 
 html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button):focus-visible {
-    outline: 3px solid #ff0 !important;
-    outline-offset: 2px;
+  outline: 3px solid #ff0 !important;
+  outline-offset: 2px;
 }
 
 /* Word spacing preferences apply to text blocks and headings. */
 html[data-jadp-word-spacing="increased"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    word-spacing: 0.1em !important;
+  word-spacing: .1em !important;
 }
 
 html[data-jadp-word-spacing="maximum"] body :is(p, li, dd, dt, blockquote, figcaption, caption, label, legend, th, td, h1, h2, h3, h4, h5, h6) {
-    word-spacing: 0.2em !important;
+  word-spacing: .2em !important;
 }
 
 /* Grayscale mode removes colour from the rendered page. */
 html[data-jadp-grayscale="true"] body {
-    filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 /* Underline links preference makes links easier to distinguish from surrounding text. */
 html[data-jadp-underline-links="true"] body a {
-    text-decoration: underline !important;
+  text-decoration: underline !important;
 }
