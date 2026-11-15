@@ -1,326 +1,328 @@
 :host {
-    all: initial;
-    color: #202124;
-    font-family: system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+  all: initial;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #202124;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .jadp-trigger {
-    position: fixed;
-    z-index: 2147483000;
-    inset-inline-start: max(1rem, env(safe-area-inset-left));
-    inset-block-end: max(1rem, env(safe-area-inset-bottom));
-    display: grid;
-    place-items: center;
-    inline-size: 3.25rem;
-    block-size: 3.25rem;
-    padding: 0;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    background: #202124;
-    color: #fff;
-    box-shadow: 0 0.2rem 0.75rem rgb(0 0 0 / 30%);
-    cursor: pointer;
-    transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  position: fixed;
+  inset-inline-start: max(1rem, env(safe-area-inset-left));
+  inset-block-end: max(1rem, env(safe-area-inset-bottom));
+  z-index: 2147483000;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  padding: 0;
+  color: #fff;
+  cursor: pointer;
+  background: #202124;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 .2rem .75rem rgb(0 0 0 / 30%);
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .jadp-trigger:hover {
-    background: #174ea6;
-    box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 35%);
-    transform: translateY(-2px);
+  background: #174ea6;
+  box-shadow: 0 .3rem 1rem rgb(0 0 0 / 35%);
+  transform: translateY(-2px);
 }
 
 .jadp-trigger:active {
-    transform: scale(0.96);
+  transform: scale(.96);
 }
 
 .jadp-trigger-image,
 .jadp-trigger-font-icon {
-    display: block;
-    inline-size: 1.8rem;
-    block-size: 1.8rem;
-    font-size: 1.8rem;
-    line-height: 1;
+  display: block;
+  inline-size: 1.8rem;
+  block-size: 1.8rem;
+  font-size: 1.8rem;
+  line-height: 1;
 }
 
 .jadp-trigger-image {
-    object-fit: contain;
+  object-fit: contain;
 }
 
 .jadp-trigger-icon {
-    display: block;
-    inline-size: 1.8rem;
-    block-size: 1.8rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 24;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  display: block;
+  inline-size: 1.8rem;
+  block-size: 1.8rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 24;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .jadp-panel {
-    position: fixed;
-    z-index: 2147483001;
-    inset-inline-start: max(1rem, env(safe-area-inset-left));
-    inset-block-end: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
-    inline-size: min(22rem, calc(100vi - 2rem));
-    container-type: inline-size;
-    max-block-size: min(75vh, 42rem);
-    max-block-size: min(75dvh, 42rem);
-    overflow: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    padding: 1rem;
-    border: 1px solid #767676;
-    border-radius: 0.5rem;
-    background: #fff;
-    color: #202124;
-    box-shadow: 0 0.25rem 1.25rem rgb(0 0 0 / 25%);
-    font: inherit;
+  position: fixed;
+  inset-inline-start: max(1rem, env(safe-area-inset-left));
+  inset-block-end: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
+  z-index: 2147483001;
+  inline-size: min(22rem, calc(100vw - 2rem));
+  container-type: inline-size;
+  /* stylelint-disable */
+  max-block-size: min(75vh, 42rem);
+  max-block-size: min(75dvh, 42rem);
+  /* stylelint-enable */
+  padding: 1rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  font: inherit;
+  color: #202124;
+  background: #fff;
+  border: 1px solid #767676;
+  border-radius: .5rem;
+  box-shadow: 0 .25rem 1.25rem rgb(0 0 0 / 25%);
 }
 
 .jadp-panel[hidden] {
-    display: none;
+  display: none;
 }
 
 
 /* Position the activation button and keep the panel beside it. */
 :host([data-trigger-position="top-left"]) .jadp-trigger {
-    top: max(1rem, env(safe-area-inset-top));
-    bottom: auto;
-    left: max(1rem, env(safe-area-inset-left));
+  top: max(1rem, env(safe-area-inset-top));
+  bottom: auto;
+  left: max(1rem, env(safe-area-inset-left));
 }
 
 :host([data-trigger-position="top-left"]) .jadp-panel {
-    top: calc(max(1rem, env(safe-area-inset-top)) + 3.75rem);
-    bottom: auto;
-    left: max(1rem, env(safe-area-inset-left));
+  top: calc(max(1rem, env(safe-area-inset-top)) + 3.75rem);
+  bottom: auto;
+  left: max(1rem, env(safe-area-inset-left));
 }
 
 :host([data-trigger-position="top-right"]) .jadp-trigger {
-    top: max(1rem, env(safe-area-inset-top));
-    right: max(1rem, env(safe-area-inset-right));
-    bottom: auto;
-    left: auto;
+  top: max(1rem, env(safe-area-inset-top));
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: auto;
+  left: auto;
 }
 
 :host([data-trigger-position="top-right"]) .jadp-panel {
-    top: calc(max(1rem, env(safe-area-inset-top)) + 3.75rem);
-    right: max(1rem, env(safe-area-inset-right));
-    bottom: auto;
-    left: auto;
+  top: calc(max(1rem, env(safe-area-inset-top)) + 3.75rem);
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: auto;
+  left: auto;
 }
 
 :host([data-trigger-position="middle-left"]) .jadp-trigger {
-    top: 50%;
-    bottom: auto;
-    left: max(1rem, env(safe-area-inset-left));
-    margin-top: -1.625rem;
+  top: 50%;
+  bottom: auto;
+  left: max(1rem, env(safe-area-inset-left));
+  margin-top: -1.625rem;
 }
 
 :host([data-trigger-position="middle-left"]) .jadp-panel {
-    top: 50%;
-    bottom: auto;
-    left: calc(max(1rem, env(safe-area-inset-left)) + 3.75rem);
-    width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-left)) - 5.75rem));
-    transform: translateY(-50%);
+  top: 50%;
+  bottom: auto;
+  left: calc(max(1rem, env(safe-area-inset-left)) + 3.75rem);
+  width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-left)) - 5.75rem));
+  transform: translateY(-50%);
 }
 
 :host([data-trigger-position="middle-right"]) .jadp-trigger {
-    top: 50%;
-    right: max(1rem, env(safe-area-inset-right));
-    bottom: auto;
-    left: auto;
-    margin-top: -1.625rem;
+  top: 50%;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: auto;
+  left: auto;
+  margin-top: -1.625rem;
 }
 
 :host([data-trigger-position="middle-right"]) .jadp-panel {
-    top: 50%;
-    right: calc(max(1rem, env(safe-area-inset-right)) + 3.75rem);
-    bottom: auto;
-    left: auto;
-    width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-right)) - 5.75rem));
-    transform: translateY(-50%);
+  top: 50%;
+  right: calc(max(1rem, env(safe-area-inset-right)) + 3.75rem);
+  bottom: auto;
+  left: auto;
+  width: min(22rem, calc(100vw - max(1rem, env(safe-area-inset-right)) - 5.75rem));
+  transform: translateY(-50%);
 }
 
 :host([data-trigger-position="bottom-right"]) .jadp-trigger {
-    right: max(1rem, env(safe-area-inset-right));
-    bottom: max(1rem, env(safe-area-inset-bottom));
-    left: auto;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: auto;
 }
 
 :host([data-trigger-position="bottom-right"]) .jadp-panel {
-    right: max(1rem, env(safe-area-inset-right));
-    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
-    left: auto;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
+  left: auto;
 }
 
 
 
 .jadp-header,
 .jadp-option[aria-pressed="true"]:hover {
-    background: #dbe7fb;
+  background: #dbe7fb;
 }
 
 .jadp-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding-block-start: 0.75rem;
-    border-block-start: 1px solid #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-block-start: .75rem;
+  border-block-start: 1px solid #bbb;
 }
 
 .jadp-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-block-end: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 1rem;
 }
 
 .jadp-header h2 {
-    margin: 0;
-    color: inherit;
-    font: inherit;
-    font-size: 1.2rem;
-    font-weight: 700;
+  margin: 0;
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: inherit;
 }
 
 .jadp-close {
-    min-inline-size: 2.5rem;
-    min-block-size: 2.5rem;
-    border: 1px solid #767676;
-    border-radius: 0.25rem;
-    background: #fff;
-    color: inherit;
-    font: inherit;
-    font-size: 1.5rem;
-    cursor: pointer;
+  min-inline-size: 2.5rem;
+  min-block-size: 2.5rem;
+  font: inherit;
+  font-size: 1.5rem;
+  color: inherit;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #767676;
+  border-radius: .25rem;
 }
 
 .jadp-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
 }
 
 .jadp-size-group {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 0.35rem;
-    min-inline-size: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .35rem;
+  min-inline-size: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 .jadp-group-label {
-    min-inline-size: 0;
-    margin: 0;
-    padding: 0;
-    font-weight: 700;
+  min-inline-size: 0;
+  padding: 0;
+  margin: 0;
+  font-weight: 700;
 }
 
 .jadp-option,
 .jadp-reset {
-    min-block-size: 2.75rem;
-    padding: 0.5rem;
-    border: 1px solid #555;
-    border-radius: 0.25rem;
-    background: #fff;
-    color: #202124;
-    font: inherit;
-    cursor: pointer;
+  min-block-size: 2.75rem;
+  padding: .5rem;
+  font: inherit;
+  color: #202124;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #555;
+  border-radius: .25rem;
 }
 
 .jadp-options {
-    display: flex;
-    flex: 0 0 auto;
-    gap: 0.35rem;
+  display: flex;
+  flex: 0 0 auto;
+  gap: .35rem;
 }
 
 .jadp-option {
-    display: grid;
-    place-items: center;
-    inline-size: 2.75rem;
-    block-size: 2.75rem;
-    min-inline-size: 2.75rem;
-    padding: 0.5rem;
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  min-inline-size: 2.75rem;
+  padding: .5rem;
 }
 
 .jadp-icon {
-    display: block;
-    inline-size: 1.5rem;
-    block-size: 1.5rem;
-    fill: currentColor;
+  display: block;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  fill: currentColor;
 }
 
 .jadp-option:hover {
-    background: #f1f3f4;
+  background: #f1f3f4;
 }
 
 .jadp-option[aria-pressed="true"] {
-    border: 2px solid #174ea6;
-    background: #e8f0fe;
-    color: #174ea6;
-    font-weight: 700;
+  font-weight: 700;
+  color: #174ea6;
+  background: #e8f0fe;
+  border: 2px solid #174ea6;
 }
 
 .jadp-reset {
-    border-color: #8b1e1e;
-    background: #8b1e1e;
-    color: #fff;
-    font-weight: 600;
+  font-weight: 600;
+  color: #fff;
+  background: #8b1e1e;
+  border-color: #8b1e1e;
 }
 
-.jadp-trigger:focus-visible,
-.jadp-panel button:focus-visible {
-    outline: 3px solid #f0b429;
-    outline-offset: 4px;
+.jadp-trigger:focus-vwsible,
+.jadp-panel button:focus-vwsible {
+  outline: 3px solid #f0b429;
+  outline-offset: 4px;
 }
 
 @container (max-inline-size: 17rem) {
-    .jadp-size-group {
-        grid-template-columns: 1fr;
-    }
+  .jadp-size-group {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .jadp-trigger {
-        transition: none;
-    }
+  .jadp-trigger {
+    transition: none;
+  }
 }
 
 @media (max-width: 24rem) {
-    .jadp-panel {
-        inset-inline-start: max(0.5rem, env(safe-area-inset-left));
-        inset-block-end: calc(max(0.5rem, env(safe-area-inset-bottom)) + 3.5rem);
-        inline-size: calc(100vi - 1rem);
-    }
+  .jadp-panel {
+    inset-inline-start: max(.5rem, env(safe-area-inset-left));
+    inset-block-end: calc(max(.5rem, env(safe-area-inset-bottom)) + 3.5rem);
+    inline-size: calc(100vw - 1rem);
+  }
 
-    :host([data-trigger-position="middle-left"]) .jadp-panel {
-        inset-inline-start: calc(max(0.5rem, env(safe-area-inset-left)) + 3.75rem);
-        inline-size: calc(100vi - max(0.5rem, env(safe-area-inset-left)) - 4.75rem);
-    }
+  :host([data-trigger-position="middle-left"]) .jadp-panel {
+    inset-inline-start: calc(max(.5rem, env(safe-area-inset-left)) + 3.75rem);
+    inline-size: calc(100vw - max(.5rem, env(safe-area-inset-left)) - 4.75rem);
+  }
 
-    :host([data-trigger-position="middle-right"]) .jadp-panel {
-        inset-inline-end: calc(max(0.5rem, env(safe-area-inset-right)) + 3.75rem);
-        inset-inline-start: auto;
-        inline-size: calc(100vi - max(0.5rem, env(safe-area-inset-right)) - 4.75rem);
-    }
+  :host([data-trigger-position="middle-right"]) .jadp-panel {
+    inset-inline-end: calc(max(.5rem, env(safe-area-inset-right)) + 3.75rem);
+    inset-inline-start: auto;
+    inline-size: calc(100vw - max(.5rem, env(safe-area-inset-right)) - 4.75rem);
+  }
 
-    .jadp-trigger {
-        inset-inline-start: max(0.5rem, env(safe-area-inset-left));
-        inset-block-end: max(0.5rem, env(safe-area-inset-bottom));
-    }
+  .jadp-trigger {
+    inset-inline-start: max(.5rem, env(safe-area-inset-left));
+    inset-block-end: max(.5rem, env(safe-area-inset-bottom));
+  }
 }
-
