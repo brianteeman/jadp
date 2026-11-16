@@ -432,7 +432,7 @@ Replace `YOUR_TEMPLATE` with the active site template directory. The replacement
 
 ### 9.2 Website Preference Effects
 
-The website preference rules are contained in `media/css/jadp.css`. They apply to screen presentation; the stylesheet's print rules restore the affected page styles for printing.
+The website preference rules are contained in `media/css/jadp.css` and are scoped to screen presentation using an outer `@media screen` block. There are no separate print-restoration rules; the preference rules simply do not apply when the page is printed.
 
 The current values are:
 
