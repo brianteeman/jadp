@@ -4,7 +4,7 @@ Joomla Accessibility Display Preferences (JADP) adds a small display-preferences
 
 **JADP provides optional display adjustments. It is not an accessibility overlay, does not repair accessibility problems and does not make a website accessible or guarantee compliance with WCAG or any other accessibility standard. A well-built, accessible website is still essential.**
 
-<img width="601" height="637" alt="JADP panel" src="https://github.com/user-attachments/assets/98007c20-540c-42a2-b2ba-b0fd85c1d527" />
+<img width="438" height="608" alt="JADP UI Panel Open" src="https://github.com/user-attachments/assets/98f0cbfb-ec3b-4634-8a78-c3b2c87ea382" />
 
 
 ## What visitors can change
