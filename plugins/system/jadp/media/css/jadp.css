@@ -38,7 +38,7 @@
     background-color: #000 !important;
   }
   
-  html[data-jadp-high-contrast="true"] body *:not(.jadp-skip-link) {
+  html[data-jadp-high-contrast="true"] body *:where(:not(.jadp-skip-link)) {
     color: #fff !important;
     text-shadow: none !important;
     background-color: transparent !important;
