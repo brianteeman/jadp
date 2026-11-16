@@ -66,11 +66,13 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
         $wa = $document->getWebAssetManager();
         $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp');
 
-        // Component-template pages need the saved page preferences, but not another toolbar.
+        // Component-template pages need live preference updates, but not another toolbar.
         $wa->useStyle('plg.system.jadp')
             ->useScript('plg.system.jadp.init');
 
         if ($this->getApplication()->getInput()->getCmd('tmpl') === 'component') {
+            $wa->useScript('plg.system.jadp.engine');
+
             return;
         }
 
