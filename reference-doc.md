@@ -410,25 +410,27 @@ This stylesheet controls the activation button, toolbar panel, headings, control
 
 The toolbar is created inside a Shadow DOM. Consequently, CSS rules in the site template's normal stylesheet or `user.css` cannot directly style the toolbar contents. The JADP toolbar stylesheet itself must be replaced or customised. The trigger button's optional CSS icon stylesheet is also loaded inside the Shadow DOM when that trigger-icon option is selected.
 
-The toolbar stylesheet is registered as the Web Asset `plg.system.jadp.ui`. JADP obtains its resolved URI from the Web Asset Manager and passes that URI to the toolbar, which links the stylesheet from inside its Shadow DOM. This allows Joomla's normal media-path resolution to locate a template override while keeping the stylesheet isolated from the page's ordinary CSS.
+The toolbar stylesheet is registered as the Web Asset `plg.system.jadp.ui`. JADP obtains its resolved URI from the Web Asset Manager and passes that URI to the toolbar, which links the stylesheet from inside its Shadow DOM. Joomla's template-aware media lookup locates a replacement file by its expected path and filename. You do not need to add an asset entry to the template's `joomla.asset.json`.
 
-Add an asset with the same name and type to the active site template's `joomla.asset.json`:
-
-```json
-{
-    "name": "plg.system.jadp.ui",
-    "type": "style",
-    "uri": "plg_system_jadp/jadp-ui.css"
-}
-```
-
-Place the replacement file at:
+For an inheritable site template, place the replacement file at:
 
 ```text
 media/templates/site/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
 ```
 
-Replace `YOUR_TEMPLATE` with the active site template directory. The replacement stylesheet is loaded inside the toolbar's Shadow DOM rather than in the page's light DOM. Keep it in sync with changes to the JADP toolbar styles when updating the plugin.
+For an inheritable administrator template, use:
+
+```text
+media/templates/administrator/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
+```
+
+For a legacy template that is non-inheritable and has no parent, use:
+
+```text
+templates/YOUR_TEMPLATE/css/plg_system_jadp/jadp-ui.css
+```
+
+Replace `YOUR_TEMPLATE` with the relevant template directory. For an inheritable template with a parent, Joomla checks the active template first and then its parent. If no replacement is found, Joomla uses the stylesheet supplied by the JADP plugin. The replacement stylesheet is loaded inside the toolbar's Shadow DOM rather than in the page's light DOM. Keep it in sync with changes to the JADP toolbar styles when updating the plugin.
 
 ### 9.2 Website Preference Effects
 
