@@ -126,7 +126,7 @@ Each control must have:
 
 Icons may be used, but should not be the sole means of identifying a control.
 
-The colour preference group is labelled **Colour Mode**, with the mutually exclusive options **Normal Colour** and **Monochrome**. The group name and option names must remain distinct so assistive technologies do not announce a repeated label such as “Grayscale, Grayscale”.
+The colour preference group is labelled **Colour Mode**, with the mutually exclusive options **Normal Colour** and **Monochrome**. The group name and option names must remain distinct so assistive technologies announce the group and selected option as distinct names.
 
 ### 3.3 Control Behaviour
 
@@ -327,7 +327,7 @@ The toolbar host is appended outside `body`, as a child of `document.documentEle
 
 The implementation must avoid indiscriminate rules that unintentionally resize layout dimensions, icons, controls or other non-text UI. In particular, changing the root font size must not be assumed to be a safe way to scale website text because it also changes dimensions expressed in rem.
 
-High contrast currently uses a black body background, white text, yellow links and focus indicators, and broad rules that make most page-element backgrounds transparent and borders white. This approach remains under review because it can remove meaningful visual distinctions. The toolbar is isolated in a Shadow DOM and is not directly restyled by the page's high-contrast selectors. Grayscale is applied to the document root, so the toolbar is also shown in grayscale.
+High contrast currently uses a black body background, white text, yellow links and focus indicators, and broad rules that make most page-element backgrounds transparent and borders white. This approach remains under review because it can remove meaningful visual distinctions. The toolbar is isolated in a Shadow DOM and is not directly restyled by the page's high-contrast selectors. Monochrome is applied to the document root, so the toolbar is also shown in monochrome.
 
 The precise selectors and effects must be tested against Cassiopeia and representative third-party templates.
 
