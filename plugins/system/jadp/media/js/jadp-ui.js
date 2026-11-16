@@ -40,9 +40,9 @@
         contrast: host.dataset.contrast,
         normalContrast: host.dataset.normalContrast,
         highContrast: host.dataset.highContrast,
-        grayscale: host.dataset.grayscale,
-        normalGrayscale: host.dataset.normalGrayscale,
-        grayscaleOn: host.dataset.grayscaleOn,
+        colourMode: host.dataset.colourMode,
+        normalColour: host.dataset.normalColour,
+        monochrome: host.dataset.monochrome,
         underlineLinks: host.dataset.underlineLinks,
         normalLinkStyle: host.dataset.normalLinkStyle,
         underline: host.dataset.underline,
@@ -386,18 +386,18 @@
 
     content.appendChild(contrastGroup);
 
-    const grayscaleGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-grayscale-label' });
-    const grayscaleLegend = create('span', { id: 'jadp-grayscale-label', className: 'jadp-group-label' }, labels.grayscale);
-    const grayscaleOptions = [
-        [false, labels.normalGrayscale, 'colour'],
-        [true, labels.grayscaleOn, 'grayscale'],
+    const colourModeGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-colour-mode-label' });
+    const colourModeLegend = create('span', { id: 'jadp-colour-mode-label', className: 'jadp-group-label' }, labels.colourMode);
+    const colourModeOptions = [
+        [false, labels.normalColour, 'colour'],
+        [true, labels.colourModeOn, 'grayscale'],
     ];
-    const grayscaleButtons = new Map();
+    const colourModeButtons = new Map();
 
-    grayscaleGroup.appendChild(grayscaleLegend);
-    const grayscaleOptionsContainer = create('div', { className: 'jadp-options' });
+    colourModeGroup.appendChild(colourModeLegend);
+    const colourModeOptionsContainer = create('div', { className: 'jadp-options' });
 
-    grayscaleOptions.forEach(([value, label, iconName]) => {
+    colourModeOptions.forEach(([value, label, iconName]) => {
         const button = create('button', {
             type: 'button',
             className: 'jadp-option',
@@ -408,13 +408,13 @@
         button.appendChild(createIcon(iconName));
 
         button.addEventListener('click', () => window.JADP.set('grayscale', value));
-        grayscaleButtons.set(value, button);
-        grayscaleOptionsContainer.appendChild(button);
+        colourModeButtons.set(value, button);
+        colourModeOptionsContainer.appendChild(button);
     });
 
-    grayscaleGroup.appendChild(grayscaleOptionsContainer);
+    colourModeGroup.appendChild(colourModeOptionsContainer);
 
-    content.appendChild(grayscaleGroup);
+    content.appendChild(colourModeGroup);
 
     const underlineLinksGroup = create('div', { className: 'jadp-size-group', role: 'group', 'aria-labelledby': 'jadp-underline-links-label' });
     const underlineLinksLegend = create('span', { id: 'jadp-underline-links-label', className: 'jadp-group-label' }, labels.underlineLinks);
@@ -541,7 +541,7 @@
             button.setAttribute('aria-pressed', String(preferences.highContrast === value));
         });
 
-        grayscaleButtons.forEach((button, value) => {
+        colourModeButtons.forEach((button, value) => {
             button.setAttribute('aria-pressed', String(preferences.grayscale === value));
         });
 
