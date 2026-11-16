@@ -51,9 +51,9 @@ Provide an alternative high-contrast presentation to help visitors distinguish t
 
 The implementation must be carefully considered to avoid making content or controls unusable.
 
-### 2.6 Grayscale
+### 2.6 Colour Mode
 
-Allow visitors to remove colour from the website presentation.
+Allow visitors to choose between Normal Colour and Monochrome. Monochrome removes colour from the website presentation using a grayscale filter.
 
 ### 2.7 Underline Links
 
@@ -125,6 +125,8 @@ Each control must have:
 - An understandable method of enabling, disabling or adjusting the preference.
 
 Icons may be used, but should not be the sole means of identifying a control.
+
+The colour preference group is labelled **Colour Mode**, with the mutually exclusive options **Normal Colour** and **Monochrome**. The group name and option names must remain distinct so assistive technologies do not announce a repeated label such as “Grayscale, Grayscale”.
 
 ### 3.3 Control Behaviour
 
@@ -344,7 +346,7 @@ The original implementation milestone has been delivered. The current plugin inc
 - Client-specific activation for Site, Administrator or Both, with Site as the default.
 - Six configurable trigger-button positions, with Bottom Left as the default.
 - An isolated, responsive Shadow DOM toolbar.
-- Three text-size presets and the line-spacing, letter-spacing, word-spacing, high-contrast, grayscale and link-underlining preferences.
+- Three text-size presets and the line-spacing, letter-spacing, word-spacing, high-contrast, colour-mode and link-underlining preferences.
 - Versioned localStorage persistence, graceful storage-failure handling and cross-tab updates.
 - A dedicated footer reset button and close behaviour that preserves preferences.
 - An administrator-facing note explaining the purpose and limitations of the toolbar.
@@ -382,7 +384,7 @@ The implementation is present under `plugins/system/jadp/`.
 
 It provides the Joomla system plugin manifest and service provider, asset registration through Joomla's Web Asset Manager, a configurable activation control with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, three text-size presets, versioned localStorage persistence, cross-tab storage updates and reset behaviour. The plugin can be enabled for the Site, Administrator or Both clients; Site is the default.
 
-The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, the clients where it is enabled, configurable trigger icon options and the trigger button position.
+The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, a Colour Mode preference with Normal Colour and Monochrome options, and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, the clients where it is enabled, configurable trigger icon options and the trigger button position.
 
 The current text-size rule adjusts the body base font size and deliberately does not change the document root font size or rem-based layout dimensions.
 
@@ -406,7 +408,7 @@ All CSS relating to the toolbar interface is contained in:
 
 This stylesheet controls the activation button, toolbar panel, headings, controls, icons and responsive layout. Site owners who want to change the appearance of the JADP toolbar should customise this stylesheet.
 
-**Do not edit `jadp.css`.** That file contains the CSS used to apply the visitor's display preferences to the website, including text size, spacing, contrast, grayscale and link underlining. Changing it can alter the behaviour of the preferences rather than simply changing the appearance of the toolbar.
+**Do not edit `jadp.css`.** That file contains the CSS used to apply the visitor's display preferences to the website, including text size, spacing, contrast, monochrome and link underlining. Changing it can alter the behaviour of the preferences rather than simply changing the appearance of the toolbar.
 
 The toolbar is created inside a Shadow DOM. Consequently, CSS rules in the site template's normal stylesheet or `user.css` cannot directly style the toolbar contents. The JADP toolbar stylesheet itself must be replaced or customised. The trigger button's optional CSS icon stylesheet is also loaded inside the Shadow DOM when that trigger-icon option is selected.
 
@@ -451,7 +453,7 @@ The current values are:
 
 The spacing rules apply to selected text elements rather than every element on the page. Text in other elements may not be affected. The text-size preference changes the body's base font size and does not change the root font size, so content with explicitly assigned font sizes may not scale in the same way.
 
-High contrast currently applies white text, a black body background, yellow links and focus indicators, and broad background and border overrides. This remains an area for further review. Grayscale applies a filter to the document root, which also affects the toolbar. Underline links applies underlining to links in the page body.
+High contrast currently applies white text, a black body background, yellow links and focus indicators, and broad background and border overrides. This remains an area for further review. Monochrome applies a grayscale filter to the document root, which also affects the toolbar. Underline links applies underlining to links in the page body.
 
 ### 9.3 Keyboard and Screen Reader Discovery
 
