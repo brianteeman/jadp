@@ -20,7 +20,7 @@ The toolbar provides these controls:
 | Letter spacing | Normal, Increased, Maximum |
 | Word spacing | Normal, Increased, Maximum |
 | Contrast | Normal contrast, High contrast |
-| Colour | Normal colour, Grayscale |
+| Colour Mode | Normal Colour, Monochrome |
 | Links | Normal link style, Underline links |
 
 Changes take effect immediately. Visitors can combine preferences, close the toolbar without losing their choices, and use **Reset Preferences** to restore all settings to their defaults.
@@ -130,7 +130,7 @@ This stylesheet controls how the selected preferences affect the website itself:
 - Letter spacing changes the spacing between characters in selected text elements.
 - Word spacing changes the spacing between words in selected text elements.
 - High contrast uses a black page background, white text and yellow links, with adjustments to borders and form controls.
-- Grayscale applies a grayscale filter to the page body.
+- Monochrome removes colour from the page using a grayscale filter applied to the document root.
 - Underline links adds underlining to links.
 
 This file is registered through Joomla's Web Asset Manager as the `plg.system.jadp` stylesheet. It is the file to review if you want to change the actual effects of a preference, rather than the appearance of the toolbar.
