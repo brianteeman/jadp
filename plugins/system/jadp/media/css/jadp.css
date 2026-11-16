@@ -62,11 +62,6 @@
     border: 1px solid #fff !important;
   }
   
-  html[data-jadp-high-contrast="true"] body :is(input, textarea, select, button):focus-visible {
-    outline: 3px solid #ff0 !important;
-    outline-offset: 2px;
-  }
-
   html[data-jadp-high-contrast="true"] body :focus-visible {
     outline: 3px solid #ff0 !important;
     outline-offset: 2px !important;
@@ -90,19 +85,5 @@
   html[data-jadp-underline-links="true"] body a {
     text-decoration: underline !important;
   }
-  
-  
-  /* Display preferences affect the screen, not printed documents. */
-  @media print {
-    html[data-jadp-high-contrast="true"] body,
-    html[data-jadp-high-contrast="true"] body *,
-    html[data-jadp-grayscale="true"] body {
-      color: initial !important;
-      background: initial !important;
-      border-color: initial !important;
-      box-shadow: initial !important;
-      filter: none !important;
-      text-shadow: initial !important;
-    }
-  }
+
 }
