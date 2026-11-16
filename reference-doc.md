@@ -14,7 +14,7 @@ JADP provides user preference controls only. It does not make a website accessib
 
 It cannot compensate for missing alternative text, incorrect HTML semantics, inaccessible forms, keyboard navigation problems or other underlying accessibility deficiencies.
 
-This distinction should be communicated clearly within the toolbar itself and in the associated Joomla documentation.
+This distinction should be communicated clearly in the associated Joomla documentation and in the plugin configuration shown to site administrators. The current toolbar does not display this disclaimer.
 
 The guiding principles are:
 
@@ -380,7 +380,7 @@ The initial release must not claim that enabling JADP makes a website accessible
 
 The implementation is present under `plugins/system/jadp/`.
 
-It provides the Joomla system plugin manifest and service provider, asset registration through Joomla's Web Asset Manager, a configurable activation control with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, three text-size presets, versioned localStorage persistence, cross-tab storage updates, reset behaviour and the required disclaimer. The plugin can be enabled for the Site, Administrator or Both clients; Site is the default.
+It provides the Joomla system plugin manifest and service provider, asset registration through Joomla's Web Asset Manager, a configurable activation control with six available positions and bottom-left as the default, an isolated Shadow DOM toolbar, three text-size presets, versioned localStorage persistence, cross-tab storage updates and reset behaviour. The plugin can be enabled for the Site, Administrator or Both clients; Site is the default.
 
 The toolbar currently provides text size, line spacing, letter spacing, word spacing, high contrast, grayscale and link underlining controls. The administrator plugin configuration includes an explanatory note about the purpose and limitations of the toolbar, the clients where it is enabled, configurable trigger icon options and the trigger button position.
 
