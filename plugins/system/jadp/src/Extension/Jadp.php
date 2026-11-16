@@ -139,7 +139,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Check that the plugin is enabled for the current HTML client.
+     * Check that the plugin is enabled for the current client.
      *
      * @return bool
      *
@@ -150,11 +150,8 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
         $enabledFor = $this->params->get('enabled_clients', 'site');
         $application = $this->getApplication();
 
-        return $application->getDocument() instanceof HtmlDocument
-            && (
-                $enabledFor === 'both'
-                || ($enabledFor === 'site' && $application->isClient('site'))
-                || ($enabledFor === 'administrator' && $application->isClient('administrator'))
-            );
+        return $enabledFor === 'both'
+            || ($enabledFor === 'site' && $application->isClient('site'))
+            || ($enabledFor === 'administrator' && $application->isClient('administrator'));
     }
 }
