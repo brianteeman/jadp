@@ -8,31 +8,13 @@
 
     const STORAGE_KEY = 'joomla.jadp.preferences';
 
-    const DEFAULTS = Object.freeze({
-        textSize: 'normal',
-        lineSpacing: 'normal',
-        letterSpacing: 'normal',
-        wordSpacing: 'normal',
-        highContrast: false,
-        grayscale: false,
-        underlineLinks: false,
-    });
-
-    const isValidPreferences = (preferences) => preferences
-        && typeof preferences === 'object'
-        && ['normal', 'large', 'extra-large'].includes(preferences.textSize)
-        && ['normal', 'increased', 'maximum'].includes(preferences.lineSpacing)
-        && ['normal', 'increased', 'maximum'].includes(preferences.letterSpacing)
-        && ['normal', 'increased', 'maximum'].includes(preferences.wordSpacing)
-        && typeof preferences.highContrast === 'boolean'
-        && typeof preferences.grayscale === 'boolean'
-        && typeof preferences.underlineLinks === 'boolean';
+    const { DEFAULTS, isValidPreferences, isValidStoredPreferences } = window.JADPPreferences;
 
     const readPreferences = () => {
         try {
             const stored = JSON.parse(window.localStorage.getItem(STORAGE_KEY));
 
-            if (stored && stored.version === 1 && isValidPreferences(stored.preferences)) {
+            if (isValidStoredPreferences(stored)) {
                 return { ...DEFAULTS, ...stored.preferences };
             }
         } catch (error) {
