@@ -70,7 +70,7 @@ final class Jadp extends CMSPlugin implements SubscriberInterface
         $wa->useStyle('plg.system.jadp')
             ->useScript('plg.system.jadp.init');
 
-        if ($this->getApplication()->input->getCmd('tmpl') === 'component') {
+        if ($this->getApplication()->getInput()->getCmd('tmpl') === 'component') {
             return;
         }
 
