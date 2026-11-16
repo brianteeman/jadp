@@ -390,7 +390,7 @@
     const colourModeLegend = create('span', { id: 'jadp-colour-mode-label', className: 'jadp-group-label' }, labels.colourMode);
     const colourModeOptions = [
         [false, labels.normalColour, 'colour'],
-        [true, labels.colourModeOn, 'grayscale'],
+        [true, labels.monochrome, 'grayscale'],
     ];
     const colourModeButtons = new Map();
 
