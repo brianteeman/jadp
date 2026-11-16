@@ -8,34 +8,7 @@
     'use strict';
 
     const STORAGE_KEY = 'joomla.jadp.preferences';
-    const DEFAULTS = {
-        textSize: 'normal',
-        lineSpacing: 'normal',
-        letterSpacing: 'normal',
-        wordSpacing: 'normal',
-        highContrast: false,
-        grayscale: false,
-        underlineLinks: false,
-    };
-
-    const isValidPreferences = (value) => {
-        if (!value || typeof value !== 'object') {
-            return false;
-        }
-
-        const preferences = value.preferences;
-
-        return value.version === 1
-            && preferences
-            && typeof preferences === 'object'
-            && ['normal', 'large', 'extra-large'].includes(preferences.textSize)
-            && ['normal', 'increased', 'maximum'].includes(preferences.lineSpacing)
-            && ['normal', 'increased', 'maximum'].includes(preferences.letterSpacing)
-            && ['normal', 'increased', 'maximum'].includes(preferences.wordSpacing)
-            && typeof preferences.highContrast === 'boolean'
-            && typeof preferences.grayscale === 'boolean'
-            && typeof preferences.underlineLinks === 'boolean';
-    };
+    const { DEFAULTS, isValidStoredPreferences } = window.JADPPreferences;
 
     let saved = null;
 
@@ -45,7 +18,7 @@
         // Storage may be unavailable or contain invalid JSON. Defaults are safe.
     }
 
-    const preferences = isValidPreferences(saved) ? saved.preferences : DEFAULTS;
+    const preferences = isValidStoredPreferences(saved) ? { ...DEFAULTS, ...saved.preferences } : DEFAULTS;
     const root = document.documentElement;
 
     root.dataset.jadpTextSize = preferences.textSize;
