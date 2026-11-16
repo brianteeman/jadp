@@ -16,9 +16,20 @@
             "uri": "plg_system_jadp/jadp-skip.css"
         },
         {
+            "name": "plg.system.jadp.preferences",
+            "type": "script",
+            "uri": "plg_system_jadp/jadp-preferences.js",
+            "attributes": {
+                "defer": false
+            }
+        },
+        {
             "name": "plg.system.jadp.init",
             "type": "script",
             "uri": "plg_system_jadp/jadp-init.js",
+            "dependencies": [
+                "plg.system.jadp.preferences"
+            ],
             "attributes": {
                 "defer": false
             }
@@ -27,6 +38,9 @@
             "name": "plg.system.jadp.engine",
             "type": "script",
             "uri": "plg_system_jadp/jadp.js",
+            "dependencies": [
+                "plg.system.jadp.preferences"
+            ],
             "attributes": {
                 "defer": true
             }
