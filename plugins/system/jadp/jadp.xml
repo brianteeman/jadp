@@ -70,6 +70,7 @@
 					type="url"
 					filter="url"
 					validate="url"
+					message="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_MESSAGE"
 					schemes="https"
 					relative="true"
 					label="PLG_SYSTEM_JADP_TRIGGER_ICON_CSS_LABEL"
