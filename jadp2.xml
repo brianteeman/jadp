@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+	<name>PLG_SYSTEM_JADP2</name>
+	<author>Brian Teeman</author>
+	<creationDate>November 2026</creationDate>
+	<copyright>(C) 2026 Brian Teeman</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0.0</version>
+	<description>PLG_SYSTEM_JADP2_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Plugin\System\Jadp2</namespace>
+	<files>
+		<folder plugin="jadp2">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_system_jadp2.ini</language>
+		<language tag="en-GB">language/en-GB/plg_system_jadp2.sys.ini</language>
+	</languages>
+	<media destination="plg_system_jadp2" folder="media">
+		<filename>joomla.asset.json</filename>
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
+	<config>
+		<fields name="params">
+			<fieldset name="per_user" label="PLG_SYSTEM_JADP2_FIELDSET_PER_USER">
+				<field name="per_user_enabled_clients" type="list" label="PLG_SYSTEM_JADP2_ENABLED_LABEL" description="PLG_SYSTEM_JADP2_PER_USER_ENABLED_DESC" default="none" validate="options">
+					<option value="none">PLG_SYSTEM_JADP2_ENABLED_NONE</option>
+					<option value="site">PLG_SYSTEM_JADP2_ENABLED_SITE</option>
+					<option value="administrator">PLG_SYSTEM_JADP2_ENABLED_ADMINISTRATOR</option>
+					<option value="both">PLG_SYSTEM_JADP2_ENABLED_BOTH</option>
+				</field>
+				<field name="accessibility_notice" type="note" label="PLG_SYSTEM_JADP2_ACCESSIBILITY_NOTICE_LABEL" description="PLG_SYSTEM_JADP2_ACCESSIBILITY_NOTICE_DESC" class="alert alert-info w-100"/>
+				<field name="trigger_position" type="list" label="PLG_SYSTEM_JADP2_TRIGGER_POSITION_LABEL" description="PLG_SYSTEM_JADP2_TRIGGER_POSITION_DESC" default="bottom-left" validate="options">
+					<option value="top-left">PLG_SYSTEM_JADP2_POSITION_TOP_LEFT</option>
+					<option value="top-right">PLG_SYSTEM_JADP2_POSITION_TOP_RIGHT</option>
+					<option value="middle-left">PLG_SYSTEM_JADP2_POSITION_MIDDLE_LEFT</option>
+					<option value="middle-right">PLG_SYSTEM_JADP2_POSITION_MIDDLE_RIGHT</option>
+					<option value="bottom-left">PLG_SYSTEM_JADP2_POSITION_BOTTOM_LEFT</option>
+					<option value="bottom-right">PLG_SYSTEM_JADP2_POSITION_BOTTOM_RIGHT</option>
+				</field>
+				<field name="trigger_icon_type" type="list" label="PLG_SYSTEM_JADP2_TRIGGER_ICON_TYPE_LABEL" description="PLG_SYSTEM_JADP2_TRIGGER_ICON_TYPE_DESC" default="default" validate="options">
+					<option value="default">PLG_SYSTEM_JADP2_TRIGGER_ICON_DEFAULT</option>
+					<option value="class">PLG_SYSTEM_JADP2_TRIGGER_ICON_CLASS</option>
+					<option value="image">PLG_SYSTEM_JADP2_TRIGGER_ICON_IMAGE</option>
+				</field>
+				<field name="trigger_icon_class" type="text" label="PLG_SYSTEM_JADP2_TRIGGER_ICON_CLASS_LABEL" description="PLG_SYSTEM_JADP2_TRIGGER_ICON_CLASS_DESC" showon="trigger_icon_type:class"/>
+				<field name="trigger_icon_css" type="url" filter="url" validate="url" message="PLG_SYSTEM_JADP2_TRIGGER_ICON_CSS_MESSAGE" schemes="https" relative="true" label="PLG_SYSTEM_JADP2_TRIGGER_ICON_CSS_LABEL" description="PLG_SYSTEM_JADP2_TRIGGER_ICON_CSS_DESC" showon="trigger_icon_type:class"/>
+				<field name="trigger_icon_image" type="media" label="PLG_SYSTEM_JADP2_TRIGGER_ICON_IMAGE_LABEL" description="PLG_SYSTEM_JADP2_TRIGGER_ICON_IMAGE_DESC" directory="images" preview="true" showon="trigger_icon_type:image"/>
+			</fieldset>
+			<fieldset name="per_site" label="PLG_SYSTEM_JADP2_FIELDSET_PER_SITE">
+				<field name="per_site_enabled_clients" type="list" label="PLG_SYSTEM_JADP2_ENABLED_LABEL" description="PLG_SYSTEM_JADP2_PER_SITE_ENABLED_DESC" default="administrator" validate="options">
+					<option value="none">PLG_SYSTEM_JADP2_ENABLED_NONE</option>
+					<option value="site">PLG_SYSTEM_JADP2_ENABLED_SITE</option>
+					<option value="administrator">PLG_SYSTEM_JADP2_ENABLED_ADMINISTRATOR</option>
+					<option value="both">PLG_SYSTEM_JADP2_ENABLED_BOTH</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
