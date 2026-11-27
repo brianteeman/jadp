@@ -123,7 +123,7 @@ final class Jadp2 extends CMSPlugin implements SubscriberInterface
 
         if ($perSiteEnabled) {
             $this->loadLanguage();
-            Text::script('PLG_SYSTEM_JADP2_EXTERNAL_LINK_NEW_WINDOW');
+            Text::script('PLG_SYSTEM_EXTERNALLINK_NEW_WINDOW');
 
             $wa->useScript('plg.system.jadp2.externallink')
                 ->useStyle('plg.system.jadp2.externallink');
