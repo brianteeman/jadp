@@ -1,4 +1,11 @@
 /**
+ * @package     Joomla.Plugin
+ * @subpackage  System.jadp
+ * @copyright   (C) 2026 Open Source Matters, Inc. <https://www.joomla.org>
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+/**
  * JADP early preference initialisation.
  *
  * This file is intentionally small and loaded synchronously in the document head
