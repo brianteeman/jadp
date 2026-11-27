@@ -100,12 +100,11 @@
 					showon="trigger_icon_type:image"
 				/>
 			</fieldset>
-			<fieldset name="per_site" label="PLG_SYSTEM_JADP_FIELDSET_PER_SITE">
+			<fieldset name="external_link" label="PLG_SYSTEM_JADP_EXTERNAL_LINK_FIELDSET">
 				<field
-					name="per_site_enabled_clients"
+					name="external_link_enabled_clients"
 					type="list"
-					label="PLG_SYSTEM_JADP_ENABLED_LABEL"
-					description="PLG_SYSTEM_JADP_PER_SITE_ENABLED_DESC"
+					label="PLG_SYSTEM_JADP_EXTERNAL_LINK"
 					default="administrator"
 					validate="options"
 					>
