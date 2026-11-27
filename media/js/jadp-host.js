@@ -11,7 +11,7 @@
     return;
   }
 
-  const options = Joomla.getOptions('plg_system_jadp');
+  const options = Joomla.getOptions('plg_system_jadp2');
 
   if (!options || !options.css || !options.labels) {
     return;
