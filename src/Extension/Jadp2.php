@@ -2,13 +2,13 @@
 
 /**
  * @package     Joomla.Plugin
- * @subpackage  System.Jadp2
+ * @subpackage  System.JADP
  *
  * @copyright   (C) 2026 Brian Teeman
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Plugin\System\Jadp2\Extension;
+namespace Joomla\Plugin\System\JADP\Extension;
 
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Event\Application\BeforeCompileHeadEvent;
@@ -27,7 +27,7 @@ use Joomla\Event\SubscriberInterface;
  *
  * @since  __DEPLOY_VERSION__
  */
-final class Jadp2 extends CMSPlugin implements SubscriberInterface
+final class JADP extends CMSPlugin implements SubscriberInterface
 {
     /**
      * Returns the events this plugin subscribes to.
@@ -69,19 +69,19 @@ final class Jadp2 extends CMSPlugin implements SubscriberInterface
         }
 
         $wa = $document->getWebAssetManager();
-        $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp2');
+        $wa->getRegistry()->addExtensionRegistryFile('plg_system_jadp');
 
         if ($perUserEnabled) {
             $this->loadLanguage();
 
-            $wa->useStyle('plg.system.jadp2')
-                ->useScript('plg.system.jadp2.init');
+            $wa->useStyle('plg.system.jadp')
+                ->useScript('plg.system.jadp.init');
 
             if ($application->getInput()->getCmd('tmpl') === 'component') {
-                $wa->useScript('plg.system.jadp2.engine');
+                $wa->useScript('plg.system.jadp.engine');
             } else {
-                $document->addScriptOptions('plg_system_jadp2', [
-                    'css' => $wa->getAsset('style', 'plg.system.jadp2.ui')->getUri() . '?' . $document->getMediaVersion(),
+                $document->addScriptOptions('plg_system_jadp', [
+                    'css' => $wa->getAsset('style', 'plg.system.jadp.ui')->getUri() . '?' . $document->getMediaVersion(),
                     'triggerPosition' => $this->params->get('trigger_position', 'bottom-left'),
                     'triggerIcon' => [
                         'type' => $this->params->get('trigger_icon_type', 'default'),
@@ -90,43 +90,43 @@ final class Jadp2 extends CMSPlugin implements SubscriberInterface
                         'image' => $this->getTriggerIconImage(),
                     ],
                     'labels' => [
-                        'open' => Text::_('PLG_SYSTEM_JADP2_OPEN'),
-                        'skipOpen' => Text::_('PLG_SYSTEM_JADP2_SKIP_OPEN'),
-                        'close' => Text::_('PLG_SYSTEM_JADP2_CLOSE'),
-                        'title' => Text::_('PLG_SYSTEM_JADP2_TITLE'),
-                        'textSize' => Text::_('PLG_SYSTEM_JADP2_TEXT_SIZE'),
-                        'lineSpacing' => Text::_('PLG_SYSTEM_JADP2_LINE_SPACING'),
-                        'letterSpacing' => Text::_('PLG_SYSTEM_JADP2_LETTER_SPACING'),
-                        'wordSpacing' => Text::_('PLG_SYSTEM_JADP2_WORD_SPACING'),
-                        'contrast' => Text::_('PLG_SYSTEM_JADP2_CONTRAST'),
-                        'normalContrast' => Text::_('PLG_SYSTEM_JADP2_NORMAL_CONTRAST'),
-                        'highContrast' => Text::_('PLG_SYSTEM_JADP2_HIGH_CONTRAST'),
-                        'colourMode' => Text::_('PLG_SYSTEM_JADP2_COLOUR_MODE'),
-                        'normalColour' => Text::_('PLG_SYSTEM_JADP2_NORMAL_COLOUR'),
-                        'monochrome' => Text::_('PLG_SYSTEM_JADP2_MONOCHROME'),
-                        'underlineLinks' => Text::_('PLG_SYSTEM_JADP2_UNDERLINE_LINKS'),
-                        'normalLinkStyle' => Text::_('PLG_SYSTEM_JADP2_NORMAL_LINK_STYLE'),
-                        'underline' => Text::_('PLG_SYSTEM_JADP2_UNDERLINE'),
-                        'normal' => Text::_('PLG_SYSTEM_JADP2_NORMAL'),
-                        'increased' => Text::_('PLG_SYSTEM_JADP2_INCREASED'),
-                        'maximum' => Text::_('PLG_SYSTEM_JADP2_MAXIMUM'),
-                        'large' => Text::_('PLG_SYSTEM_JADP2_LARGE'),
-                        'extraLarge' => Text::_('PLG_SYSTEM_JADP2_EXTRA_LARGE'),
-                        'reset' => Text::_('PLG_SYSTEM_JADP2_RESET'),
+                        'open' => Text::_('PLG_SYSTEM_JADP_OPEN'),
+                        'skipOpen' => Text::_('PLG_SYSTEM_JADP_SKIP_OPEN'),
+                        'close' => Text::_('PLG_SYSTEM_JADP_CLOSE'),
+                        'title' => Text::_('PLG_SYSTEM_JADP_TITLE'),
+                        'textSize' => Text::_('PLG_SYSTEM_JADP_TEXT_SIZE'),
+                        'lineSpacing' => Text::_('PLG_SYSTEM_JADP_LINE_SPACING'),
+                        'letterSpacing' => Text::_('PLG_SYSTEM_JADP_LETTER_SPACING'),
+                        'wordSpacing' => Text::_('PLG_SYSTEM_JADP_WORD_SPACING'),
+                        'contrast' => Text::_('PLG_SYSTEM_JADP_CONTRAST'),
+                        'normalContrast' => Text::_('PLG_SYSTEM_JADP_NORMAL_CONTRAST'),
+                        'highContrast' => Text::_('PLG_SYSTEM_JADP_HIGH_CONTRAST'),
+                        'colourMode' => Text::_('PLG_SYSTEM_JADP_COLOUR_MODE'),
+                        'normalColour' => Text::_('PLG_SYSTEM_JADP_NORMAL_COLOUR'),
+                        'monochrome' => Text::_('PLG_SYSTEM_JADP_MONOCHROME'),
+                        'underlineLinks' => Text::_('PLG_SYSTEM_JADP_UNDERLINE_LINKS'),
+                        'normalLinkStyle' => Text::_('PLG_SYSTEM_JADP_NORMAL_LINK_STYLE'),
+                        'underline' => Text::_('PLG_SYSTEM_JADP_UNDERLINE'),
+                        'normal' => Text::_('PLG_SYSTEM_JADP_NORMAL'),
+                        'increased' => Text::_('PLG_SYSTEM_JADP_INCREASED'),
+                        'maximum' => Text::_('PLG_SYSTEM_JADP_MAXIMUM'),
+                        'large' => Text::_('PLG_SYSTEM_JADP_LARGE'),
+                        'extraLarge' => Text::_('PLG_SYSTEM_JADP_EXTRA_LARGE'),
+                        'reset' => Text::_('PLG_SYSTEM_JADP_RESET'),
                     ],
                 ]);
 
-                $wa->useStyle('plg.system.jadp2.skip')
-                    ->useScript('plg.system.jadp2.ui');
+                $wa->useStyle('plg.system.jadp.skip')
+                    ->useScript('plg.system.jadp.ui');
             }
         }
 
         if ($perSiteEnabled) {
             $this->loadLanguage();
-            Text::script('PLG_SYSTEM_EXTERNALLINK_NEW_WINDOW');
+            Text::script('PLG_SYSTEM_JADP_EXTERNAL_LINK_NEW_WINDOW');
 
-            $wa->useScript('plg.system.jadp2.externallink')
-                ->useStyle('plg.system.jadp2.externallink');
+            $wa->useScript('plg.system.jadp.externallink')
+                ->useStyle('plg.system.jadp.externallink');
         }
     }
 

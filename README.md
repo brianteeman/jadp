@@ -1,6 +1,6 @@
-# JADP2 — Display Preferences and External Link
+# JADP — Display Preferences and External Link
 
-JADP2 combines two independent system-plugin features: visitor display preferences and an accessible indicator for links that open in a new tab or window.
+JADP combines two independent system-plugin features: visitor display preferences and an accessible indicator for links that open in a new tab or window.
 
 **JADP provides optional display adjustments. It is not an accessibility overlay, does not repair accessibility problems and does not make a website accessible or guarantee compliance with WCAG or any other accessibility standard. A well-built, accessible website is still essential.**
 
@@ -41,9 +41,9 @@ Preferences are saved in the visitor's browser and are reapplied on later pages 
 
 Joomla 5.4 or later (including Joomla 6). The plugin uses Joomla APIs introduced in Joomla 5.4.
 
-## Installing and enabling JADP2
+## Installing and enabling JADP
 
-Install the JADP2 package using Joomla's normal extension installer. When replacing the two original plugins, disable the old **System - JADP** and **System - External Link** plugins to avoid loading the same features twice. Then open **System → Manage → Plugins**, find **System - JADP2: Display Preferences and External Link**, and enable it. The new plugin has a new element name, so review its Per User and Per Site settings after installation; the previous plugin parameter selections are not automatically migrated. Existing browser-stored JADP preferences are retained.
+Install the JADP package using Joomla's normal extension installer. When replacing the two original plugins, disable the old **System - JADP** and **System - External Link** plugins to avoid loading the same features twice. Then open **System → Manage → Plugins**, find **System - JADP: Display Preferences and External Link**, and enable it. The new plugin has a new element name, so review its Per User and Per Site settings after installation; the previous plugin parameter selections are not automatically migrated. Existing browser-stored JADP preferences are retained.
 
 The plugin configuration includes an important notice explaining that JADP provides display preferences only. Enabling it does not make the site accessible.
 
@@ -100,7 +100,7 @@ JADP uses separate stylesheets for the toolbar, the visitor's page preferences a
 The installed files are located in:
 
 ```text
-media/plg_system_jadp22/css/
+media/plg_system_jadp2/css/
 ├── jadp-ui.css
 ├── jadp.css
 └── jadp-skip.css
@@ -116,7 +116,7 @@ This stylesheet controls the floating button and the toolbar panel, including it
 
 The toolbar is rendered inside a Shadow DOM. This isolates it from the site's template CSS, so adding rules to the template's `user.css` or other ordinary stylesheets will not directly change the toolbar's contents.
 
-The toolbar stylesheet is registered with Joomla's Web Asset Manager as `plg.system.jadp2.ui`. Joomla resolves the stylesheet using its template-aware media lookup. You do not need to add an entry to the template's `joomla.asset.json`; the replacement file is found by its expected path and filename.
+The toolbar stylesheet is registered with Joomla's Web Asset Manager as `plg.system.jadp.ui`. Joomla resolves the stylesheet using its template-aware media lookup. You do not need to add an entry to the template's `joomla.asset.json`; the replacement file is found by its expected path and filename.
 
 For an inheritable site template, place your replacement stylesheet at:
 

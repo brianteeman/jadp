@@ -1,54 +1,54 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
-  "name": "plg_system_jadp2",
+  "name": "plg_system_jadp",
   "version": "0.1.0",
-  "description": "JADP2: Display Preferences and External Link",
+  "description": "JADP: Display Preferences and External Link",
   "license": "GPL-2.0-or-later",
   "assets": [
     {
-      "name": "plg.system.jadp2",
+      "name": "plg.system.jadp",
       "type": "style",
-      "uri": "plg_system_jadp2/jadp.css"
+      "uri": "plg_system_jadp/jadp.css"
     },
     {
-      "name": "plg.system.jadp2.skip",
+      "name": "plg.system.jadp.skip",
       "type": "style",
-      "uri": "plg_system_jadp2/jadp-skip.css"
+      "uri": "plg_system_jadp/jadp-skip.css"
     },
     {
-      "name": "plg.system.jadp2.preferences",
+      "name": "plg.system.jadp.preferences",
       "type": "script",
-      "uri": "plg_system_jadp2/jadp-preferences.js",
+      "uri": "plg_system_jadp/jadp-preferences.js",
       "attributes": {
         "defer": false
       }
     },
     {
-      "name": "plg.system.jadp2.init",
+      "name": "plg.system.jadp.init",
       "type": "script",
-      "uri": "plg_system_jadp2/jadp-init.js",
+      "uri": "plg_system_jadp/jadp-init.js",
       "dependencies": [
-        "plg.system.jadp2.preferences"
+        "plg.system.jadp.preferences"
       ],
       "attributes": {
         "defer": false
       }
     },
     {
-      "name": "plg.system.jadp2.engine",
+      "name": "plg.system.jadp.engine",
       "type": "script",
-      "uri": "plg_system_jadp2/jadp.js",
+      "uri": "plg_system_jadp/jadp.js",
       "dependencies": [
-        "plg.system.jadp2.preferences"
+        "plg.system.jadp.preferences"
       ],
       "attributes": {
         "defer": true
       }
     },
     {
-      "name": "plg.system.jadp2.host",
+      "name": "plg.system.jadp.host",
       "type": "script",
-      "uri": "plg_system_jadp2/jadp-host.js",
+      "uri": "plg_system_jadp/jadp-host.js",
       "dependencies": [
         "core"
       ],
@@ -57,26 +57,26 @@
       }
     },
     {
-      "name": "plg.system.jadp2.ui",
+      "name": "plg.system.jadp.ui",
       "type": "script",
-      "uri": "plg_system_jadp2/jadp-ui.js",
+      "uri": "plg_system_jadp/jadp-ui.js",
       "dependencies": [
-        "plg.system.jadp2.engine",
-        "plg.system.jadp2.host"
+        "plg.system.jadp.engine",
+        "plg.system.jadp.host"
       ],
       "attributes": {
         "defer": true
       }
     },
     {
-      "name": "plg.system.jadp2.ui",
+      "name": "plg.system.jadp.ui",
       "type": "style",
-      "uri": "plg_system_jadp2/jadp-ui.css"
+      "uri": "plg_system_jadp/jadp-ui.css"
     },
     {
-      "name": "plg.system.jadp2.externallink",
+      "name": "plg.system.jadp.externallink",
       "type": "script",
-      "uri": "plg_system_jadp2/jadp-externallink.js",
+      "uri": "plg_system_jadp/jadp-externallink.js",
       "dependencies": [
         "core"
       ],
@@ -85,9 +85,9 @@
       }
     },
     {
-      "name": "plg.system.jadp2.externallink",
+      "name": "plg.system.jadp.externallink",
       "type": "style",
-      "uri": "plg_system_jadp2/jadp-externallink.css"
+      "uri": "plg_system_jadp/jadp-externallink.css"
     }
   ]
 }

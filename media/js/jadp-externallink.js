@@ -14,7 +14,7 @@
     const noBreakClass = 'plg-system-externallink-nobreak';
     const iconClass = 'plg-system-externallink-icon';
     const hiddenClass = 'visually-hidden';
-    const messageKey = 'PLG_SYSTEM_EXTERNALLINK_NEW_WINDOW';
+    const messageKey = 'PLG_SYSTEM_JADP_EXTERNAL_LINK_NEW_WINDOW';
     const svgNamespace = 'http://www.w3.org/2000/svg';
 
     const makeIcon = () => {
