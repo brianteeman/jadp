@@ -76,7 +76,7 @@
     {
       "name": "plg.system.jadp2.externallink",
       "type": "script",
-      "uri": "plg_system_jadp2/externallink.js",
+      "uri": "plg_system_jadp2/jadp-externallink.js",
       "dependencies": [
         "core"
       ],
@@ -87,7 +87,7 @@
     {
       "name": "plg.system.jadp2.externallink",
       "type": "style",
-      "uri": "plg_system_jadp2/externallink.css"
+      "uri": "plg_system_jadp2/jadp-externallink.css"
     }
   ]
 }
