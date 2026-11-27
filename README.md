@@ -43,7 +43,7 @@ Joomla 5.4 or later (including Joomla 6). The plugin uses Joomla APIs introduced
 
 ## Installing and enabling JADP2
 
-Install the JADP package using Joomla's normal extension installer. Then open **System → Manage → Plugins**, find **System - JADP2: Display Preferences and External Link**, and enable it.
+Install the JADP2 package using Joomla's normal extension installer. When replacing the two original plugins, disable the old **System - JADP** and **System - External Link** plugins to avoid loading the same features twice. Then open **System → Manage → Plugins**, find **System - JADP2: Display Preferences and External Link**, and enable it. The new plugin has a new element name, so review its Per User and Per Site settings after installation; the previous plugin parameter selections are not automatically migrated. Existing browser-stored JADP preferences are retained.
 
 The plugin configuration includes an important notice explaining that JADP provides display preferences only. Enabling it does not make the site accessible.
 
