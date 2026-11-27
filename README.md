@@ -1,13 +1,23 @@
-# Joomla Accessibility Display Preferences (JADP)
+# JADP2 — Display Preferences and External Link
 
-Joomla Accessibility Display Preferences (JADP) adds a small display-preferences toolbar to a Joomla website. It lets visitors adjust how page content is presented to suit their reading preferences.
+JADP2 combines two independent system-plugin features: visitor display preferences and an accessible indicator for links that open in a new tab or window.
 
 **JADP provides optional display adjustments. It is not an accessibility overlay, does not repair accessibility problems and does not make a website accessible or guarantee compliance with WCAG or any other accessibility standard. A well-built, accessible website is still essential.**
 
 <img width="438" height="608" alt="JADP UI Panel Open" src="https://github.com/user-attachments/assets/98f0cbfb-ec3b-4634-8a78-c3b2c87ea382" />
 
 
-## What visitors can change
+## Per User Settings — Display Preferences
+
+The Per User Settings group controls the visitor display-preferences toolbar. Its default is **None**, so the toolbar is not loaded on either the site or administrator until enabled. The existing JADP controls, trigger positions, icon configuration, browser-local preference storage and accessibility disclaimer are retained.
+
+## Per Site Settings — External Link
+
+The Per Site Settings group controls the accessible external-link indicator. Its default is **Administrator (Backend)**. It adds an inline external-window icon and screen-reader-only announcement to links with `target="_blank"`. To exclude a link, add the `no-external-link-icon` class. The feature also observes dynamically inserted content and avoids adding duplicate indicators.
+
+Both groups can independently be set to None, Site, Administrator or Both. Changing one group does not enable or disable the other.
+
+## Display-preference controls
 
 Visitors open the toolbar using the floating display-preferences button. Keyboard users can also reach it using the **Open display preferences** link at the beginning of the page; the link becomes visible when it receives keyboard focus.
 
@@ -31,21 +41,26 @@ Preferences are saved in the visitor's browser and are reapplied on later pages 
 
 Joomla 5.4 or later (including Joomla 6). The plugin uses Joomla APIs introduced in Joomla 5.4.
 
-## Installing and enabling JADP
+## Installing and enabling JADP2
 
-Install the JADP package using Joomla's normal extension installer. Then open **System → Manage → Plugins**, find **System - JADP**, and enable it.
+Install the JADP package using Joomla's normal extension installer. Then open **System → Manage → Plugins**, find **System - JADP2: Display Preferences and External Link**, and enable it.
 
 The plugin configuration includes an important notice explaining that JADP provides display preferences only. Enabling it does not make the site accessible.
 
-### Where the toolbar is enabled
+### Per User Settings
 
-The **Enabled** setting controls which Joomla application displays the toolbar:
+The **Enabled** setting controls which Joomla application loads the display-preferences toolbar:
 
-- **Site (Frontend)** – display it on the public website. This is the default.
+- **None** – do not load the display-preferences feature. This is the default.
+- **Site (Frontend)** – display it on the public website.
 - **Administrator (Backend)** – display it in the Joomla administrator.
 - **Both** – display it on both the public website and administrator.
 
 The toolbar is only added to HTML pages.
+
+### Per Site Settings
+
+The External Link feature has its own **Enabled** setting with the same four choices. Its default is **Administrator (Backend)**. It does not depend on the Per User Settings selection.
 
 ### Trigger button position
 
@@ -74,6 +89,10 @@ When using **PNG Image**, select a PNG from the site's images folder. A square i
 
 The icon is decorative; the button retains its accessible name and keyboard operation regardless of the icon selected.
 
+## External Link behaviour
+
+Only links with `target="_blank"` are processed. The plugin adds a decorative inline SVG indicator and translated screen-reader-only text announcing that the link opens in a new tab or window. Add `no-external-link-icon` to a link to exclude it. Dynamically inserted links are also processed.
+
 ## Customising the CSS
 
 JADP uses separate stylesheets for the toolbar, the visitor's page preferences and the keyboard entry link. The distinction matters: changing the toolbar's appearance is different from changing what a visitor preference does.
@@ -81,7 +100,7 @@ JADP uses separate stylesheets for the toolbar, the visitor's page preferences a
 The installed files are located in:
 
 ```text
-media/plg_system_jadp/css/
+media/plg_system_jadp22/css/
 ├── jadp-ui.css
 ├── jadp.css
 └── jadp-skip.css
@@ -97,7 +116,7 @@ This stylesheet controls the floating button and the toolbar panel, including it
 
 The toolbar is rendered inside a Shadow DOM. This isolates it from the site's template CSS, so adding rules to the template's `user.css` or other ordinary stylesheets will not directly change the toolbar's contents.
 
-The toolbar stylesheet is registered with Joomla's Web Asset Manager as `plg.system.jadp.ui`. Joomla resolves the stylesheet using its template-aware media lookup. You do not need to add an entry to the template's `joomla.asset.json`; the replacement file is found by its expected path and filename.
+The toolbar stylesheet is registered with Joomla's Web Asset Manager as `plg.system.jadp2.ui`. Joomla resolves the stylesheet using its template-aware media lookup. You do not need to add an entry to the template's `joomla.asset.json`; the replacement file is found by its expected path and filename.
 
 For an inheritable site template, place your replacement stylesheet at:
 
